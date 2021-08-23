@@ -32,4 +32,17 @@ public class JobRole {
         return description;
     }
 
+    public String getContractType() {
+        return contractType;
+    }
+
+    @Override
+    public String toString() {
+        return "JobRole{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", contractType='" + contractType + '\'' +
+                '}';
+    }
 }
