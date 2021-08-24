@@ -1,6 +1,7 @@
 package com.team404.kainosproject.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="job_role")
@@ -20,6 +21,18 @@ public class JobRole {
 
     @Column(name="contractType")
     private String contractType;
+
+    @ManyToMany
+    @JoinTable(
+            name = "job_location",
+            joinColumns = @JoinColumn(name="job_id"),
+            inverseJoinColumns = @JoinColumn(name="location_id")
+    )
+    List<Location> locations;
+
+    public List<Location> getLocations() {
+        return locations;
+    }
 
     public Integer getId() {
         return id;

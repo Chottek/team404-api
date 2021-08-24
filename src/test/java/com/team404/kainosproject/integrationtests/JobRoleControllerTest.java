@@ -49,7 +49,10 @@ public class JobRoleControllerTest {
 
         assertAll("Should contain Test Job Row",
                 () -> assertEquals("Head of test job", jobRole.get("title")),
-                () -> assertEquals("London", jobRole.getJSONArray("locations").get(0)),
+                () -> assertEquals(
+                        "[{\"name\":\"London\"},{\"name\":\"Birmingham\"},{\"name\":\"Gdansk\"}]",
+                        jobRole.getJSONArray("locations").toString()
+                ),
                 () -> assertEquals(3, jobRole.getJSONArray("locations").length()),
                 () -> assertEquals("<b>What you will be expected to do </b> " +
                         "<br/> Day to day you will be expected to be a test entry in our tables.",
