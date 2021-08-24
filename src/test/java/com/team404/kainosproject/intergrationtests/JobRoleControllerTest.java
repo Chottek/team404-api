@@ -47,7 +47,6 @@ public class JobRoleControllerTest {
 
         assertAll("Should contain Test Job Row",
                 () -> assertEquals("Head of test job", firstObj.get("title")),
-                () -> assertEquals("In this role you will be expected to act as a test entry to our database", firstObj.get("description")),
                 () -> assertEquals("full_time", firstObj.get("contractType"))
         );
     }
