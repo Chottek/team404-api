@@ -20,6 +20,10 @@ public class JobRole {
     @Column(name="posted")
     private String posted;
 
+    public String getPosted() {
+        return posted;
+    }
+
     public Integer getId() {
         return id;
     }
