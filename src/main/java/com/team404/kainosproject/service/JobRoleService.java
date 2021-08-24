@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 
@@ -30,6 +31,10 @@ public class JobRoleService {
         Iterable<JobRole> jobRoles = repository.findAll();
         LOG.info("Got {} JobRole entries from database", jobRoles.spliterator().estimateSize());
         return jobRoles;
+    }
+
+    public Optional<JobRole> getById(int id){
+       return repository.findById(id);
     }
 
 
