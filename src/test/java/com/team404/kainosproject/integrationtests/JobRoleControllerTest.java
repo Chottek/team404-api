@@ -1,4 +1,4 @@
-package com.team404.kainosproject.intergrationtests;
+package com.team404.kainosproject.integrationtests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import org.json.*;
@@ -36,21 +37,46 @@ public class JobRoleControllerTest {
 
         assertAll("Should contain Test Job Row",
                 () -> assertEquals("Head of test job", firstObj.get("title")),
-                () -> assertEquals("In this role you will be expected to act as a test entry to our database", firstObj.get("description")),
                 () -> assertEquals("full_time", firstObj.get("contractType"))
         );
     }
 
     @Test
     public void when_gettingJobSpecificationByID_Expect_TestRowLocationsAndDescription(){
+        final JSONObject jobRole = new JSONObject(restTemplate
+                .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
+                .getBody());
 
-
+        assertAll("Should contain Test Job Row",
+                () -> assertEquals("Head of test job", jobRole.get("title")),
+                () -> assertEquals("London", jobRole.getJSONArray("locations").get(0)),
+                () -> assertEquals(3, jobRole.getJSONArray("locations").length()),
+                () -> assertEquals("<b>What you will be expected to do </b> " +
+                        "<br/> Day to day you will be expected to be a test entry in our tables.",
+                        jobRole.get("description")),
+                () -> assertEquals("full_time", jobRole.get("contractType"))
+        );
     }
 
     @Test
     public void when_wrongIDForJobSpecification_Expect_JobSpecificationNotFound(){
+        final int jobRolesSize = new JSONArray(restTemplate
+                .getForEntity(createURLWithPort("/job-roles"), String.class)
+                .getBody()).length();
 
+        assertAll("Should return 404 Status",
+                () -> assertEquals(restTemplate
+                                .getForEntity(createURLWithPort("/job-roles/" + (-1)), String.class)
+                                .getStatusCode(), ResponseEntity.notFound().build().getStatusCode()),
 
+                () -> assertEquals(restTemplate
+                        .getForEntity(createURLWithPort("/job-roles/" + (0)), String.class)
+                        .getStatusCode(), ResponseEntity.notFound().build().getStatusCode()),
+
+                () -> assertEquals(restTemplate
+                        .getForEntity(createURLWithPort("/job-roles/" + (jobRolesSize + 1)), String.class)
+                        .getStatusCode(), ResponseEntity.notFound().build().getStatusCode())
+        );
     }
 
 
