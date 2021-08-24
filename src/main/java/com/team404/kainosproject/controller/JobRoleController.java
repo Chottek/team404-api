@@ -20,7 +20,7 @@ public class JobRoleController {
      * Gets a list of JobRole objects from JobRoleService
      * @return List of JobRole objects
      */
-    @GetMapping("/job-roles")
+    @GetMapping("/job-roles") //produces = "application/json"
     public Iterable<JobRole> getAllJobRoles(){
         return service.getAll();
     }
