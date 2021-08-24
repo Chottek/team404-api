@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="job_role")
+@SecondaryTable(name="job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name="job_id"))
 public class JobRole {
 
     @Id
@@ -14,7 +15,7 @@ public class JobRole {
     @Column(name="title")
     private String title;
 
-    @Column(name="description")
+    @Column(name="description", table = "job_detail")
     private String description;
 
     @Column(name="contractType")
