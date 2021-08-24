@@ -1,0 +1,99 @@
+package com.team404.kainosproject.intergrationtests;
+
+import com.team404.kainosproject.controller.JobRoleController;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import org.json.*;
+
+import java.util.Objects;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
+// https://spring.io/guides/gs/testing-web/
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class JobRoleControllerTest {
+
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private TestRestTemplate restTemplate = new TestRestTemplate();
+
+    @Test
+    public void SomeTest() throws Exception{
+
+        ResponseEntity<String> response = restTemplate.getForEntity(createURLWithPort("/job-roles"), String.class);
+        JSONArray array = new JSONArray(response.getBody());
+
+        JSONObject firstObj = (JSONObject) array.get(0);
+
+        System.out.println(response.getBody());
+
+        assertEquals("Head of test job", firstObj.get("title"));
+        assertEquals("In this role you will be expected to act as a test entry to our database", firstObj.get("description"));
+        assertEquals("full_time", firstObj.get("contractType"));
+    }
+
+    private String createURLWithPort(String uri) {
+
+        return "http://localhost:" + port + uri;
+    }
+
+}
+
+/* TODO This starts the server on a random port to test the full application
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class SomeTestClass {
+
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    public void SomeTest() throws Exception{
+
+        restTemplate.getForObject();
+
+    }
+
+}
+*/
+
+// To test just a data source it seems we can use @MockBean to mock a repository.
+
+/* Using Mock MVC tests the requests without starting a full web application
+
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+public class JobRoleControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Test
+    public void SomeTest() throws Exception{
+        mockMVC.perform(...)
+    }
+
+}
+ */
