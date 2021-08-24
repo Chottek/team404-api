@@ -20,6 +20,9 @@ public class JobRole {
     @Column(name="contractType")
     private String contractType;
 
+    @Column(name="posted")
+    private String posted;
+
     public Integer getId() {
         return id;
     }
@@ -43,6 +46,7 @@ public class JobRole {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", contractType='" + contractType + '\'' +
+                ", posted='" + posted + '\'' +
                 '}';
     }
 }
