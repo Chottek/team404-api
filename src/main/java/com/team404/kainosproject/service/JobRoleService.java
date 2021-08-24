@@ -28,7 +28,7 @@ public class JobRoleService {
      */
     public Iterable<JobRole> getAll(){
         Iterable<JobRole> jobRoles = repository.findAll();
-        LOG.info("Got {} from database", StreamSupport.stream(jobRoles.spliterator(), false).count());
+        LOG.info("Got {} JobRole entries from database", jobRoles.spliterator().estimateSize());
         return jobRoles;
     }
 
