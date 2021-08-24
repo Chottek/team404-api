@@ -33,9 +33,13 @@ public class JobRoleService {
         return jobRoles;
     }
 
+    /**
+     * Gets an Optional of JobRole from database, based on ID
+     * @param id Numeric id of Job Role in database
+     * @return Optional of JobRole in database
+     */
     public Optional<JobRole> getById(int id){
        return repository.findById(id);
     }
-
 
 }
