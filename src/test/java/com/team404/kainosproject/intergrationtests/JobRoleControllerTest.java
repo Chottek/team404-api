@@ -1,24 +1,14 @@
 package com.team404.kainosproject.intergrationtests;
 
-import com.team404.kainosproject.controller.JobRoleController;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import org.json.*;
-
-import javax.sql.DataSource;
-import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -36,7 +26,6 @@ public class JobRoleControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-
     @Test
     public void when_gettingFirstRowFromJobRoleTable_Expect_ReturnsTestJobRow(){
         final JSONArray jobRoles = new JSONArray(restTemplate
@@ -51,6 +40,19 @@ public class JobRoleControllerTest {
                 () -> assertEquals("full_time", firstObj.get("contractType"))
         );
     }
+
+    @Test
+    public void when_gettingJobSpecificationByID_Expect_TestRowLocationsAndDescription(){
+
+
+    }
+
+    @Test
+    public void when_wrongIDForJobSpecification_Expect_JobSpecificationNotFound(){
+
+
+    }
+
 
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
