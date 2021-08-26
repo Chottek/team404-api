@@ -112,7 +112,31 @@ public class JobRoleControllerTest {
 
     @Test
     public void when_getJobSpecification_Expect_JobBandIsReturned(){
+        final JSONObject jobRole = new JSONObject(restTemplate
+                .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
+                .getBody());
 
+        assertEquals("Associate", (String) jobRole.get("band"));
+    }
+
+    @Test
+    public void when_getAllJobs_Expect_AllReturnABand(){
+
+        final JSONArray jobRoles = new JSONArray(restTemplate
+                .getForEntity(createURLWithPort("/job-roles"), String.class)
+                .getBody()
+        );
+
+        jobRoles.forEach(
+                (jobRole) -> {
+                    try{
+                        ((JSONObject) jobRole).get("band");
+                    }
+                    catch (JSONException e){
+                        fail("Object " + jobRole + " is missing a band");
+                    }
+                }
+        );
     }
 
 

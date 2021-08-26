@@ -33,6 +33,9 @@ public class JobRole {
     @Column(name="capability")
     private String capability;
 
+    @Column(name="band")
+    private String band;
+
     public String getCapability() { return capability; }
 
     public List<Location> getLocations() {
@@ -53,6 +56,10 @@ public class JobRole {
 
     public String getContractType() {
         return contractType;
+    }
+
+    public String getBand() {
+        return band;
     }
 
     @Override

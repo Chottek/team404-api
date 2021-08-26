@@ -46,3 +46,14 @@ ALTER TABLE job_role ADD COLUMN capability ENUM (
     'Commercial_and_Financial_Management',
     'Business_Services_Support'
 ) NOT NULL;
+
+ALTER TABLE job_role ADD COLUMN band ENUM (
+    'Leadership',
+    'Principal',
+    'Manager',
+    'Consultant',
+    'Senior_Associate',
+    'Associate',
+    'Trainee',
+    'Apprentice'
+) NOT NULL;
