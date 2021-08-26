@@ -28,7 +28,7 @@ public class JobRole {
             joinColumns = @JoinColumn(name="job_id"),
             inverseJoinColumns = @JoinColumn(name="location_id")
     )
-    List<Location> locations;
+    private List<Location> locations;
 
     public List<Location> getLocations() {
         return locations;
