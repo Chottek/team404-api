@@ -11,8 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import org.json.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 // https://spring.io/guides/gs/testing-web/
@@ -80,6 +79,40 @@ public class JobRoleControllerTest {
                         .getForEntity(createURLWithPort("/job-roles/" + (jobRolesSize + 1)), String.class)
                         .getStatusCode(), ResponseEntity.notFound().build().getStatusCode())
         );
+    }
+
+    @Test
+    public void when_getJobSpecification_Expect_JobCapabilityIsReturned(){
+        final JSONObject jobRole = new JSONObject(restTemplate
+                .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
+                .getBody());
+
+        assertEquals("Engineering", (String) jobRole.get("capability"));
+    }
+
+    @Test
+    public void when_getAllJobs_Expect_AllReturnACapability(){
+
+        final JSONArray jobRoles = new JSONArray(restTemplate
+                .getForEntity(createURLWithPort("/job-roles"), String.class)
+                .getBody()
+        );
+
+        jobRoles.forEach(
+                (jobRole) -> {
+                    try{
+                        ((JSONObject) jobRole).get("capability");
+                    }
+                    catch (JSONException e){
+                        fail("Object " + jobRole + " is missing a capability");
+                    }
+                }
+        );
+    }
+
+    @Test
+    public void when_getJobSpecification_Expect_JobBandIsReturned(){
+
     }
 
 

@@ -28,3 +28,21 @@ CREATE TABLE job_detail (
     job_id INT NOT NULL, FOREIGN KEY (job_id) REFERENCES job_role(job_id),
     description TEXT NOT NULL
 );
+
+ALTER TABLE job_role ADD COLUMN capability ENUM (
+    'Engineering',
+    'Platforms',
+    'Data',
+    'Artificial_Intelligence',
+    'Cyber_Security',
+    'Workday',
+    'Experience_Design',
+    'Product',
+    'Delivery',
+    'Operations',
+    'Business_Development_and_Marketing',
+    'Organisation_Strategy_and_Planning',
+    'People',
+    'Commercial_and_Financial_Management',
+    'Business_Services_Support'
+) NOT NULL;

@@ -30,6 +30,11 @@ public class JobRole {
     )
     List<Location> locations;
 
+    @Column(name="capability")
+    private String capability;
+
+    public String getCapability() { return capability; }
+
     public List<Location> getLocations() {
         return locations;
     }

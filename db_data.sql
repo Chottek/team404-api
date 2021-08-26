@@ -9,15 +9,15 @@ VALUES
 (5, "Derry"),
 (6, "Toronto");
 
-INSERT INTO job_role (job_id, title, contract_type)
+INSERT INTO job_role (job_id, title, contract_type, capability)
 VALUES
-(1, "Head of test job", "full_time"),
-(2, "Head of People Operations", "full_time"),
-(3, "Technical Architect", "full_time"),
-(4, "Security Engineer", "full_time"),
-(5, "Product Owner", "full_time"),
-(6, "Senior Software Engineer (Java)", "full_time"),
-(7, "Test Engineer", "full_time");
+(1, "Head of test job", "full_time", "Engineering"),
+(2, "Head of People Operations", "full_time", "People"),
+(3, "Technical Architect", "full_time", "Engineering"),
+(4, "Security Engineer", "full_time", "Cyber_Security"),
+(5, "Product Owner", "full_time", "Business_Development_and_Marketing"),
+(6, "Senior Software Engineer (Java)", "full_time", "Engineering"),
+(7, "Test Engineer", "full_time", "Engineering");
 
 -- Link inserted Jobs to their available locations
 INSERT INTO job_location (job_id, location_id)
