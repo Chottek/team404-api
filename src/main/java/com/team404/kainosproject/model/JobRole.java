@@ -34,7 +34,7 @@ public class JobRole {
     @Column(name="capability")
     private String capability;
 
-    @Column(name="name", table="band")
+    @Column(name="band")
     private String band;
 
     public String getCapability() { return capability; }
