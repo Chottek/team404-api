@@ -139,6 +139,123 @@ public class JobRoleControllerTest {
         );
     }
 
+    @Test
+    public void when_getBands_Expect_AllBandsAndCompetenciesAreReturned(){
+
+        final JSONArray result = new JSONArray(restTemplate
+                .getForEntity(createURLWithPort("/management-levels"), String.class)
+                .getBody()
+        );
+
+         /*
+         Expected
+         [
+            {
+                'band' : 'Apprentice',
+                'competencies' : [
+                    {
+                        'name' : 'Personal_Performance',
+                        'indicators' :
+                        [
+                            {'name' : 'Developing self-awareness', 'name' : '...', 'description' : "..."}, {'description' : "..."},
+                            ...
+                        ]
+                    },
+                    ...
+                ]
+            },
+            { 'band' : 'Trainee', ... },
+            ...
+         ]
+         */
+
+        // Expect 8 Bands
+        assertEquals(8, result.length());
+
+        // Expect Each management level to have one or more competency
+
+        // TODO Refactor each test into their own function
+        for (Object band: result) {
+
+            JSONObject obj = (JSONObject) band;
+
+            assertAll(
+
+                    // Check the band is labelled
+                    () -> {
+                        try{
+                            obj.get("band");
+                        } catch (JSONException e){
+                            fail("Object: " + obj + " was missing a management level (band)");
+                        }
+                    },
+
+                    // Contains a list of competencies of non-zero length
+                    () -> {
+                        try{
+                            JSONArray arr = (JSONArray) obj.get("competencies");
+                            if(arr.length() <= 0) fail("Object: " + obj + " has no competencies listed");
+
+                        } catch (JSONException e){
+                            fail("Object: " + obj + " has no competencies attribute");
+                        }
+                    },
+
+                    // Check all competencies have a name and set of indicators of non-zero length
+                    () -> {
+                        JSONArray arr = (JSONArray) obj.get("Competencies");
+
+                        arr.forEach(
+                                (competency) -> {
+                                    JSONObject competencyObj = new JSONObject(competency);
+                                    try { competencyObj.get("name"); }
+                                    catch (JSONException e) { fail("Object: " + competencyObj + " had no name attribute"); }
+
+                                    try {
+                                        JSONArray indicators = (JSONArray) competencyObj.get("indicators");
+                                        assertTrue(
+                                                "Object: " + competencyObj + " had a zero length list of indicators",
+                                                indicators.length() > 0
+                                        );
+                                    }
+                                    catch (JSONException e) {
+                                        fail("object: " + competencyObj + " had no attribute indicators");
+                                    }
+                                }
+                        );
+                    },
+
+                    // Check that each competency indicator has a name and description
+                    () -> {
+
+                        // For each competency
+                        JSONArray competencies = (JSONArray) obj.get("Competencies");
+                        competencies.forEach( (competency) -> {
+
+                            // Foreach Indicator
+                            JSONObject competencyObj = new JSONObject(competency);
+                            JSONArray indicators = (JSONArray) competencyObj.get("indicators");
+                            indicators.forEach( (indicator) -> {
+
+                                JSONObject indicatorObj = (JSONObject) indicator;
+                                try{ indicatorObj.get("name"); }
+                                catch (JSONException e) { fail("Indicator: " + indicatorObj + " had no attribute name"); }
+
+                                try{
+                                    String desc = (String) indicatorObj.get("description");
+                                    assertTrue(
+                                            "Indicator: " + indicatorObj + "had an empty description",
+                                            desc.length() > 0
+                                    );
+                                }
+                                catch (JSONException e) { fail("Indicator: " + indicatorObj + " had no attribute description"); }
+                            });
+                        });
+                    }
+            );
+        }
+    }
+
 
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
