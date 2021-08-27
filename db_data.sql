@@ -9,15 +9,27 @@ VALUES
 (5, "Derry"),
 (6, "Toronto");
 
-INSERT INTO job_role (job_id, title, contract_type)
+INSERT INTO job_role (job_id, title, contract_type, sharepoint_link)
 VALUES
-(1, "Head of test job", "full_time"),
-(2, "Head of People Operations", "full_time"),
-(3, "Technical Architect", "full_time"),
-(4, "Security Engineer", "full_time"),
-(5, "Product Owner", "full_time"),
-(6, "Senior Software Engineer (Java)", "full_time"),
-(7, "Test Engineer", "full_time");
+(1, "Head of test job", "full_time", "Test Link"),
+(2, "Head of People Operations", "full_time",
+"https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FPeople%2FJob%20profile%20-%20Global%20Head%20of%20People%20Support%20%28Leader%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FPeople"
+),
+(3, "Technical Architect", "full_time",
+"https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20Profile%20-%20Technical%20Architect%20%28Consultant%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering"
+),
+(4, "Security Engineer", "full_time",
+"https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FCyber%20Security%2FJob%20profile%20-%20Security%20Engineer%20%28Associate%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FCyber%20Security"
+),
+(5, "Product Manager", "full_time",
+"https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FWorkday%2FProduct%20Development%2FJob%20Profile%20%2D%20Principal%20Product%20Manager%20%28Principal%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FWorkday%2FProduct%20Development"
+),
+(6, "Senior Software Engineer", "full_time",
+"https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%20%2D%20Software%20Engineer%20%28Associate%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering"
+),
+(7, "Test Engineer", "full_time",
+"https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FTesting%2FJob%20profile%20%2D%20Test%20Engineer%20%28Associate%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FTesting"
+);
 
 -- Link inserted Jobs to their available locations
 INSERT INTO job_location (job_id, location_id)

@@ -30,6 +30,13 @@ public class JobRole {
     )
     List<Location> locations;
 
+    @Column(name = "sharepoint_link")
+    private String sharePointLink;
+
+    public String getSharePointLink() {
+        return sharePointLink;
+    }
+
     public List<Location> getLocations() {
         return locations;
     }
