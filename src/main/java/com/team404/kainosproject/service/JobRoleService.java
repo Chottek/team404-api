@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
 
 @Service
 public class JobRoleService {
@@ -39,7 +37,13 @@ public class JobRoleService {
      * @return Optional of JobRole in database
      */
     public Optional<JobRole> getById(int id){
-       return repository.findById(id);
+        Optional<JobRole> jobRole = repository.findById(id);
+        if(jobRole.isPresent()){
+            LOG.info("Got JobRole with id [{}]", id);
+        }else{
+            LOG.error("No JobRole with id [{}] found!", id);
+        }
+        return jobRole;
     }
 
 }

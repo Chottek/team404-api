@@ -12,10 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.json.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertAll;
-
-// https://spring.io/guides/gs/testing-web/
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -89,46 +86,3 @@ public class JobRoleControllerTest {
     }
 
 }
-
-/* TODO This starts the server on a random port to test the full application
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SomeTestClass {
-
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
-
-    @Test
-    public void SomeTest() throws Exception{
-
-        restTemplate.getForObject();
-
-    }
-
-}
-*/
-
-// To test just a data source it seems we can use @MockBean to mock a repository.
-
-/* Using Mock MVC tests the requests without starting a full web application
-
-import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-
-@SpringBootTest
-@AutoConfigureMockMvc
-public class JobRoleControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Test
-    public void SomeTest() throws Exception{
-        mockMVC.perform(...)
-    }
-
-}
- */
