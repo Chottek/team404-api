@@ -1,5 +1,8 @@
 package com.team404.kainosproject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,16 +14,29 @@ public class CompetencyIndicator {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "sub_competency_id")
-    private Integer subCompetencyId;
+    @ManyToOne
+    @JoinColumn(name="sub_competency_id", nullable = false)
+    private SubCompetency subCompetency;
 
-
-    @Column(name = "band_id")
-    private Integer bandId;
+    @ManyToOne
+    @JoinColumn(name="band_id", nullable = false)
+    private Band band;
 
     @Column(name = "description")
     private String description;
 
+    public String getDescription() {
+        return description;
+    }
 
+    // Don't Serialise Band Here ( as this is contained in Band )
+    @JsonBackReference
+    public Band getBand() {
+        return band;
+    }
 
+    @JsonManagedReference
+    public SubCompetency getSubCompetency() {
+        return subCompetency;
+    }
 }

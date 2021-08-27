@@ -1,5 +1,7 @@
 package com.team404.kainosproject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.servlet.annotation.HttpConstraint;
 import java.util.List;
@@ -16,10 +18,11 @@ public class Competency {
     @Column(name = "name")
     private String name;
 
-    @OneToMany
-
+    // Note that the mappedBy property is the property in the many class to map too
+    @OneToMany(mappedBy = "competency")
     private List<SubCompetency> subCompetencies;
 
+    @JsonBackReference
     public List<SubCompetency> getSubCompetencies() {
         return subCompetencies;
     }
@@ -28,15 +31,7 @@ public class Competency {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

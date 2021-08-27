@@ -1,5 +1,8 @@
 package com.team404.kainosproject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,34 +16,27 @@ public class SubCompetency {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "competency_id", nullable = false)
+    @JoinColumn(name="competency_id", nullable = false)
     private Competency competency;
 
-    @OneToMany
-    @JoinColumn(name = "competency_indicator_id", nullable = false)
+    @Column
+    private String name;
+
+    // Note that the mappedBy property is the property in the many class to map too
+    @OneToMany(mappedBy = "subCompetency")
     private List<CompetencyIndicator> competencyIndicators;
 
-    public Integer getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Competency getCompetency() {
-        return competency;
-    }
-
-    public void setCompetency(Competency competency) {
-        this.competency = competency;
-    }
-
+    @JsonBackReference
     public List<CompetencyIndicator> getCompetencyIndicators() {
         return competencyIndicators;
     }
 
-    public void setCompetencyIndicators(List<CompetencyIndicator> competencyIndicators) {
-        this.competencyIndicators = competencyIndicators;
+    @JsonManagedReference
+    public Competency getCompetency() {
+        return competency;
     }
 }

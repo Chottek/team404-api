@@ -143,7 +143,7 @@ public class JobRoleControllerTest {
     public void when_getBands_Expect_AllBandsAndCompetenciesAreReturned(){
 
         final JSONArray result = new JSONArray(restTemplate
-                .getForEntity(createURLWithPort("/management-levels"), String.class)
+                .getForEntity(createURLWithPort("/capabilities"), String.class)
                 .getBody()
         );
 

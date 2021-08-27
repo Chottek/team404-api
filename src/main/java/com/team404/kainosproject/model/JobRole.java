@@ -1,12 +1,13 @@
 package com.team404.kainosproject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name="job_role")
 @SecondaryTable(name="job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name="job_id"))
-@SecondaryTable(name="band", pkJoinColumns = @PrimaryKeyJoinColumn(name="band_id"))
 public class JobRole {
 
     @Id
@@ -34,8 +35,9 @@ public class JobRole {
     @Column(name="capability")
     private String capability;
 
-    @Column(name="band")
-    private String band;
+    @ManyToOne
+    @JoinColumn(name="band_id", nullable = false)
+    private Band band;
 
     public String getCapability() { return capability; }
 
@@ -59,7 +61,7 @@ public class JobRole {
         return contractType;
     }
 
-    public String getBand() {
+    public Band getBand() {
         return band;
     }
 

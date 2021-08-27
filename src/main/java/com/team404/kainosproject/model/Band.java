@@ -1,11 +1,12 @@
 package com.team404.kainosproject.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "band")
-@SecondaryTable(name="competency_indicator", pkJoinColumns = @PrimaryKeyJoinColumn(name="band_id"))
 public class Band {
 
     @Id
@@ -14,33 +15,37 @@ public class Band {
     private Integer id;
 
     @Column(name = "name")
-    private String name;
+    private String band;
 
-    @ManyToOne
-    @JoinColumn(name = "competency_id", nullable = false)
-    private Competency competency;
+    @OneToMany(mappedBy = "band")
+    private List<JobRole> jobs;
 
-    public Integer getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "band")
+    private List<CompetencyIndicator> competencyIndicators;
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getBand() {
+        return band;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBand(String band) {
+        this.band = band;
+    }
+
+    // Serialise this normally, but don't serialise any reference to this in competencyIndicators
+    @JsonManagedReference
+    public List<CompetencyIndicator> getCompetencyIndicators() {
+        return competencyIndicators;
     }
 
     @Override
     public String toString() {
         return "Band{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + band + '\'' +
                 '}';
     }
 }
