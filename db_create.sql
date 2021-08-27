@@ -29,6 +29,35 @@ CREATE TABLE job_detail (
     description TEXT NOT NULL
 );
 
+--US005
+
+CREATE TABLE band (
+    band_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR NOT NULL
+);
+
+CREATE competency_indicator (
+    competency_indicator_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    sub_competency_id INT NOT NULL,
+    band_id INT NOT NULL,
+    description VARCHAR(200) NOT NULL,
+    FOREIGN KEY (band_id) REFERENCES band(band_id),
+    FOREIGN KEY (sub_competency_id) REFERENCES sub_competency(sub_competency_id)
+);
+
+CREATE TABLE sub_competency (
+    sub_competency_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR NOT NULL,
+    competency_id INT NOT NULL,
+    FOREIGN KEY (competency_id) REFERENCES competency(competency_id)
+);
+
+CREATE TABLE competency (
+    competency_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR NOT NULL
+);
+
+
 ALTER TABLE job_role ADD COLUMN capability ENUM (
     'Engineering',
     'Platforms',
@@ -57,3 +86,4 @@ ALTER TABLE job_role ADD COLUMN band ENUM (
     'Trainee',
     'Apprentice'
 ) NOT NULL;
+
