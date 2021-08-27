@@ -116,7 +116,7 @@ public class JobRoleControllerTest {
                 .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
                 .getBody());
 
-        assertEquals("Associate", (String) jobRole.get("band"));
+        assertEquals("Leadership", (String) jobRole.get("band"));
     }
 
     @Test

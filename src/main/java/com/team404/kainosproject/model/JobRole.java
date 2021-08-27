@@ -6,6 +6,7 @@ import java.util.List;
 @Entity
 @Table(name="job_role")
 @SecondaryTable(name="job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name="job_id"))
+@SecondaryTable(name="band", pkJoinColumns = @PrimaryKeyJoinColumn(name="band_id"))
 public class JobRole {
 
     @Id
@@ -33,7 +34,7 @@ public class JobRole {
     @Column(name="capability")
     private String capability;
 
-    @Column(name="band")
+    @Column(name="name", table="band")
     private String band;
 
     public String getCapability() { return capability; }
