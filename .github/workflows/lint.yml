@@ -17,6 +17,7 @@ jobs:
       - name: Run Java Checkstyle
         uses: Justintime50/java-checkstyle-action@v1
         with:
+          directory: /src/main/java
           # The name of the style suite to be used, either 'sun' or 'google'.
           # Default is shown.
           style_suite: google
