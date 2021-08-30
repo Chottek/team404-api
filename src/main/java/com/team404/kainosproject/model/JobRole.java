@@ -30,6 +30,9 @@ public class JobRole {
     )
     List<Location> locations;
 
+    @Column(name = "responsibilities")
+    private String responsibilities;
+
     @Column(name="capability")
     private String capability;
 
@@ -62,6 +65,10 @@ public class JobRole {
         return band;
     }
 
+    public String getResponsibilities() {
+        return responsibilities;
+    }
+
     @Override
     public String toString() {
         return "JobRole{" +
@@ -69,6 +76,10 @@ public class JobRole {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", contractType='" + contractType + '\'' +
+                ", locations=" + locations +
+                ", responsibilities='" + responsibilities + '\'' +
+                ", capability='" + capability + '\'' +
+                ", band='" + band + '\'' +
                 '}';
     }
 }
