@@ -8,25 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BandedCompetencyService {
+public class BandService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CompetencyService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BandService.class);
 
     private final BandRepository repository;
 
     @Autowired
-    public BandedCompetencyService(BandRepository repository) {
+    public BandService(BandRepository repository) {
         this.repository = repository;
     }
 
     /**
-     * Gets a List of Competency objects from database
-     *
-     * @return Competency objects list
+     * Gets a List of Band objects from database
+     * @return Band objects list
      */
     public Iterable<Band> getAllCompetenciesByBand() {
-        Iterable<Band> competencies = repository.findAll();
-        LOG.info("Got {} Competency entries from database", competencies.spliterator().estimateSize());
-        return competencies;
+        Iterable<Band> bands = repository.findAll();
+        LOG.info("Got {} Band entries from database", bands.spliterator().estimateSize());
+        return bands;
     }
 }
