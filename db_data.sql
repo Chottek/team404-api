@@ -18,19 +18,19 @@ VALUES
 "Engineering", "Associate"),
 
 (2, "Head of People Operations", "full_time",
-"Lead and manage a busy global HR operational function<br>in tandem transform the function to ensure key people initiatives and processes are user centric, standardised, efficient and delivered within clearly defined SLA’s<br>Working closely with Systems team, you will drive a road map of HCM improvements with a focus on employee and manager self-serve<br>Ensuring that new functionality is fully embedded and communicated across the business" ,
+"\nLead and manage a busy global HR operational function\nIn tandem transform the function to ensure key people initiatives and processes are user centric, standardised, efficient and delivered within clearly defined SLA’s\nWorking closely with Systems team, you will drive a road map of HCM improvements with a focus on employee and manager self-serve\nEnsuring that new functionality is fully embedded",
 "People", "Leadership"),
 
 (3, "Technical Architect", "full_time",
-"Leading teams and developing high quality solutions<br>work with customer architects to agree technical designs, advising on estimated effort and technical implications of user stories and user journeys<br>You’ll manage, coach and develop a small number of staff, with a focus on managing employee performance and assisting in their career development",
+"Leading teams and developing high quality solutions\nWork with customer architects to agree technical designs, advising on estimated effort and technical implications of user stories and user journeys\nYou’ll manage, coach and develop a small number of staff, with a focus on managing employee performance and assisting in their career development",
 "Engineering", "Consultant"),
 
 (4, "Security Engineer", "full_time",
-"Identifying and introducing appropriate security controls<br>training the team in secure development practices<br>sharing knowledge on threats and vulnerabilities",
+"Identifying and introducing appropriate security controls\nTraining the team in secure development practices\nSharing knowledge on threats and vulnerabilities",
 "Cyber_Security", "Senior_Associate"),
 
 (5, "Product Owner", "full_time",
-"Gathering and prioritising product and customer requirements<br>Working closely with development, sales, pre-sales, marketing and professional services to ensure customer satisfaction goals are met and exceeded<br>Helping us maintain our leading market position",
+"Gathering and prioritising product and customer requirements\nWorking closely with development, sales, pre-sales, marketing and professional services to ensure customer satisfaction goals are met and exceeded\nHelping us maintain our leading market position",
 "Business_Development_and_Marketing", "Manager"),
 
 (6, "Senior Software Engineer (Java)", "full_time",

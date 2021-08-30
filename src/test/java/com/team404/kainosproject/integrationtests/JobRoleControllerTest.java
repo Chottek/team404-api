@@ -121,7 +121,6 @@ public class JobRoleControllerTest {
 
     @Test
     public void when_getAllJobs_Expect_AllReturnABand(){
-
         final JSONArray jobRoles = new JSONArray(restTemplate
                 .getForEntity(createURLWithPort("/job-roles"), String.class)
                 .getBody()
@@ -137,6 +136,21 @@ public class JobRoleControllerTest {
                     }
                 }
         );
+    }
+
+
+    /**
+     * Check if String of "responsibilities" column
+     * from JobRole object got by ID is not an empty String
+     */
+    @Test
+    public void when_getJobById_expect_responsibilitiesToBe_NonEmpty(){
+        final int ID = 1;
+        final JSONObject jobRole = new JSONObject(restTemplate
+                .getForEntity(createURLWithPort("/job-roles/" + ID), String.class)
+                .getBody());
+
+        assertFalse(jobRole.get("responsibilities").toString().isEmpty());
     }
 
 
