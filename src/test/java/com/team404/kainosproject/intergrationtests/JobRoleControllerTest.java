@@ -3,6 +3,7 @@ package com.team404.kainosproject.intergrationtests;
 import com.team404.kainosproject.controller.JobRoleController;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,10 +17,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import org.json.*;
 
+import javax.sql.DataSource;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 // https://spring.io/guides/gs/testing-web/
 
@@ -31,25 +34,24 @@ public class JobRoleControllerTest {
     private int port;
 
     @Autowired
-    private TestRestTemplate restTemplate = new TestRestTemplate();
+    private TestRestTemplate restTemplate;
+
 
     @Test
-    public void SomeTest() throws Exception{
+    public void when_gettingFirstRowFromJobRoleTable_Expect_ReturnsTestJobRow(){
+        final JSONArray jobRoles = new JSONArray(restTemplate
+                .getForEntity(createURLWithPort("/job-roles"), String.class)
+                .getBody());
 
-        ResponseEntity<String> response = restTemplate.getForEntity(createURLWithPort("/job-roles"), String.class);
-        JSONArray array = new JSONArray(response.getBody());
+        final JSONObject firstObj = (JSONObject) jobRoles.get(0);
 
-        JSONObject firstObj = (JSONObject) array.get(0);
-
-        System.out.println(response.getBody());
-
-        assertEquals("Head of test job", firstObj.get("title"));
-        assertEquals("In this role you will be expected to act as a test entry to our database", firstObj.get("description"));
-        assertEquals("full_time", firstObj.get("contractType"));
+        assertAll("Should contain Test Job Row",
+                () -> assertEquals("Head of test job", firstObj.get("title")),
+                () -> assertEquals("full_time", firstObj.get("contractType"))
+        );
     }
 
     private String createURLWithPort(String uri) {
-
         return "http://localhost:" + port + uri;
     }
 

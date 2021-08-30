@@ -14,11 +14,15 @@ public class JobRole {
     @Column(name="title")
     private String title;
 
-    @Column(name="description")
-    private String description;
-
     @Column(name="contractType")
     private String contractType;
+
+    @Column(name="posted")
+    private String posted;
+
+    public String getPosted() {
+        return posted;
+    }
 
     public Integer getId() {
         return id;
@@ -26,10 +30,6 @@ public class JobRole {
 
     public String getTitle() {
         return title;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public String getContractType() {
@@ -41,8 +41,8 @@ public class JobRole {
         return "JobRole{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
                 ", contractType='" + contractType + '\'' +
+                ", posted='" + posted + '\'' +
                 '}';
     }
 }
