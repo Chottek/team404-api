@@ -9,7 +9,7 @@ class KainosProjectApplicationTests {
 
 	@Test
 	void testAutomaticTestsOnPushMergeToMain() {
-		assertTrue(false);
+		assertTrue(true);
 	}
 
 }
