@@ -2,7 +2,7 @@ name: Tests
 
 on:
     # Trigger the workflow on push for the main branch
-    # and pull request for main and card-* prefix branches
+    # and pull request for main
     push:
         branches:
             - master
