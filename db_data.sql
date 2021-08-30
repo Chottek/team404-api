@@ -14,7 +14,7 @@ INSERT INTO job_role (job_id, title, contract_type,
  capability, band)
 VALUES
 (1, "Head of test job", "full_time",
-"Basically just existing and showing that everything works fine :)",
+"\nBasically just existing and showing that everything works fine :)",
 "Engineering", "Associate"),
 
 (2, "Head of People Operations", "full_time",
@@ -22,23 +22,23 @@ VALUES
 "People", "Leadership"),
 
 (3, "Technical Architect", "full_time",
-"Leading teams and developing high quality solutions\nWork with customer architects to agree technical designs, advising on estimated effort and technical implications of user stories and user journeys\nYou’ll manage, coach and develop a small number of staff, with a focus on managing employee performance and assisting in their career development",
+"\nLeading teams and developing high quality solutions\nWork with customer architects to agree technical designs, advising on estimated effort and technical implications of user stories and user journeys\nYou’ll manage, coach and develop a small number of staff, with a focus on managing employee performance and assisting in their career development",
 "Engineering", "Consultant"),
 
 (4, "Security Engineer", "full_time",
-"Identifying and introducing appropriate security controls\nTraining the team in secure development practices\nSharing knowledge on threats and vulnerabilities",
+"\nIdentifying and introducing appropriate security controls\nTraining the team in secure development practices\nSharing knowledge on threats and vulnerabilities",
 "Cyber_Security", "Senior_Associate"),
 
 (5, "Product Owner", "full_time",
-"Gathering and prioritising product and customer requirements\nWorking closely with development, sales, pre-sales, marketing and professional services to ensure customer satisfaction goals are met and exceeded\nHelping us maintain our leading market position",
+"\nGathering and prioritising product and customer requirements\nWorking closely with development, sales, pre-sales, marketing and professional services to ensure customer satisfaction goals are met and exceeded\nHelping us maintain our leading market position",
 "Business_Development_and_Marketing", "Manager"),
 
 (6, "Senior Software Engineer (Java)", "full_time",
-"Developing high quality solutions which delight our customers and impact the lives of users worldwide",
+"\nDeveloping high quality solutions which delight our customers and impact the lives of users worldwide",
 "Engineering", "Senior_Associate"),
 
 (7, "Test Engineer", "full_time",
-"Developing and executing functional automated and manual tests to help the team deliver working application software that meets user needs.",
+"\nDeveloping and executing functional automated and manual tests to help the team deliver working application software that meets user needs.",
 "Engineering", "Associate");
 
 -- Link inserted Jobs to their available locations
