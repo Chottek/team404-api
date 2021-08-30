@@ -23,7 +23,7 @@ public class BandService {
      * Gets a List of Band objects from database
      * @return Band objects list
      */
-    public Iterable<Band> getAllCompetenciesByBand() {
+    public Iterable<Band> getAllBands() {
         Iterable<Band> bands = repository.findAll();
         LOG.info("Got {} Band entries from database", bands.spliterator().estimateSize());
         return bands;

@@ -1,7 +1,7 @@
 package com.team404.kainosproject.controller;
 
-import com.team404.kainosproject.model.Band;
-import com.team404.kainosproject.service.BandService;
+import com.team404.kainosproject.model.Competency;
+import com.team404.kainosproject.service.CompetencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,17 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CompetencyController {
 
-    private final BandService service;
+    private final CompetencyService service;
 
     @Autowired
-    public CompetencyController(BandService service) {
+    public CompetencyController(CompetencyService service) {
         this.service = service;
     }
 
     @GetMapping("/competencies")
-    public Iterable<Band> getAllCompetencies(){
-        return service.getAllCompetenciesByBand();
+    public Iterable<Competency> getAllCompetencies(){
+        return service.getAllCompetencies();
     }
-
 
 }
