@@ -22,7 +22,7 @@ public class BandController {
         return service.getAllBands();
     }
 
-    @GetMapping("/bands-remapped")
+    @GetMapping("/bandswcompetencies")
     public Iterable<BandDTO> getBandDTOs(){
         return service.getAllBandsDTOs();
     }
