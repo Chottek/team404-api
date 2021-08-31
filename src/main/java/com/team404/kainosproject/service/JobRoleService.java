@@ -21,7 +21,7 @@ public class JobRoleService {
   }
 
   /**
-   * Gets a List of JobRole objects from database
+   * Gets a List of JobRole objects from database.
    *
    * @return JobRole objects list
    */

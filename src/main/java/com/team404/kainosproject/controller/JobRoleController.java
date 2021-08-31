@@ -17,7 +17,7 @@ public class JobRoleController {
   }
 
   /**
-   * Gets a list of JobRole objects from JobRoleService
+   * Gets a list of JobRole objects from JobRoleService.
    *
    * @return List of JobRole objects
    */
