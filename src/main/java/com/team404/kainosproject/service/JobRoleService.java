@@ -8,6 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+/**
+ * Job Role Service.
+ *
+ * @author team404
+ */
 @Service
 public class JobRoleService {
 
@@ -21,7 +27,7 @@ public class JobRoleService {
   }
 
   /**
-   * Gets a List of JobRole objects from database
+   * Gets a List of JobRole objects from database.
    *
    * @return JobRole objects list
    */
@@ -32,7 +38,7 @@ public class JobRoleService {
   }
 
   /**
-   * Gets an Optional of JobRole from database, based on ID
+   * Gets an Optional of JobRole from database, based on ID.
    *
    * @param id Numeric id of Job Role in database
    * @return Optional of JobRole in database

@@ -13,6 +13,11 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
+/**
+ * Job Role.
+ *
+ * @author team404
+ */
 @Entity
 @Table(name = "job_role")
 @SecondaryTable(name = "job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name = "job_id"))
@@ -31,6 +36,9 @@ public class JobRole {
 
   @Column(name = "contractType")
   private String contractType;
+
+  @Column(name = "posted")
+  private String posted;
 
   @ManyToMany
   @JoinTable(
@@ -67,6 +75,10 @@ public class JobRole {
     return contractType;
   }
 
+  public String getPosted() {
+    return posted;
+  }
+
   @Override
   public String toString() {
     return "JobRole{" +
@@ -74,6 +86,7 @@ public class JobRole {
         ", title='" + title + '\'' +
         ", description='" + description + '\'' +
         ", contractType='" + contractType + '\'' +
+        ", posted='" + posted + '\'' +
         '}';
   }
 }
