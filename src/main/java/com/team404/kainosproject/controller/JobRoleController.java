@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Job Role Controller
+ * Job Role Controller.
+ *
  * @author team404
  */
 @RestController

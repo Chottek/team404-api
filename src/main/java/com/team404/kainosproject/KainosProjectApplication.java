@@ -4,7 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Kainos Project Application
+ * Kainos Project Application.
+ *
  * @author team404
  */
 @SpringBootApplication

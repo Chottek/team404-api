@@ -8,7 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Job Role
+ * Job Role.
+ *
  * @author team404
  */
 @Entity
