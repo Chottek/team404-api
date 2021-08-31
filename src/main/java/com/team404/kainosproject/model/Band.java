@@ -15,7 +15,7 @@ public class Band {
     private Integer id;
 
     @Column(name = "name")
-    private String band;
+    private String name;
 
     @OneToMany(mappedBy = "band")
     private List<JobRole> jobs;
@@ -27,12 +27,12 @@ public class Band {
         this.id = id;
     }
 
-    public String getBand() {
-        return band;
+    public String getName() {
+        return name;
     }
 
-    public void setBand(String band) {
-        this.band = band;
+    public void setName(String name) {
+        this.name = name;
     }
 
     // Serialise this normally, but don't serialise any reference to this in competencyIndicators
@@ -45,7 +45,7 @@ public class Band {
     public String toString() {
         return "Band{" +
                 "id=" + id +
-                ", name='" + band + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

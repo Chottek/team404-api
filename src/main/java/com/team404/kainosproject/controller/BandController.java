@@ -1,6 +1,7 @@
 package com.team404.kainosproject.controller;
 
 import com.team404.kainosproject.model.Band;
+import com.team404.kainosproject.model.dto.BandDTO;
 import com.team404.kainosproject.service.BandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,11 @@ public class BandController {
     @GetMapping("/bands")
     public Iterable<Band> getAllBands(){
         return service.getAllBands();
+    }
+
+    @GetMapping("/bands-remapped")
+    public Iterable<BandDTO> getBandDTOs(){
+        return service.getAllBandsDTOs();
     }
 
 }
