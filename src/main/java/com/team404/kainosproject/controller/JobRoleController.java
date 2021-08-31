@@ -9,20 +9,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JobRoleController {
 
-    private final JobRoleService service;
+  private final JobRoleService service;
 
-    @Autowired
-    public JobRoleController(JobRoleService service) {
-        this.service = service;
-    }
+  @Autowired
+  public JobRoleController(JobRoleService service) {
+    this.service = service;
+  }
 
-    /**
-     * Gets a list of JobRole objects from JobRoleService
-     * @return List of JobRole objects
-     */
-    @GetMapping("/job-roles") //produces = "application/json"
-    public Iterable<JobRole> getAllJobRoles(){
-        return service.getAll();
-    }
+  /**
+   * Gets a list of JobRole objects from JobRoleService
+   *
+   * @return List of JobRole objects
+   */
+  @GetMapping("/job-roles") //produces = "application/json"
+  public Iterable<JobRole> getAllJobRoles() {
+    return service.getAll();
+  }
 
 }
