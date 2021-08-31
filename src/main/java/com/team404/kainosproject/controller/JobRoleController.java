@@ -33,7 +33,6 @@ public class JobRoleController {
     return service.getAll();
   }
 
-
   /**
    * Gets Job Role object based on ID
    *
