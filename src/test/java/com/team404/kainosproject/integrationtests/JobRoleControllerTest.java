@@ -11,10 +11,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import org.json.*;
 
+<<<<<<< HEAD
 import static org.junit.Assert.*;
+=======
+import static org.junit.Assert.assertEquals;
+>>>>>>> US002_viewjobspecification
 import static org.junit.jupiter.api.Assertions.assertAll;
-
-// https://spring.io/guides/gs/testing-web/
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -36,7 +38,8 @@ public class JobRoleControllerTest {
 
         assertAll("Should contain Test Job Row",
                 () -> assertEquals("Head of test job", firstObj.get("title")),
-                () -> assertEquals("full_time", firstObj.get("contractType"))
+                () -> assertEquals("full_time", firstObj.get("contractType")),
+                () -> assertEquals("Test Link", firstObj.get("sharePointLink"))
         );
     }
 
@@ -87,9 +90,10 @@ public class JobRoleControllerTest {
                 .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
                 .getBody());
 
-        assertEquals("Engineering", (String) jobRole.get("capability"));
+        assertEquals("Engineering", jobRole.get("capability"));
     }
 
+<<<<<<< HEAD
     @Test
     public void when_getAllJobs_Expect_AllReturnACapability(){
 
@@ -144,47 +148,6 @@ public class JobRoleControllerTest {
         return "http://localhost:" + port + uri;
     }
 
+=======
+>>>>>>> US002_viewjobspecification
 }
-
-/* TODO This starts the server on a random port to test the full application
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SomeTestClass {
-
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
-
-    @Test
-    public void SomeTest() throws Exception{
-
-        restTemplate.getForObject();
-
-    }
-
-}
-*/
-
-// To test just a data source it seems we can use @MockBean to mock a repository.
-
-/* Using Mock MVC tests the requests without starting a full web application
-
-import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-
-@SpringBootTest
-@AutoConfigureMockMvc
-public class JobRoleControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Test
-    public void SomeTest() throws Exception{
-        mockMVC.perform(...)
-    }
-
-}
- */
