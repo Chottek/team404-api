@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+/**
+ * Job Role Service
+ * @author team404
+ */
 @Service
 public class JobRoleService {
 

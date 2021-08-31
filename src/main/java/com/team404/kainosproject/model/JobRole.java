@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Job Role
+ * @author team404
+ */
 @Entity
 @Table(name = "job_role")
 public class JobRole {
