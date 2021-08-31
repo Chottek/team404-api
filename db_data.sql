@@ -9,39 +9,27 @@ VALUES
 (5, "Derry"),
 (6, "Toronto");
 
-<<<<<<< HEAD
-INSERT INTO job_role (job_id, title, contract_type, capability)
+INSERT INTO job_role (job_id, title, contract_type, capability, sharepoint_link)
 VALUES
-(1, "Head of test job", "full_time", "Engineering"),
-(2, "Head of People Operations", "full_time", "People"),
-(3, "Technical Architect", "full_time", "Engineering"),
-(4, "Security Engineer", "full_time", "Cyber_Security"),
-(5, "Product Owner", "full_time", "Business_Development_and_Marketing"),
-(6, "Senior Software Engineer (Java)", "full_time", "Engineering"),
-(7, "Test Engineer", "full_time", "Engineering");
-=======
-INSERT INTO job_role (job_id, title, contract_type, sharepoint_link)
-VALUES
-(1, "Head of test job", "full_time", "Test Link"),
-(2, "Head of People Operations", "full_time",
+(1, "Head of test job", "full_time", "Test Link", "Engineering"),
+(2, "Head of People Operations", "full_time", "People",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EXYqFjDBzXZFiXMGdbXni2YBIM8ZztDBqB5naCdnXhbYew?e=DWvKrR"
 ),
-(3, "Technical Architect", "full_time",
+(3, "Technical Architect", "full_time"," Engineering", 
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/ERa52ZFdOhxJuKYbwl5w27YBUGgHxFh6qz9AtTflB2YPGA?e=mMeOWH"
 ),
-(4, "Security Engineer", "full_time",
+(4, "Security Engineer", "full_time", "Cyber_Security",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbWlHfJkEF1HhJ6_BC4aqLoBAGXd7z6SYRwcdEBcNgygCQ?e=nTVpB6"
 ),
-(5, "Product Manager", "full_time",
+(5, "Product Manager", "full_time", "Business_Development_and_Marketing",
 "https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Workday/Product%20Development/Job%20Profile%20-%20Product%20Manager%20(Manager).pdf?web=1"
 ),
-(6, "Senior Software Engineer", "full_time",
+(6, "Senior Software Engineer", "full_time", "Engineering",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EeS73plMEQ9Fjf-tovttXuYBEo-0tlfT-U3bFMcgryapVw?e=wJFypU"
 ),
-(7, "Test Engineer", "full_time",
+(7, "Test Engineer", "full_time", "Engineering",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh"
 );
->>>>>>> US002_viewjobspecification
 
 -- Link inserted Jobs to their available locations
 INSERT INTO job_location (job_id, location_id)
