@@ -37,6 +37,9 @@ public class JobRole {
   @Column(name = "contractType")
   private String contractType;
 
+  @Column(name = "posted")
+  private String posted;
+
   @ManyToMany
   @JoinTable(
       name = "job_location",
