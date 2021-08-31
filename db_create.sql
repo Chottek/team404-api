@@ -7,6 +7,7 @@ CREATE TABLE job_role (
     job_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     contract_type ENUM ('full_time', 'part_time', 'consultant') NOT NULL,
+    sharepoint_link VARCHAR(200),
     posted DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
