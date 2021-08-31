@@ -9,6 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+/**
+ * Location.
+ *
+ * @author team404
+ */
 @Entity
 @Table(name = "location")
 public class Location {
