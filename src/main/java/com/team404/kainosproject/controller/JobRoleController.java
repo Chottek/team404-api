@@ -11,31 +11,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JobRoleController {
 
-    private final JobRoleService service;
+  private final JobRoleService service;
 
-    @Autowired
-    public JobRoleController(JobRoleService service) {
-        this.service = service;
-    }
+  @Autowired
+  public JobRoleController(JobRoleService service) {
+    this.service = service;
+  }
 
-    /**
-     * Gets a list of JobRole objects from JobRoleService
-     * @return List of JobRole objects
-     */
-    @GetMapping("/job-roles") //produces = "application/json"
-    public Iterable<JobRole> getAllJobRoles(){
-        return service.getAll();
-    }
+  /**
+   * Gets a list of JobRole objects from JobRoleService
+   *
+   * @return List of JobRole objects
+   */
+  @GetMapping("/job-roles") //produces = "application/json"
+  public Iterable<JobRole> getAllJobRoles() {
+    return service.getAll();
+  }
 
 
-    /**
-     * Gets Job Role object based on ID
-     * @param id Numeric id of Job Role in database
-     * @return ResponseEntity containing an object if it exists, else ResponseEntity with 404 Not Found Status
-     */
-    @GetMapping("/job-roles/{id}")
-    public ResponseEntity<JobRole> getById(@PathVariable("id") int id){
-        return service.getById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+  /**
+   * Gets Job Role object based on ID
+   *
+   * @param id Numeric id of Job Role in database
+   * @return ResponseEntity containing an object if it exists, else ResponseEntity with 404 Not
+   * Found Status
+   */
+  @GetMapping("/job-roles/{id}")
+  public ResponseEntity<JobRole> getById(@PathVariable("id") int id) {
+    return service.getById(id).map(ResponseEntity::ok)
+        .orElseGet(() -> ResponseEntity.notFound().build());
+  }
 
 }
