@@ -55,7 +55,6 @@
 	</dependencies>
 
 	<build>
-		<testSourceDirectory>src/test/java/com/team404/kainosproject/unittests</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

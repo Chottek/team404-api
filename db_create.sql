@@ -29,5 +29,3 @@ CREATE TABLE job_detail (
     job_id INT NOT NULL, FOREIGN KEY (job_id) REFERENCES job_role(job_id),
     description TEXT NOT NULL
 );
-
-
