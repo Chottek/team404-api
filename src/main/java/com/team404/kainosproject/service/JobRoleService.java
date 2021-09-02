@@ -1,12 +1,14 @@
 package com.team404.kainosproject.service;
 
 import com.team404.kainosproject.model.JobRole;
+import com.team404.kainosproject.model.dto.JobRoleDTO;
 import com.team404.kainosproject.repository.JobRoleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
@@ -38,8 +40,9 @@ public class JobRoleService {
      * @param id Numeric id of Job Role in database
      * @return Optional of JobRole in database
      */
-    public Optional<JobRole> getById(int id){
-       return repository.findById(id);
+    public Optional<JobRoleDTO> getById(int id){
+        Optional<JobRole> jobRole = repository.findById(id);
+        return jobRole.map(JobRoleDTO::new).or(Optional::empty);
     }
 
 }

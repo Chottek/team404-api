@@ -65,6 +65,10 @@ public class JobRole {
         return band;
     }
 
+    public String getBandAsString(){
+        return band.getName();
+    }
+
     @Override
     public String toString() {
         return "JobRole{" +

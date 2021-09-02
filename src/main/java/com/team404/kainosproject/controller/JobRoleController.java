@@ -1,6 +1,7 @@
 package com.team404.kainosproject.controller;
 
 import com.team404.kainosproject.model.JobRole;
+import com.team404.kainosproject.model.dto.JobRoleDTO;
 import com.team404.kainosproject.service.JobRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class JobRoleController {
      * @return ResponseEntity containing an object if it exists, else ResponseEntity with 404 Not Found Status
      */
     @GetMapping("/job-roles/{id}")
-    public ResponseEntity<JobRole> getById(@PathVariable("id") int id){
+    public ResponseEntity<JobRoleDTO> getById(@PathVariable("id") int id){
         return service.getById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

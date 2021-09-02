@@ -4,28 +4,30 @@ import java.util.List;
 
 public class BandDTO {
 
-    private String name;
-    private List<CompetencyIndicatorDTO> competencyIndicators;
+    private String band;
+    private List<CompetencyDTO> competencies;
 
-    public BandDTO(String name, List<CompetencyIndicatorDTO> competencyIndicators) {
-        this.name = name;
-        this.competencyIndicators = competencyIndicators;
+    public BandDTO(String band, List<CompetencyDTO> competencies) {
+        this.band = band;
+        this.competencies = competencies;
     }
 
-    public String getName() {
-        return name;
+    public BandDTO() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getBand() {
+        return band;
     }
 
-    public List<CompetencyIndicatorDTO> getCompetencyIndicators() {
-        return competencyIndicators;
+    public void setBand(String band) {
+        this.band = band;
     }
 
-    public void setCompetencyIndicators(List<CompetencyIndicatorDTO> competencyIndicators) {
-        this.competencyIndicators = competencyIndicators;
+    public List<CompetencyDTO> getCompetencies() {
+        return competencies;
+    }
+
+    public void setCompetencies(List<CompetencyDTO> competencies) {
+        this.competencies = competencies;
     }
 }
-
