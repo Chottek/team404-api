@@ -1,24 +1,35 @@
 package com.team404.kainosproject.model;
 
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+/**
+ * Models the database table location, representing Kainos office locations.
+ *
+ * @author team404
+ */
 @Entity
 @Table(name = "location")
 public class Location {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="location_id")
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "location_id")
+  private Integer id;
 
-    @Column(name="name")
-    private String name;
+  @Column(name = "name")
+  private String name;
 
-    @ManyToMany(mappedBy = "locations")
-    private List<JobRole> jobs;
+  @ManyToMany(mappedBy = "locations")
+  private List<JobRole> jobs;
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 }
