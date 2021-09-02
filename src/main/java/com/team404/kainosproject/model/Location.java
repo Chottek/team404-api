@@ -9,6 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+/**
+ * Models the location table of the database, containing the locations of kainos offices.
+ *
+ * @author team404
+ */
 @Entity
 @Table(name = "location")
 public class Location {

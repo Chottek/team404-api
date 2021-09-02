@@ -91,11 +91,11 @@ public class JobRole {
 
   @Override
   public String toString() {
-    return "JobRole{" +
-        "id=" + id +
-        ", title='" + title + '\'' +
-        ", description='" + description + '\'' +
-        ", contractType='" + contractType + '\'' +
-        '}';
+    return "JobRole{"
+        + "id=" + id
+        + ", title='" + title + '\''
+        + ", description='" + description + '\''
+        + ", contractType='" + contractType + '\''
+        + '}';
   }
 }
