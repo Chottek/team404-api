@@ -181,6 +181,19 @@ public class JobRoleControllerTest {
     @Test
     public void when_requestJobRoleMatrix_Expect_ReturnedInOrderOfBand(){
 
+        // This test will need improving when admin users are given the ability to create new bands
+
+        String[] bandOrder = {"Executive", "Leadership", "Principal", "Manager", "Consultant", "Senior_Associate", "Associate", "Trainee", "Apprentice"};
+
+        for (int i = 0; i < bandOrder.length; i++){
+
+            assertEquals(
+                bandOrder[i],
+                jobMatrixEngineering.getJSONObject(0).get("band_name")
+            );
+
+        }
+
     }
 
     private boolean jsonArrayIsNotEmpty(JSONObject json, String arrayName){

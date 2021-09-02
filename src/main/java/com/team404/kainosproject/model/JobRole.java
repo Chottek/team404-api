@@ -32,14 +32,19 @@ public class JobRole {
     )
     List<Location> locations;
 
-    @Column(name="capability")
-    private String capability;
+    @ManyToOne
+    @JoinColumn(name="capability_id")
+    private Capability capability;
+
+    @ManyToOne
+    @JoinColumn(name="job_family_id")
+    private JobFamily jobFamily;
 
     @ManyToOne
     @JoinColumn(name="band_id", nullable = false)
     private Band band;
 
-    public String getCapability() { return capability; }
+    public Capability getCapability() { return capability; }
 
     public List<Location> getLocations() {
         return locations;
@@ -61,8 +66,12 @@ public class JobRole {
         return contractType;
     }
 
-    public Band getBand() {
-        return band;
+//    public Band getBand() {
+//        return band;
+//    }
+
+    public JobFamily getJobFamily() {
+        return jobFamily;
     }
 
     public String getBandAsString(){

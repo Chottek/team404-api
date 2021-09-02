@@ -31,7 +31,7 @@ public class JobRoleDTO {
         this.description = jr.getDescription();
         this.contractType = jr.getContractType();
         this.locations = jr.getLocations();
-        this.capability = jr.getCapability();
+        this.capability = jr.getCapability().toString();
         this.band = jr.getBandAsString();
     }
 
