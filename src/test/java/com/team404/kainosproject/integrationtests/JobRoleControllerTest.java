@@ -1,17 +1,20 @@
-package com.team404.kainosproject.integrationtests;
+package com.team404.kainosproject.intergrationtests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.http.ResponseEntity;
 
-import org.json.*;
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertAll;
+// https://spring.io/guides/gs/testing-web/
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -107,12 +110,6 @@ public class JobRoleControllerTest {
                 }
         );
     }
-
-    @Test
-    public void when_getJobSpecification_Expect_JobBandIsReturned(){
-
-    }
-
 
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;

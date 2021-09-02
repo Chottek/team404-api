@@ -81,6 +81,10 @@ public class JobRole {
     return contractType;
   }
 
+  public String getPosted() {
+    return posted;
+  }
+
   @Override
   public String toString() {
     return "JobRole{"
