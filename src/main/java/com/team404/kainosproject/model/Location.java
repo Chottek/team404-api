@@ -10,7 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
- * Models the location table of the database, containing the locations of kainos offices.
+ * Models the database table location, representing Kainos office locations.
  *
  * @author team404
  */
