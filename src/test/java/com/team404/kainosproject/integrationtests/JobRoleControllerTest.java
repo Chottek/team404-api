@@ -1,5 +1,7 @@
 package com.team404.kainosproject.integrationtests;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,16 @@ public class JobRoleControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    private JSONArray jobMatrixEngineering;
+
+    @BeforeClass
+    private void setup(){
+        jobMatrixEngineering = new JSONArray(restTemplate
+            .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
+            .getBody()
+        );
+    }
 
     @Test
     public void when_gettingFirstRowFromJobRoleTable_Expect_ReturnsTestJobRow() {
@@ -140,18 +152,49 @@ public class JobRoleControllerTest {
     @Test
     public void when_requestJobRoleMatrix_Expect_JobRolesAndFamiliesReturned(){
 
-        final JSONArray jobsMatrix = new JSONArray(restTemplate
-                .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
-                .getBody()
-        );
+        // Check each band has family and job titles
+        jobMatrixEngineering.forEach(band -> {
 
+            assertAll(
+                () -> assertTrue(jsonHasAttribute((JSONObject) band, "band_name")),
+                () -> assertTrue(jsonHasAttribute((JSONObject) band, "job_families")),
+                () -> assertTrue(jsonArrayIsNotEmpty((JSONObject) band, "job_families"))
+            );
+        });
 
+        jobMatrixEngineering.forEach( band -> {
 
+            JSONArray jobFamilies = ((JSONObject) band).getJSONArray("job_families");
+
+            jobFamilies.forEach( family -> {
+
+                assertAll(
+                    () -> assertTrue(jsonHasAttribute((JSONObject) family, "job_family_name")),
+                    () -> assertTrue(jsonHasAttribute((JSONObject) family, "job_titles")),
+                    () -> assertTrue(jsonArrayIsNotEmpty((JSONObject) family, "job_titles"))
+                );
+
+            });
+        });
     }
 
     @Test
     public void when_requestJobRoleMatrix_Expect_ReturnedInOrderOfBand(){
 
+    }
+
+    private boolean jsonArrayIsNotEmpty(JSONObject json, String arrayName){
+
+        try{
+
+            if(json.getJSONArray(arrayName).length() >= 0)
+                return false;
+        }
+        catch (JSONException e){
+            return false;
+        }
+
+        return true;
     }
 
     private boolean jsonHasAttribute(JSONObject json, String attributeName){
