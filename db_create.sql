@@ -30,17 +30,20 @@ CREATE TABLE job_detail (
     description TEXT NOT NULL
 );
 
-INSERT INTO job_role (title, contract_type)
-VALUES
-("Head of test job", "full_time"),
-("Head of People Operations", "full_time"),
-("Technical Architect", "full_time"),
-("Security Engineer", "full_time"),
-("Product Owner", "full_time"),
-("Senior Software Engineer (Java)", "full_time"),
-("Test Engineer", "full_time");
-
-
-
-
-
+ALTER TABLE job_role ADD COLUMN capability ENUM (
+    'Engineering',
+    'Platforms',
+    'Data',
+    'Artificial_Intelligence',
+    'Cyber_Security',
+    'Workday',
+    'Experience_Design',
+    'Product',
+    'Delivery',
+    'Operations',
+    'Business_Development_and_Marketing',
+    'Organisation_Strategy_and_Planning',
+    'People',
+    'Commercial_and_Financial_Management',
+    'Business_Services_Support'
+) NOT NULL;

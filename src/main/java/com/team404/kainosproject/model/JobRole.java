@@ -48,8 +48,14 @@ public class JobRole {
   )
   private List<Location> locations;
 
+  @Column(name = "capability")
+  private String capability;
   @Column(name = "sharepoint_link")
   private String sharePointLink;
+
+  public String getCapability() {
+    return capability;
+  }
 
   public String getSharePointLink() {
     return sharePointLink;
@@ -86,7 +92,6 @@ public class JobRole {
         + ", title='" + title + '\''
         + ", description='" + description + '\''
         + ", contractType='" + contractType + '\''
-        + ", posted='" + posted + '\''
         + '}';
   }
 }
