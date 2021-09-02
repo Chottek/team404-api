@@ -1,4 +1,4 @@
-package com.team404.kainosproject.integrationtests;
+package java.com.team404.kainosproject.integrationtests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,11 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import org.json.*;
 
-<<<<<<< HEAD
 import static org.junit.Assert.*;
-=======
 import static org.junit.Assert.assertEquals;
->>>>>>> US002_viewjobspecification
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @RunWith(SpringRunner.class)
@@ -93,7 +90,7 @@ public class JobRoleControllerTest {
         assertEquals("Engineering", jobRole.get("capability"));
     }
 
-<<<<<<< HEAD
+
     @Test
     public void when_getAllJobs_Expect_AllReturnACapability(){
 
@@ -147,7 +144,4 @@ public class JobRoleControllerTest {
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
     }
-
-=======
->>>>>>> US002_viewjobspecification
 }
