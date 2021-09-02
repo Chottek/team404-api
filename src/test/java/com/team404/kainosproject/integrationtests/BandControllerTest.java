@@ -3,6 +3,7 @@ package com.team404.kainosproject.integrationtests;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import java.util.stream.StreamSupport;
+
+import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @RunWith(SpringRunner.class)
@@ -25,114 +27,98 @@ public class BandControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Test
-    public void when_getBands_Expect_NotEmptyResultSet() {
-        final JSONArray result = new JSONArray(restTemplate
-                .getForEntity(createURLWithPort("/bands-competencies"), String.class)
-                .getBody()
-        );
+    private JSONArray bandsCompetenciesResult;
 
-        assertTrue(result.length() > 0);
+    @Before
+    public void setUp() {
+        bandsCompetenciesResult = new JSONArray(restTemplate
+                .getForEntity(createURLWithPort("/bands-competencies"), String.class)
+                .getBody());
     }
 
     @Test
-    public void when_getBands_Expect_AllBandsAndCompetenciesAreReturned() {
-        final JSONArray result = new JSONArray(restTemplate
-                .getForEntity(createURLWithPort("/bands-competencies"), String.class)
-                .getBody()
-        );
+    public void when_getBands_Expect_NotEmptyResultSet() {
+        assertTrue(bandsCompetenciesResult.length() > 0);
+    }
 
-        // TODO Refactor each test into their own function
-
-        System.out.println(result.spliterator().estimateSize());
-
-        for (Object band : result) {
-
-            JSONObject obj = (JSONObject) band;
-
-            System.out.println(band.toString());
-            System.out.println("______________");
-
+    @Test
+    public void when_getBands_Expect_BandFieldAndCompetenciesArray_IsPresent() {
+        for (Object band : bandsCompetenciesResult) {
+            final JSONObject obj = (JSONObject) band;
             assertAll(
-                    // Check the band is labelled
-                    () -> {
-                        try {
-                            obj.get("band");
-                        } catch (JSONException e) {
-                            fail("Object: " + obj + " was missing a management level (band)");
+                    () -> assertTrue("[band] field is missing from object " + obj, isPresentInObject(obj, "band")),
+                    () -> assertTrue("[competencies] array is missing from object " + obj, isPresentInObject(obj, "competencies")),
+                    () -> assertTrue("[competencies] array is empty in object " + obj, isHavingEntries(obj.getJSONArray("competencies")))
+            );
+        }
+    }
+
+    @Test
+    public void when_getBands_Expect_EachCompetencyHas_NameAndIndicatorsArray() {
+        for (Object band : bandsCompetenciesResult) {
+            final JSONObject obj = (JSONObject) band;
+
+            obj.getJSONArray("competencies").forEach((competency) -> {
+                        JSONObject competencyObj = (JSONObject) competency;
+
+                        if (!isPresentInObject(competencyObj, "name")) {
+                            fail("Object: " + competencyObj + " had no name attribute");
                         }
-                    },
 
-                    // Contains a list of competencies of non-zero length
-                    () -> {
-                        try {
-                            JSONArray arr = (JSONArray) obj.get("competencies");
-                            if (arr.length() <= 0) fail("Object: " + obj + " has no competencies listed");
-
-                        } catch (JSONException e) {
-                            fail("Object: " + obj + " has no competencies attribute");
+                        if (!isPresentInObject(competencyObj, "indicators")) {
+                            fail("Object: " + competencyObj + " had no attribute indicators");
                         }
-                    },
 
-                    // Check all competencies have a name and set of indicators of non-zero length
-                    () -> {
-                        JSONArray arr = (JSONArray) obj.get("competencies");
-                        arr.forEach(
-                                (competency) -> {
-                                    JSONObject competencyObj = (JSONObject) competency;
-                                    try {
-                                        competencyObj.get("name");
-                                    } catch (JSONException e) {
-                                        fail("Object: " + competencyObj + " had no name attribute");
-                                    }
-
-                                    try {
-                                        JSONArray indicators = (JSONArray) competencyObj.get("indicators");
-                                        assertTrue(
-                                                "Object: " + competencyObj + " had a zero length list of indicators",
-                                                indicators.length() > 0
-                                        );
-                                    } catch (JSONException e) {
-                                        fail("object: " + competencyObj + " had no attribute indicators");
-                                    }
-                                }
-                        );
-                    },
-
-                    // Check that each competency indicator has a name and description
-                    () -> {
-                        // For each competency
-                        JSONArray competencies = (JSONArray) obj.get("competencies");
-                        competencies.forEach((competency) -> {
-
-                            // Foreach Indicator
-                            JSONObject competencyObj = new JSONObject(competency);
-                            JSONArray indicators = (JSONArray) competencyObj.get("indicators");
-                            indicators.forEach((indicator) -> {
-
-                                JSONObject indicatorObj = (JSONObject) indicator;
-                                try {
-                                    indicatorObj.get("name");
-                                } catch (JSONException e) {
-                                    fail("Indicator: " + indicatorObj + " had no attribute name");
-                                }
-
-                                try {
-                                    String desc = (String) indicatorObj.get("description");
-                                    assertTrue(
-                                            "Indicator: " + indicatorObj + "had an empty description",
-                                            desc.length() > 0
-                                    );
-                                } catch (JSONException e) {
-                                    fail("Indicator: " + indicatorObj + " had no attribute description");
-                                }
-                            });
-                        });
+                        if (!isHavingEntries(competencyObj.getJSONArray("indicators"))) {
+                            fail("Object: " + competencyObj + " had a zero length list of indicators");
+                        }
                     }
             );
         }
     }
 
+    @Test
+    public void when_getBands_ExpectEachCompetencyIndicator_Contains_NonEmpty_NameAndDescription(){
+        for (Object band : bandsCompetenciesResult) {
+            final JSONObject obj = (JSONObject) band;
+            JSONArray competencies = obj.getJSONArray("competencies");
+            competencies.forEach((competency) -> {
+                JSONObject competencyJSONObject = (JSONObject) competency;
+                JSONArray indicators = (JSONArray) competencyJSONObject.get("indicators");
+                indicators.forEach((indicator) -> {
+                    JSONObject indicatorObj = (JSONObject) indicator;
+                    if (!isPresentInObject(indicatorObj, "name")) {
+                        fail("Indicator: " + indicatorObj + " had no attribute name");
+                    }
+
+                    if(indicatorObj.get("name").toString().length() == 0){
+                        fail("[" + indicatorObj.getString("name") + "]'s description field had an empty String!");
+                    }
+
+                    if (!isPresentInObject(indicatorObj, "description")) {
+                        fail("Indicator: " + indicatorObj + " had no attribute description");
+                    }
+
+                    if (indicatorObj.get("description").toString().length() == 0) {
+                        fail("[" + indicatorObj.getString("name") + "]'s description field had an empty String!");
+                    }
+                });
+            });
+        }
+    }
+
+    private boolean isPresentInObject(JSONObject obj, String fieldName) {
+        try {
+            obj.get(fieldName);
+        } catch (JSONException je) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isHavingEntries(JSONArray arr) {
+        return arr.length() > 0;
+    }
 
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
