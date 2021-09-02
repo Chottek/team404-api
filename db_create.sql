@@ -47,6 +47,7 @@ ALTER TABLE job_role ADD COLUMN capability ENUM (
 
 CREATE TABLE band (
     band_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    priority INT NOT NULL,
     name VARCHAR(100) NOT NULL
 );
 
