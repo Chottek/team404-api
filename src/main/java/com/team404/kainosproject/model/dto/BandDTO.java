@@ -6,6 +6,7 @@ public class BandDTO {
 
     private String name;
     private List<CompetencyIndicatorDTO> competencyIndicators;
+    private List<String> competencyIndicatorNames;
 
     public BandDTO(String name, List<CompetencyIndicatorDTO> competencyIndicators) {
         this.name = name;

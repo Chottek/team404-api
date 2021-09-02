@@ -35,4 +35,13 @@ public class CompetencyIndicatorDTO {
     public void setSubCompetencyName(String subCompetencyName) {
         this.subCompetencyName = subCompetencyName;
     }
+
+    @Override
+    public String toString() {
+        return "CompetencyIndicatorDTO{" +
+                "competencyIndicatorName='" + competencyIndicatorName + '\'' +
+                ", description='" + description + '\'' +
+                ", subCompetencyName='" + subCompetencyName + '\'' +
+                '}';
+    }
 }
