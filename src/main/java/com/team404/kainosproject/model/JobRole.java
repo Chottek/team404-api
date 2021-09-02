@@ -45,11 +45,10 @@ public class JobRole {
       joinColumns = @JoinColumn(name = "job_id"),
       inverseJoinColumns = @JoinColumn(name = "location_id")
   )
-  private List<Location> locations;
-  @Column(name = "capability")
-  private String capability;
+
   @Column(name = "band")
   private String band;
+
   @Column(name = "sharepoint_link")
   private String sharePointLink;
 
@@ -63,12 +62,6 @@ public class JobRole {
 
   @Column(name = "capability")
   private String capability;
-  @Column(name = "sharepoint_link")
-  private String sharePointLink;
-
-  public String getCapability() {
-    return capability;
-  }
 
   public String getSharePointLink() {
     return sharePointLink;
@@ -80,14 +73,6 @@ public class JobRole {
 
   public String getCapability() {
     return capability;
-  }
-
-  public String getSharePointLink() {
-    return sharePointLink;
-  }
-
-  public List<Location> getLocations() {
-    return locations;
   }
 
   public Integer getId() {
