@@ -21,15 +21,45 @@ VALUES
 (8, 'Apprentice', 9),
 (9, 'Executive', 1);
 
-INSERT INTO job_role (job_id, title, contract_type, capability, band_id)
+INSERT INTO capability (capability_id, name)
 VALUES
-(1, "Head of test job", "full_time", "Engineering", 1),
-(2, "Head of People Operations", "full_time", "People", 1),
-(3, "Technical Architect", "full_time", "Engineering", 4),
-(4, "Security Engineer", "full_time", "Cyber_Security", 5),
-(5, "Product Owner", "full_time", "Business_Development_and_Marketing", 3),
-(6, "Senior Software Engineer (Java)", "full_time", "Engineering", 5),
-(7, "Test Engineer", "full_time", "Engineering", 6);
+(1, 'Engineering'),
+(2, 'Platforms'),
+(3, 'Data'),
+(4, 'Artificial_Intelligence'),
+(5, 'Cyber_Security'),
+(6, 'Workday'),
+(7, 'Experience_Design'),
+(8, 'Product'),
+(9, 'Delivery'),
+(10, 'Operations'),
+(11, 'Business_Development_and_Marketing'),
+(12, 'Organisation_Strategy_and_Planning'),
+(13, 'People'),
+(14, 'Commercial_and_Financial_Management'),
+(15, 'Business_Services_Support');
+
+INSERT INTO job_family (job_family_id, name, capability_id)
+VALUES
+(1,"Engineering Strategy and Planning",1),
+(2,"Engineering",1),
+(3,"Architecture",1),
+(4,"Testing and Quality Assurance",1),
+(5,"Product Specialist",1);
+
+
+INSERT INTO job_role (job_id, title, contract_type, capability_id, band_id)
+VALUES
+(1, "Head of test job", "full_time", 1, 1),
+(2, "Head of People Operations", "full_time", 13, 1),
+(3, "Security Engineer", "full_time", 5, 5),
+(4, "Product Owner", "full_time", 11, 3);
+
+INSERT INTO job_role (job_id, title, contract_type, capability_id, band_id, job_family_id)
+VALUES
+(5, "Technical Architect", "full_time", 1, 4, 3),
+(6, "Senior Software Engineer (Java)", "full_time", 1, 5, 2),
+(7, "Test Engineer", "full_time", 1, 6, 5);
 
 -- Link inserted Jobs to their available locations
 INSERT INTO job_location (job_id, location_id)

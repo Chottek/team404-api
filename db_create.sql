@@ -75,3 +75,28 @@ CREATE TABLE competency_indicator (
     FOREIGN KEY (sub_competency_id) REFERENCES sub_competency(sub_competency_id)
 );
 
+-- Break out capability into it's own table
+
+ALTER TABLE job_role DROP COLUMN capability;
+
+CREATE TABLE capability (
+    capability_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    name VARCHAR(100) NOT NULL
+);
+
+ALTER TABLE job_role ADD COLUMN capability_id INT;
+ALTER TABLE job_role ADD FOREIGN KEY (capability_id) REFERENCES capability(capability_id);
+
+-- Create job families and link job_Role and capability
+
+CREATE TABLE job_family (
+    job_family_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    name VARCHAR(100),
+    capability_id INT, FOREIGN KEY (capability_id) REFERENCES capability(capability_id)
+);
+
+-- Each job role can belong to a single job_family (a family may have multiple job roles)
+ALTER TABLE job_role ADD COLUMN job_family_id INT;
+ALTER TABLE job_role ADD FOREIGN KEY (job_family_id) REFERENCES job_family(job_family_id);
+
+
