@@ -108,6 +108,7 @@ public class JobRole {
 
   public String getBand() {
     return band;
+  }
 
   public String getPosted() {
     return posted;
