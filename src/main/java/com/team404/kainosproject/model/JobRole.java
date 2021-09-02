@@ -1,10 +1,16 @@
 package com.team404.kainosproject.model;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 /**
@@ -14,6 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "job_role")
+@SecondaryTable(name = "job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name = "job_id"))
 public class JobRole {
 
   @Id
@@ -24,14 +31,32 @@ public class JobRole {
   @Column(name = "title")
   private String title;
 
+  @Column(name = "description", table = "job_detail")
+  private String description;
+
   @Column(name = "contractType")
   private String contractType;
 
   @Column(name = "posted")
   private String posted;
 
-  public String getPosted() {
-    return posted;
+  @ManyToMany
+  @JoinTable(
+      name = "job_location",
+      joinColumns = @JoinColumn(name = "job_id"),
+      inverseJoinColumns = @JoinColumn(name = "location_id")
+  )
+  private List<Location> locations;
+
+  @Column(name = "sharepoint_link")
+  private String sharePointLink;
+
+  public String getSharePointLink() {
+    return sharePointLink;
+  }
+
+  public List<Location> getLocations() {
+    return locations;
   }
 
   public Integer getId() {
@@ -42,8 +67,16 @@ public class JobRole {
     return title;
   }
 
+  public String getDescription() {
+    return description;
+  }
+
   public String getContractType() {
     return contractType;
+  }
+
+  public String getPosted() {
+    return posted;
   }
 
   @Override
@@ -51,6 +84,7 @@ public class JobRole {
     return "JobRole{"
         + "id=" + id
         + ", title='" + title + '\''
+        + ", description='" + description + '\''
         + ", contractType='" + contractType + '\''
         + ", posted='" + posted + '\''
         + '}';
