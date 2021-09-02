@@ -11,7 +11,7 @@ VALUES
 
 INSERT INTO job_role (job_id, title, contract_type, capability, sharepoint_link)
 VALUES
-(1, "Head of test job", "full_time", "Test Link", "Engineering"),
+(1, "Head of test job", "full_time", "Engineering", "Test Link"),
 (2, "Head of People Operations", "full_time", "People",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EXYqFjDBzXZFiXMGdbXni2YBIM8ZztDBqB5naCdnXhbYew?e=DWvKrR"
 ),

@@ -1,4 +1,4 @@
-package java.com.team404.kainosproject.integrationtests;
+package com.team404.kainosproject.integrationtests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
