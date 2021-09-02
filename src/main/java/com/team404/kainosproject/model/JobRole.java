@@ -39,6 +39,18 @@ public class JobRole {
 
   @Column(name = "posted")
   private String posted;
+  @ManyToMany
+  @JoinTable(
+      name = "job_location",
+      joinColumns = @JoinColumn(name = "job_id"),
+      inverseJoinColumns = @JoinColumn(name = "location_id")
+  )
+
+  @Column(name = "band")
+  private String band;
+
+  @Column(name = "sharepoint_link")
+  private String sharePointLink;
 
   @ManyToMany
   @JoinTable(
@@ -50,12 +62,6 @@ public class JobRole {
 
   @Column(name = "capability")
   private String capability;
-  @Column(name = "sharepoint_link")
-  private String sharePointLink;
-
-  public String getCapability() {
-    return capability;
-  }
 
   public String getSharePointLink() {
     return sharePointLink;
@@ -63,6 +69,10 @@ public class JobRole {
 
   public List<Location> getLocations() {
     return locations;
+  }
+
+  public String getCapability() {
+    return capability;
   }
 
   public Integer getId() {
@@ -79,6 +89,10 @@ public class JobRole {
 
   public String getContractType() {
     return contractType;
+  }
+
+  public String getBand() {
+    return band;
   }
 
   public String getPosted() {

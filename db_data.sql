@@ -9,25 +9,25 @@ VALUES
 (5, "Derry"),
 (6, "Toronto");
 
-INSERT INTO job_role (job_id, title, contract_type, capability, sharepoint_link)
+INSERT INTO job_role (job_id, title, contract_type, capability, band, sharepoint_link)
 VALUES
-(1, "Head of test job", "full_time", "Engineering", "Test Link"),
-(2, "Head of People Operations", "full_time", "People",
+(1, "Head of test job", "full_time", "Test Link", "Engineering", "Associate"),
+(2, "Head of People Operations", "full_time", "People", "Leadership",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EXYqFjDBzXZFiXMGdbXni2YBIM8ZztDBqB5naCdnXhbYew?e=DWvKrR"
 ),
-(3, "Technical Architect", "full_time"," Engineering", 
+(3, "Technical Architect", "full_time"," Engineering", "Consultant",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/ERa52ZFdOhxJuKYbwl5w27YBUGgHxFh6qz9AtTflB2YPGA?e=mMeOWH"
 ),
-(4, "Security Engineer", "full_time", "Cyber_Security",
+(4, "Security Engineer", "full_time", "Cyber_Security", "Senior_Associate",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbWlHfJkEF1HhJ6_BC4aqLoBAGXd7z6SYRwcdEBcNgygCQ?e=nTVpB6"
 ),
-(5, "Product Manager", "full_time", "Business_Development_and_Marketing",
+(5, "Product Manager", "full_time", "Business_Development_and_Marketing", "Manager",
 "https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Workday/Product%20Development/Job%20Profile%20-%20Product%20Manager%20(Manager).pdf?web=1"
 ),
-(6, "Senior Software Engineer", "full_time", "Engineering",
+(6, "Senior Software Engineer", "full_time", "Engineering", "Senior_Associate",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EeS73plMEQ9Fjf-tovttXuYBEo-0tlfT-U3bFMcgryapVw?e=wJFypU"
 ),
-(7, "Test Engineer", "full_time", "Engineering",
+(7, "Test Engineer", "full_time", "Engineering", "Associate",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh"
 );
 
