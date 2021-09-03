@@ -39,12 +39,6 @@ public class JobRole {
 
   @Column(name = "posted")
   private String posted;
-  @ManyToMany
-  @JoinTable(
-      name = "job_location",
-      joinColumns = @JoinColumn(name = "job_id"),
-      inverseJoinColumns = @JoinColumn(name = "location_id")
-  )
 
   @Column(name = "band")
   private String band;
@@ -62,6 +56,9 @@ public class JobRole {
 
   @Column(name = "capability")
   private String capability;
+
+  @Column(name = "responsibilities")
+  private String responsibilities;
 
   public String getSharePointLink() {
     return sharePointLink;
@@ -110,10 +107,10 @@ public class JobRole {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", contractType='" + contractType + '\'' +
-                ", locations=" + locations +
-                ", responsibilities='" + responsibilities + '\'' +
+                ", locations=[" + locations.size() +
+                "], responsibilities='" + responsibilities + '\'' +
                 ", capability='" + capability + '\'' +
-                ", band='" + band + '\'' +
+                ", band='" +  '\'' +
                 '}';
     }
 }
