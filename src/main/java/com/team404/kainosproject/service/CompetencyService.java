@@ -10,23 +10,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class CompetencyService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CompetencyService.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CompetencyService.class);
 
-    private final CompetencyRepository repository;
+  private final CompetencyRepository repository;
 
-    @Autowired
-    public CompetencyService(CompetencyRepository repository) {
-        this.repository = repository;
-    }
+  @Autowired
+  public CompetencyService(CompetencyRepository repository) {
+    this.repository = repository;
+  }
 
-    /**
-     * Gets a List of Competency objects from database
-     * @return Competency objects list
-     */
-    public Iterable<Competency> getAllCompetencies(){
-        Iterable<Competency> competencies = repository.findAll();
-        LOG.info("Got {} Competency entries from database", competencies.spliterator().estimateSize());
-        return competencies;
-    }
+  /**
+   * Gets a List of Competency objects from database
+   *
+   * @return Competency objects list
+   */
+  public Iterable<Competency> getAllCompetencies() {
+    Iterable<Competency> competencies = repository.findAll();
+    LOG.info("Got {} Competency entries from database", competencies.spliterator().estimateSize());
+    return competencies;
+  }
 
 }

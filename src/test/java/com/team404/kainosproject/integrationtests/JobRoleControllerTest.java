@@ -22,124 +22,124 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class JobRoleControllerTest {
 
-    @LocalServerPort
-    private int port;
+  @LocalServerPort
+  private int port;
 
-    @Autowired
-    private TestRestTemplate restTemplate;
+  @Autowired
+  private TestRestTemplate restTemplate;
 
-    @Test
-    public void when_gettingFirstRowFromJobRoleTable_Expect_ReturnsTestJobRow() {
-        final JSONArray jobRoles = new JSONArray(restTemplate
-                .getForEntity(createURLWithPort("/job-roles"), String.class)
-                .getBody());
+  @Test
+  public void when_gettingFirstRowFromJobRoleTable_Expect_ReturnsTestJobRow() {
+    final JSONArray jobRoles = new JSONArray(restTemplate
+        .getForEntity(createURLWithPort("/job-roles"), String.class)
+        .getBody());
 
-        final JSONObject firstObj = (JSONObject) jobRoles.get(0);
+    final JSONObject firstObj = (JSONObject) jobRoles.get(0);
 
-        assertAll("Should contain Test Job Row",
-                () -> assertEquals("Head of test job", firstObj.get("title")),
-                () -> assertEquals("full_time", firstObj.get("contractType"))
-        );
-    }
+    assertAll("Should contain Test Job Row",
+        () -> assertEquals("Head of test job", firstObj.get("title")),
+        () -> assertEquals("full_time", firstObj.get("contractType"))
+    );
+  }
 
-    @Test
-    public void when_gettingJobSpecificationByID_Expect_TestRowLocationsAndDescription() {
-        final JSONObject jobRole = new JSONObject(restTemplate
-                .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
-                .getBody());
+  @Test
+  public void when_gettingJobSpecificationByID_Expect_TestRowLocationsAndDescription() {
+    final JSONObject jobRole = new JSONObject(restTemplate
+        .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
+        .getBody());
 
-        assertAll("Should contain Test Job Row",
-                () -> assertEquals("Head of test job", jobRole.get("title")),
-                () -> assertEquals(
-                        "[{\"name\":\"London\"},{\"name\":\"Birmingham\"},{\"name\":\"Gdansk\"}]",
-                        jobRole.getJSONArray("locations").toString()
-                ),
-                () -> assertEquals(3, jobRole.getJSONArray("locations").length()),
-                () -> assertEquals("<b>What you will be expected to do </b> " +
-                                "<br/> Day to day you will be expected to be a test entry in our tables.",
-                        jobRole.get("description")),
-                () -> assertEquals("full_time", jobRole.get("contractType"))
-        );
-    }
+    assertAll("Should contain Test Job Row",
+        () -> assertEquals("Head of test job", jobRole.get("title")),
+        () -> assertEquals(
+            "[{\"name\":\"London\"},{\"name\":\"Birmingham\"},{\"name\":\"Gdansk\"}]",
+            jobRole.getJSONArray("locations").toString()
+        ),
+        () -> assertEquals(3, jobRole.getJSONArray("locations").length()),
+        () -> assertEquals("<b>What you will be expected to do </b> " +
+                "<br/> Day to day you will be expected to be a test entry in our tables.",
+            jobRole.get("description")),
+        () -> assertEquals("full_time", jobRole.get("contractType"))
+    );
+  }
 
-    @Test
-    public void when_wrongIDForJobSpecification_Expect_JobSpecificationNotFound() {
-        final int jobRolesSize = new JSONArray(restTemplate
-                .getForEntity(createURLWithPort("/job-roles"), String.class)
-                .getBody()).length();
+  @Test
+  public void when_wrongIDForJobSpecification_Expect_JobSpecificationNotFound() {
+    final int jobRolesSize = new JSONArray(restTemplate
+        .getForEntity(createURLWithPort("/job-roles"), String.class)
+        .getBody()).length();
 
-        assertAll("Should return 404 Status",
-                () -> assertEquals(restTemplate
-                        .getForEntity(createURLWithPort("/job-roles/" + (-1)), String.class)
-                        .getStatusCode(), ResponseEntity.notFound().build().getStatusCode()),
+    assertAll("Should return 404 Status",
+        () -> assertEquals(restTemplate
+            .getForEntity(createURLWithPort("/job-roles/" + (-1)), String.class)
+            .getStatusCode(), ResponseEntity.notFound().build().getStatusCode()),
 
-                () -> assertEquals(restTemplate
-                        .getForEntity(createURLWithPort("/job-roles/" + (0)), String.class)
-                        .getStatusCode(), ResponseEntity.notFound().build().getStatusCode()),
+        () -> assertEquals(restTemplate
+            .getForEntity(createURLWithPort("/job-roles/" + (0)), String.class)
+            .getStatusCode(), ResponseEntity.notFound().build().getStatusCode()),
 
-                () -> assertEquals(restTemplate
-                        .getForEntity(createURLWithPort("/job-roles/" + (jobRolesSize + 1)), String.class)
-                        .getStatusCode(), ResponseEntity.notFound().build().getStatusCode())
-        );
-    }
+        () -> assertEquals(restTemplate
+            .getForEntity(createURLWithPort("/job-roles/" + (jobRolesSize + 1)), String.class)
+            .getStatusCode(), ResponseEntity.notFound().build().getStatusCode())
+    );
+  }
 
-    @Test
-    public void when_getJobSpecification_Expect_JobCapabilityIsReturned() {
-        final JSONObject jobRole = new JSONObject(restTemplate
-                .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
-                .getBody());
+  @Test
+  public void when_getJobSpecification_Expect_JobCapabilityIsReturned() {
+    final JSONObject jobRole = new JSONObject(restTemplate
+        .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
+        .getBody());
 
-        assertEquals("Engineering", (String) jobRole.get("capability"));
-    }
+    assertEquals("Engineering", jobRole.get("capability"));
+  }
 
-    @Test
-    public void when_getAllJobs_Expect_AllReturnACapability() {
+  @Test
+  public void when_getAllJobs_Expect_AllReturnACapability() {
 
-        final JSONArray jobRoles = new JSONArray(restTemplate
-                .getForEntity(createURLWithPort("/job-roles"), String.class)
-                .getBody()
-        );
+    final JSONArray jobRoles = new JSONArray(restTemplate
+        .getForEntity(createURLWithPort("/job-roles"), String.class)
+        .getBody()
+    );
 
-        jobRoles.forEach(
-                (jobRole) -> {
-                    try {
-                        ((JSONObject) jobRole).get("capability");
-                    } catch (JSONException e) {
-                        fail("Object " + jobRole + " is missing a capability");
-                    }
-                }
-        );
-    }
+    jobRoles.forEach(
+        (jobRole) -> {
+          try {
+            ((JSONObject) jobRole).get("capability");
+          } catch (JSONException e) {
+            fail("Object " + jobRole + " is missing a capability");
+          }
+        }
+    );
+  }
 
-    @Test
-    public void when_getJobSpecification_Expect_JobBandIsReturned() {
-        final JSONObject jobRole = new JSONObject(restTemplate
-                .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
-                .getBody());
-        assertEquals("Leadership", jobRole.get("band"));
-    }
+  @Test
+  public void when_getJobSpecification_Expect_JobBandIsReturned() {
+    final JSONObject jobRole = new JSONObject(restTemplate
+        .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
+        .getBody());
+    assertEquals("Leadership", jobRole.get("band"));
+  }
 
-    @Test
-    public void when_getAllJobs_Expect_AllReturnABand() {
+  @Test
+  public void when_getAllJobs_Expect_AllReturnABand() {
 
-        final JSONArray jobRoles = new JSONArray(restTemplate
-                .getForEntity(createURLWithPort("/job-roles"), String.class)
-                .getBody()
-        );
+    final JSONArray jobRoles = new JSONArray(restTemplate
+        .getForEntity(createURLWithPort("/job-roles"), String.class)
+        .getBody()
+    );
 
-        jobRoles.forEach(
-                (jobRole) -> {
-                    try {
-                        ((JSONObject) jobRole).get("band");
-                    } catch (JSONException e) {
-                        fail("Object " + jobRole + " is missing a band");
-                    }
-                }
-        );
-    }
+    jobRoles.forEach(
+        (jobRole) -> {
+          try {
+            ((JSONObject) jobRole).get("band");
+          } catch (JSONException e) {
+            fail("Object " + jobRole + " is missing a band");
+          }
+        }
+    );
+  }
 
-    private String createURLWithPort(String uri) {
-        return "http://localhost:" + port + uri;
-    }
+  private String createURLWithPort(String uri) {
+    return "http://localhost:" + port + uri;
+  }
 
 }

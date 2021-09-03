@@ -39,10 +39,11 @@ public class JobRoleService {
 
   /**
    * Gets an Optional of JobRole from database, based on ID.
+   *
    * @param id Numeric id of Job Role in database
    * @return Optional of JobRole in database
    */
-  public Optional<JobRoleDTO> getById(int id){
+  public Optional<JobRoleDTO> getById(int id) {
     Optional<JobRole> jobRole = repository.findById(id);
     return jobRole.map(JobRoleDTO::new).or(Optional::empty);
   }
