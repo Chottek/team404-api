@@ -39,7 +39,7 @@ public class JobRoleController {
    *
    * @param id Numeric id of Job Role in database
    * @return ResponseEntity containing an object if it exists,
-   * else ResponseEntity with 404 NotFound Status
+   *        else ResponseEntity with 404 NotFound Status
    */
   @GetMapping("/job-roles/{id}")
   public ResponseEntity<JobRole> getById(@PathVariable("id") int id) {
