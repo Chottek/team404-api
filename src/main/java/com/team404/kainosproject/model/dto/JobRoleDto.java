@@ -20,6 +20,7 @@ public class JobRoleDto {
   private String capability;
   private String band;
   private String responsibilities;
+  private String sharepoint;
 
   /**
    * Create a new Data Transfer Object to contain the below information.
@@ -55,6 +56,7 @@ public class JobRoleDto {
     this.capability = jr.getCapability();
     this.band = jr.getBandAsString();
     this.responsibilities = jr.getResponsibilities();
+    this.sharepoint = jr.getSharePointLink();
   }
 
   public JobRoleDto() {
@@ -110,5 +112,9 @@ public class JobRoleDto {
 
   public String getResponsibilities() {
     return responsibilities;
+  }
+
+  public String getSharepointLink() {
+    return sharepoint;
   }
 }
