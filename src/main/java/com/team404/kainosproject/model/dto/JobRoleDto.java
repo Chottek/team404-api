@@ -21,7 +21,8 @@ public class JobRoleDto {
   private String band;
 
   /**
-   * Create a new Data Transfer Object to contain the below information
+   * Create a new Data Transfer Object to contain the below information.
+   *
    * @param title job title
    * @param description job description
    * @param contractType type of contract (part_time, full_time, consultant)
@@ -41,6 +42,7 @@ public class JobRoleDto {
 
   /**
    * Initialise a data transfer object from a JobRole model.
+   *
    * @param jr a job role model object
    */
   public JobRoleDto(JobRole jr) {

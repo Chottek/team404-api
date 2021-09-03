@@ -28,8 +28,8 @@ public class BandController {
   }
 
   @GetMapping("/bands-competencies")
-  public Iterable<BandDto> getBandDTOs() {
-    return service.getAllBandsDTOs();
+  public Iterable<BandDto> getBandDtos() {
+    return service.getAllBandsDtos();
   }
 
 }

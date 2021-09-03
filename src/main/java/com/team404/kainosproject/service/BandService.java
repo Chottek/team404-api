@@ -41,12 +41,12 @@ public class BandService {
   }
 
   /**
-   * Gets a List of Band objects from database and maps it to the BandDTO of form that can be easily.
-   * parsed
+   * Gets a List of Band objects from database and maps it to the BandDTO
+   * of form that can be easily parsed.
    *
    * @return Iterable of BandDTO objects
    */
-  public Iterable<BandDto> getAllBandsDTOs() {
+  public Iterable<BandDto> getAllBandsDtos() {
     Iterable<Band> bands = repository.findAll();
     List<String> competencies = new ArrayList<>();
     List<String> bandNames = new ArrayList<>();
@@ -64,11 +64,11 @@ public class BandService {
           .forEach(bandNames::add);
     });
 
-    List<BandDto> bandDTOSList = new ArrayList<>();
+    List<BandDto> bandDtosList = new ArrayList<>();
 
     for (String bandName : bandNames) {
-      BandDto bandDTO = new BandDto();
-      bandDTO.setBand(bandName);
+      BandDto bandDto = new BandDto();
+      bandDto.setBand(bandName);
       final List<CompetencyDto> competencyDtos = new ArrayList<>();
       for (String competency : competencies) {
         final List<IndicatorDto> indicators = new ArrayList<>();
@@ -88,10 +88,10 @@ public class BandService {
         }
       }
       LOG.info("[{}] BandDTO contains [{}] competencies", bandName, competencyDtos.size());
-      bandDTO.setCompetencies(competencyDtos);
-      bandDTOSList.add(bandDTO);
+      bandDto.setCompetencies(competencyDtos);
+      bandDtosList.add(bandDto);
     }
-    LOG.info("Created [{}] Band Data Transfer Objects from Band model", bandDTOSList.size());
-    return bandDTOSList;
+    LOG.info("Created [{}] Band Data Transfer Objects from Band model", bandDtosList.size());
+    return bandDtosList;
   }
 }
