@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BandController {
 
-    private final BandService service;
+  private final BandService service;
 
-    @Autowired
-    public BandController(BandService service) {
-        this.service = service;
-    }
+  @Autowired
+  public BandController(BandService service) {
+    this.service = service;
+  }
 
-    @GetMapping("/bands")
-    public Iterable<Band> getAllBands(){
-        return service.getAllBands();
-    }
+  @GetMapping("/bands")
+  public Iterable<Band> getAllBands() {
+    return service.getAllBands();
+  }
 
-    @GetMapping("/bands-competencies")
-    public Iterable<BandDTO> getBandDTOs(){
-        return service.getAllBandsDTOs();
-    }
+  @GetMapping("/bands-competencies")
+  public Iterable<BandDTO> getBandDTOs() {
+    return service.getAllBandsDTOs();
+  }
 
 }

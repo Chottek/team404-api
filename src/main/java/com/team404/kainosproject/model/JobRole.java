@@ -1,81 +1,87 @@
 package com.team404.kainosproject.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="job_role")
-@SecondaryTable(name="job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name="job_id"))
+@Table(name = "job_role")
+@SecondaryTable(name = "job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name = "job_id"))
 public class JobRole {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="job_id")
-    private Integer id;
+  @ManyToMany
+  @JoinTable(
+      name = "job_location",
+      joinColumns = @JoinColumn(name = "job_id"),
+      inverseJoinColumns = @JoinColumn(name = "location_id")
+  )
+  List<Location> locations;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "job_id")
+  private Integer id;
+  @Column(name = "title")
+  private String title;
+  @Column(name = "description", table = "job_detail")
+  private String description;
+  @Column(name = "contractType")
+  private String contractType;
+  @Column(name = "capability")
+  private String capability;
 
-    @Column(name="title")
-    private String title;
+  @ManyToOne
+  @JoinColumn(name = "band_id", nullable = false)
+  private Band band;
 
-    @Column(name="description", table = "job_detail")
-    private String description;
+  public String getCapability() {
+    return capability;
+  }
 
-    @Column(name="contractType")
-    private String contractType;
+  public List<Location> getLocations() {
+    return locations;
+  }
 
-    @ManyToMany
-    @JoinTable(
-            name = "job_location",
-            joinColumns = @JoinColumn(name="job_id"),
-            inverseJoinColumns = @JoinColumn(name="location_id")
-    )
-    List<Location> locations;
+  public Integer getId() {
+    return id;
+  }
 
-    @Column(name="capability")
-    private String capability;
+  public String getTitle() {
+    return title;
+  }
 
-    @ManyToOne
-    @JoinColumn(name="band_id", nullable = false)
-    private Band band;
+  public String getDescription() {
+    return description;
+  }
 
-    public String getCapability() { return capability; }
+  public String getContractType() {
+    return contractType;
+  }
 
-    public List<Location> getLocations() {
-        return locations;
-    }
+  public Band getBand() {
+    return band;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public String getBandAsString() {
+    return band.getName();
+  }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getContractType() {
-        return contractType;
-    }
-
-    public Band getBand() {
-        return band;
-    }
-
-    public String getBandAsString(){
-        return band.getName();
-    }
-
-    @Override
-    public String toString() {
-        return "JobRole{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", contractType='" + contractType + '\'' +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "JobRole{" +
+        "id=" + id +
+        ", title='" + title + '\'' +
+        ", description='" + description + '\'' +
+        ", contractType='" + contractType + '\'' +
+        '}';
+  }
 }

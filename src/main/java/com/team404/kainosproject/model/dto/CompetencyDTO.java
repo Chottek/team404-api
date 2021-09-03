@@ -4,27 +4,27 @@ import java.util.List;
 
 public class CompetencyDTO {
 
-    private String name;
-    private List<IndicatorDTO> indicators;
+  private String name;
+  private List<IndicatorDTO> indicators;
 
-    public CompetencyDTO(String name, List<IndicatorDTO> indicators) {
-        this.name = name;
-        this.indicators = indicators;
-    }
+  public CompetencyDTO(String name, List<IndicatorDTO> indicators) {
+    this.name = name;
+    this.indicators = indicators;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public List<IndicatorDTO> getIndicators() {
-        return indicators;
-    }
+  public List<IndicatorDTO> getIndicators() {
+    return indicators;
+  }
 
-    public void setIndicators(List<IndicatorDTO> indicators) {
-        this.indicators = indicators;
-    }
+  public void setIndicators(List<IndicatorDTO> indicators) {
+    this.indicators = indicators;
+  }
 }
