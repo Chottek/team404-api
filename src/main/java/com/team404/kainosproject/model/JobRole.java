@@ -1,13 +1,27 @@
 package com.team404.kainosproject.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
+import javax.persistence.Table;
 
+/**
+ * Job Role.
+ *
+ * @author team404
+ */
 @Entity
-@Table(name="job_role")
-@SecondaryTable(name="job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name="job_id"))
+@Table(name = "job_role")
+@SecondaryTable(name = "job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name = "job_id"))
 public class JobRole {
 
     @Id
@@ -24,6 +38,9 @@ public class JobRole {
     @Column(name="contractType")
     private String contractType;
 
+    @Column(name = "posted")
+    private String posted;
+
     @ManyToMany
     @JoinTable(
             name = "job_location",
@@ -39,7 +56,14 @@ public class JobRole {
     @JoinColumn(name="band_id", nullable = false)
     private Band band;
 
+    @Column(name = "sharepoint_link")
+    private String sharePointLink;
+
     public String getCapability() { return capability; }
+
+    public String getSharePointLink() {
+    return sharePointLink;
+  }
 
     public List<Location> getLocations() {
         return locations;
@@ -68,6 +92,10 @@ public class JobRole {
     public String getBandAsString(){
         return band.getName();
     }
+
+    public String getPosted() {
+    return posted;
+  }
 
     @Override
     public String toString() {

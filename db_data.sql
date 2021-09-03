@@ -21,15 +21,22 @@ VALUES
 (8, 'Apprentice', 9),
 (9, 'Executive', 1);
 
-INSERT INTO job_role (job_id, title, contract_type, capability, band_id)
+INSERT INTO job_role (job_id, title, contract_type, capability, band_id, sharepoint_link)
 VALUES
-(1, "Head of test job", "full_time", "Engineering", 1),
-(2, "Head of People Operations", "full_time", "People", 1),
-(3, "Technical Architect", "full_time", "Engineering", 4),
-(4, "Security Engineer", "full_time", "Cyber_Security", 5),
-(5, "Product Owner", "full_time", "Business_Development_and_Marketing", 3),
-(6, "Senior Software Engineer (Java)", "full_time", "Engineering", 5),
-(7, "Test Engineer", "full_time", "Engineering", 6);
+(1, "Head of test job", "full_time", "Engineering", 1,
+"Test Link"),
+(2, "Head of People Operations", "full_time", "People", 1,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EXYqFjDBzXZFiXMGdbXni2YBIM8ZztDBqB5naCdnXhbYew?e=DWvKrR"),
+(3, "Technical Architect", "full_time", "Engineering", 4,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/ERa52ZFdOhxJuKYbwl5w27YBUGgHxFh6qz9AtTflB2YPGA?e=mMeOWH"),
+(4, "Security Engineer", "full_time", "Cyber_Security", 5,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbWlHfJkEF1HhJ6_BC4aqLoBAGXd7z6SYRwcdEBcNgygCQ?e=nTVpB6"),
+(5, "Product Owner", "full_time", "Business_Development_and_Marketing", 3,
+"https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Workday/Product%20Development/Job%20Profile%20-%20Product%20Manager%20(Manager).pdf?web=1"),
+(6, "Senior Software Engineer (Java)", "full_time", "Engineering", 5,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EeS73plMEQ9Fjf-tovttXuYBEo-0tlfT-U3bFMcgryapVw?e=wJFypU"),
+(7, "Test Engineer", "full_time", "Engineering", 6,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh");
 
 -- Link inserted Jobs to their available locations
 INSERT INTO job_location (job_id, location_id)
@@ -996,3 +1003,5 @@ VALUES
 9, 47,
 "Builds a strong network of collaborative relationships and partnerships globally to achieve our objectives, whist supporting wider stakeholder agendas. Utilises the experience and input of external partners, non-executive directors, and industry experts to improve effectiveness."
 );
+=======
+>>>>>>> origin/master
