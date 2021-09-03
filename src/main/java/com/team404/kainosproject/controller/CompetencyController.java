@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controls requests relating to Kainos competencies.
+ *
+ * @author team404
+ */
 @RestController
 public class CompetencyController {
 

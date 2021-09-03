@@ -10,6 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Model Object representing a Kainos Competency.
+ *
+ * @author team 404
+ */
 @Entity
 @Table(name = "competency")
 public class Competency {

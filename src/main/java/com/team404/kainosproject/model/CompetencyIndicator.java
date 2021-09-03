@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Represents an indicator of how a Kainos competency can be achieved.
+ *
+ * @author  team404
+ */
 @Entity
 @Table(name = "competency_indicator")
 public class CompetencyIndicator {

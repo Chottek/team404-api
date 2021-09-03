@@ -14,58 +14,78 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
+/**
+ * Job Role.
+ *
+ * @author team404
+ */
 @Entity
 @Table(name = "job_role")
 @SecondaryTable(name = "job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name = "job_id"))
 public class JobRole {
 
-  @ManyToMany
-  @JoinTable(
-      name = "job_location",
-      joinColumns = @JoinColumn(name = "job_id"),
-      inverseJoinColumns = @JoinColumn(name = "location_id")
-  )
-  List<Location> locations;
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "job_id")
-  private Integer id;
-  @Column(name = "title")
-  private String title;
-  @Column(name = "description", table = "job_detail")
-  private String description;
-  @Column(name = "contractType")
-  private String contractType;
-  @Column(name = "capability")
-  private String capability;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="job_id")
+    private Integer id;
+
+    @Column(name="title")
+    private String title;
+
+    @Column(name="description", table = "job_detail")
+    private String description;
+
+    @Column(name="contractType")
+    private String contractType;
+
+    @Column(name = "posted")
+    private String posted;
+
+    @ManyToMany
+    @JoinTable(
+            name = "job_location",
+            joinColumns = @JoinColumn(name="job_id"),
+            inverseJoinColumns = @JoinColumn(name="location_id")
+    )
+    List<Location> locations;
+
+    @Column(name="capability")
+    private String capability;
 
   @ManyToOne
   @JoinColumn(name = "band_id", nullable = false)
   private Band band;
 
+  @Column(name = "sharepoint_link")
+  private String sharePointLink;
+
   public String getCapability() {
     return capability;
   }
 
-  public List<Location> getLocations() {
-    return locations;
+  public String getSharePointLink() {
+    return sharePointLink;
   }
 
-  public Integer getId() {
-    return id;
-  }
+    public List<Location> getLocations() {
+        return locations;
+    }
 
-  public String getTitle() {
-    return title;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public String getContractType() {
-    return contractType;
-  }
+    public String getDescription() {
+        return description;
+    }
+
+    public String getContractType() {
+        return contractType;
+    }
 
   public Band getBand() {
     return band;
@@ -75,13 +95,17 @@ public class JobRole {
     return band.getName();
   }
 
+  public String getPosted() {
+    return posted;
+  }
+
   @Override
   public String toString() {
-    return "JobRole{" +
-        "id=" + id +
-        ", title='" + title + '\'' +
-        ", description='" + description + '\'' +
-        ", contractType='" + contractType + '\'' +
-        '}';
+    return "JobRole{"
+        + "id=" + id
+        + ", title='" + title + '\''
+        + ", description='" + description + '\''
+        + ", contractType='" + contractType + '\''
+        + '}';
   }
 }

@@ -13,6 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Represents a sub category of a Kainos Competency.
+ *
+ * @author team404
+ */
 @Entity
 @Table(name = "sub_competency")
 public class SubCompetency {

@@ -30,15 +30,15 @@ public class JobRoleControllerTest {
   @Autowired
   private TestRestTemplate restTemplate;
 
-  private JSONArray jobMatrixEngineering;
+    private JSONArray jobMatrixEngineering;
 
-  @BeforeClass
-  private void setup() {
-    jobMatrixEngineering = new JSONArray(restTemplate
-        .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
-        .getBody()
-    );
-  }
+    @BeforeClass
+    private void setup() {
+        jobMatrixEngineering = new JSONArray(restTemplate
+            .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
+            .getBody()
+        );
+    }
 
   @Test
   public void when_gettingFirstRowFromJobRoleTable_Expect_ReturnsTestJobRow() {
@@ -214,46 +214,3 @@ public class JobRoleControllerTest {
   }
 
 }
-
-/* TODO This starts the server on a random port to test the full application
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SomeTestClass {
-
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
-
-    @Test
-    public void SomeTest() throws Exception{
-
-        restTemplate.getForObject();
-
-    }
-
-}
-*/
-
-// To test just a data source it seems we can use @MockBean to mock a repository.
-
-/* Using Mock MVC tests the requests without starting a full web application
-
-import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-
-@SpringBootTest
-@AutoConfigureMockMvc
-public class JobRoleControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Test
-    public void SomeTest() throws Exception{
-        mockMVC.perform(...)
-    }
-
-}
- */
