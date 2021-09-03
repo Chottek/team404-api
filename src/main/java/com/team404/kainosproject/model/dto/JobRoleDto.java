@@ -114,7 +114,7 @@ public class JobRoleDto {
     return responsibilities;
   }
 
-  public String getSharepoint() {
+  public String getSharepointLink() {
     return sharepoint;
   }
 }
