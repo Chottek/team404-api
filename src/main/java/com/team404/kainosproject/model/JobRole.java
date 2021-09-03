@@ -100,17 +100,4 @@ public class JobRole {
     return responsibilities;
   }
 
-  @Override
-  public String toString() {
-    return "JobRole{"
-        + "id=" + id
-        + ", title='" + title + '\''
-        + ", description='" + description + '\''
-        + ", contractType='" + contractType + '\''
-        + ", locations=[" + locations.size()
-        + "], responsibilities='" + responsibilities + '\''
-        + ", capability='" + capability + '\''
-        + ", band='" + '\''
-        + '}';
-  }
 }
