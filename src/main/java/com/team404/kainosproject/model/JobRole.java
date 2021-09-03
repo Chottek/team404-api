@@ -49,8 +49,13 @@ public class JobRole {
     )
     List<Location> locations;
 
-    @Column(name="capability")
-    private String capability;
+    @ManyToOne
+    @JoinColumn(name="capability_id")
+    private Capability capability;
+
+    @ManyToOne
+    @JoinColumn(name="job_family_id")
+    private JobFamily jobFamily;
 
   @ManyToOne
   @JoinColumn(name = "band_id", nullable = false)
@@ -60,7 +65,7 @@ public class JobRole {
   private String sharePointLink;
 
   public String getCapability() {
-    return capability;
+    return capability.getName();
   }
 
   public String getSharePointLink() {
@@ -87,9 +92,13 @@ public class JobRole {
         return contractType;
     }
 
-  public Band getBand() {
-    return band;
-  }
+//    public Band getBand() {
+//        return band;
+//    }
+
+    public JobFamily getJobFamily() {
+        return jobFamily;
+    }
 
   public String getBandAsString() {
     return band.getName();
