@@ -16,7 +16,7 @@ VALUES
 "Engineering","Associate", "Test Link"),
 
 (2, "Head of People Operations", "full_time",
-"\nLead and manage a busy global HR operational function\nIn tandem transform the function to ensure key people initiatives and processes are user centric, standardised, efficient and delivered within clearly defined SLA’s\nWorking closely with Systems team, you will drive a road map of HCM improvements with a focus on employee and manager self-serve\nEnsuring that new functionality is fully embedded"
+"\nLead and manage a busy global HR operational function\nIn tandem transform the function to ensure key people initiatives and processes are user centric, standardised, efficient and delivered within clearly defined SLA’s\nWorking closely with Systems team, you will drive a road map of HCM improvements with a focus on employee and manager self-serve\nEnsuring that new functionality is fully embedded",
 "People", "Leadership",
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EXYqFjDBzXZFiXMGdbXni2YBIM8ZztDBqB5naCdnXhbYew?e=DWvKrR"
 ),
@@ -27,7 +27,8 @@ VALUES
 ),
 (4, "Security Engineer", "full_time",
 "\nIdentifying and introducing appropriate security controls\nTraining the team in secure development practices\nSharing knowledge on threats and vulnerabilities",
-"Cyber_Security", "Senior_Associate"),
+"Cyber_Security", "Senior_Associate",
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbWlHfJkEF1HhJ6_BC4aqLoBAGXd7z6SYRwcdEBcNgygCQ?e=nTVpB6"),
 
 (5, "Product Owner", "full_time",
 "\nGathering and prioritising product and customer requirements\nWorking closely with development, sales, pre-sales, marketing and professional services to ensure customer satisfaction goals are met and exceeded\nHelping us maintain our leading market position",
