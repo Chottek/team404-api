@@ -38,7 +38,8 @@ public class JobRoleService {
   }
 
   /**
-   * Gets an Optional of JobRole from database, based on ID
+   * Gets an Optional of JobRole from database, based on ID.
+   *
    * @param id Numeric id of Job Role in database
    * @return Optional of JobRole in database
    */

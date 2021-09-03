@@ -95,22 +95,9 @@ public class JobRole {
   public String getPosted() {
     return posted;
   }
-  
-  public String getResponsibilities() {
-       return responsibilities;
-  } 
 
-  @Override
-    public String toString() {
-        return "JobRole{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", contractType='" + contractType + '\'' +
-                ", locations=[" + locations.size() +
-                "], responsibilities='" + responsibilities + '\'' +
-                ", capability='" + capability + '\'' +
-                ", band='" +  '\'' +
-                '}';
-    }
+  public String getResponsibilities() {
+    return responsibilities;
+  }
+
 }
