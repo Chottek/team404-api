@@ -19,6 +19,7 @@ public class JobRoleDto {
   private List<Location> locations;
   private String capability;
   private String band;
+  private String responsibilities;
 
   /**
    * Create a new Data Transfer Object to contain the below information.
@@ -31,13 +32,14 @@ public class JobRoleDto {
    * @param band management level of the job
    */
   public JobRoleDto(String title, String description, String contractType, List<Location> locations,
-      String capability, String band) {
+      String capability, String band, String responsibilities) {
     this.title = title;
     this.description = description;
     this.contractType = contractType;
     this.locations = locations;
     this.capability = capability;
     this.band = band;
+    this.responsibilities = responsibilities;
   }
 
   /**
@@ -52,6 +54,7 @@ public class JobRoleDto {
     this.locations = jr.getLocations();
     this.capability = jr.getCapability();
     this.band = jr.getBandAsString();
+    this.responsibilities = jr.getResponsibilities();
   }
 
   public JobRoleDto() {
@@ -103,5 +106,9 @@ public class JobRoleDto {
 
   public void setBand(String band) {
     this.band = band;
+  }
+
+  public String getResponsibilities() {
+    return responsibilities;
   }
 }

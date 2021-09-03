@@ -28,6 +28,8 @@ CREATE TABLE job_detail (
     description TEXT NOT NULL
 );
 
+ALTER TABLE job_role ADD responsibilities VARCHAR(400) NOT NULL;
+
 ALTER TABLE job_role ADD COLUMN capability ENUM (
     'Engineering',
     'Platforms',
