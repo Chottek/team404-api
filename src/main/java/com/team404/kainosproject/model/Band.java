@@ -10,6 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Model object representing the band table.
+ * Bands represent Kainos management levels.
+ *
+ * @author team 404
+ */
 @Entity
 @Table(name = "band")
 public class Band {
@@ -48,9 +54,9 @@ public class Band {
 
   @Override
   public String toString() {
-    return "Band{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        '}';
+    return "Band{"
+        + "id=" + id
+        + ", name='" + name + '\''
+        + '}';
   }
 }

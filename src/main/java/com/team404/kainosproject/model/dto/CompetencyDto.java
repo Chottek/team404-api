@@ -7,12 +7,12 @@ import java.util.List;
  *
  * @author team404
  */
-public class CompetencyDTO {
+public class CompetencyDto {
 
   private String name;
-  private List<IndicatorDTO> indicators;
+  private List<IndicatorDto> indicators;
 
-  public CompetencyDTO(String name, List<IndicatorDTO> indicators) {
+  public CompetencyDto(String name, List<IndicatorDto> indicators) {
     this.name = name;
     this.indicators = indicators;
   }
@@ -25,11 +25,11 @@ public class CompetencyDTO {
     this.name = name;
   }
 
-  public List<IndicatorDTO> getIndicators() {
+  public List<IndicatorDto> getIndicators() {
     return indicators;
   }
 
-  public void setIndicators(List<IndicatorDTO> indicators) {
+  public void setIndicators(List<IndicatorDto> indicators) {
     this.indicators = indicators;
   }
 }

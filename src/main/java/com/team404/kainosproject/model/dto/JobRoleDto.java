@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author team404
  */
-public class JobRoleDTO {
+public class JobRoleDto {
 
   //TODO: Nothing in common with US005
 
@@ -20,7 +20,16 @@ public class JobRoleDTO {
   private String capability;
   private String band;
 
-  public JobRoleDTO(String title, String description, String contractType, List<Location> locations,
+  /**
+   * Create a new Data Transfer Object to contain the below information
+   * @param title job title
+   * @param description job description
+   * @param contractType type of contract (part_time, full_time, consultant)
+   * @param locations office locations job is available for
+   * @param capability Kainos capability that the job belongs to
+   * @param band management level of the job
+   */
+  public JobRoleDto(String title, String description, String contractType, List<Location> locations,
       String capability, String band) {
     this.title = title;
     this.description = description;
@@ -30,7 +39,11 @@ public class JobRoleDTO {
     this.band = band;
   }
 
-  public JobRoleDTO(JobRole jr) {
+  /**
+   * Initialise a data transfer object from a JobRole model.
+   * @param jr a job role model object
+   */
+  public JobRoleDto(JobRole jr) {
     this.title = jr.getTitle();
     this.description = jr.getDescription();
     this.contractType = jr.getContractType();
@@ -39,7 +52,7 @@ public class JobRoleDTO {
     this.band = jr.getBandAsString();
   }
 
-  public JobRoleDTO() {
+  public JobRoleDto() {
   }
 
   public String getTitle() {

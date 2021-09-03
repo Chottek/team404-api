@@ -1,7 +1,7 @@
 package com.team404.kainosproject.service;
 
 import com.team404.kainosproject.model.JobRole;
-import com.team404.kainosproject.model.dto.JobRoleDTO;
+import com.team404.kainosproject.model.dto.JobRoleDto;
 import com.team404.kainosproject.repository.JobRoleRepository;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -43,8 +43,8 @@ public class JobRoleService {
    * @param id Numeric id of Job Role in database
    * @return Optional of JobRole in database
    */
-  public Optional<JobRoleDTO> getById(int id) {
+  public Optional<JobRoleDto> getById(int id) {
     Optional<JobRole> jobRole = repository.findById(id);
-    return jobRole.map(JobRoleDTO::new).or(Optional::empty);
+    return jobRole.map(JobRoleDto::new).or(Optional::empty);
   }
 }

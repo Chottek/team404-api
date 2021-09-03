@@ -7,17 +7,17 @@ import java.util.List;
  *
  * @author team404
  */
-public class BandDTO {
+public class BandDto {
 
   private String band;
-  private List<CompetencyDTO> competencies;
+  private List<CompetencyDto> competencies;
 
-  public BandDTO(String band, List<CompetencyDTO> competencies) {
+  public BandDto(String band, List<CompetencyDto> competencies) {
     this.band = band;
     this.competencies = competencies;
   }
 
-  public BandDTO() {
+  public BandDto() {
   }
 
   public String getBand() {
@@ -28,11 +28,11 @@ public class BandDTO {
     this.band = band;
   }
 
-  public List<CompetencyDTO> getCompetencies() {
+  public List<CompetencyDto> getCompetencies() {
     return competencies;
   }
 
-  public void setCompetencies(List<CompetencyDTO> competencies) {
+  public void setCompetencies(List<CompetencyDto> competencies) {
     this.competencies = competencies;
   }
 }

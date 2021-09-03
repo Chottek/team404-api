@@ -5,12 +5,12 @@ package com.team404.kainosproject.model.dto;
  *
  * @author team404
  */
-public class IndicatorDTO {
+public class IndicatorDto {
 
   private String name;
   private String description;
 
-  public IndicatorDTO(String name, String description) {
+  public IndicatorDto(String name, String description) {
     this.name = name;
     this.description = description;
   }

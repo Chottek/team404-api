@@ -7,6 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Used to access stored information about Kainos Competencies.
+ *
+ * @author team404
+ */
 @Service
 public class CompetencyService {
 
@@ -20,7 +25,7 @@ public class CompetencyService {
   }
 
   /**
-   * Gets a List of Competency objects from database
+   * Gets a List of Competency objects from database.
    *
    * @return Competency objects list
    */
