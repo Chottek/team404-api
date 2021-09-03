@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
@@ -23,45 +24,38 @@ import javax.persistence.Table;
 @SecondaryTable(name = "job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name = "job_id"))
 public class JobRole {
 
+  @ManyToMany
+  @JoinTable(
+      name = "job_location",
+      joinColumns = @JoinColumn(name = "job_id"),
+      inverseJoinColumns = @JoinColumn(name = "location_id")
+  )
+  List<Location> locations;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "job_id")
   private Integer id;
-
   @Column(name = "title")
   private String title;
-
   @Column(name = "description", table = "job_detail")
   private String description;
-
   @Column(name = "contractType")
   private String contractType;
-
   @Column(name = "posted")
   private String posted;
-  @ManyToMany
-  @JoinTable(
-      name = "job_location",
-      joinColumns = @JoinColumn(name = "job_id"),
-      inverseJoinColumns = @JoinColumn(name = "location_id")
-  )
+  @Column(name = "capability")
+  private String capability;
 
-  @Column(name = "band")
-  private String band;
+  @ManyToOne
+  @JoinColumn(name = "band_id", nullable = false)
+  private Band band;
 
   @Column(name = "sharepoint_link")
   private String sharePointLink;
 
-  @ManyToMany
-  @JoinTable(
-      name = "job_location",
-      joinColumns = @JoinColumn(name = "job_id"),
-      inverseJoinColumns = @JoinColumn(name = "location_id")
-  )
-  private List<Location> locations;
-
-  @Column(name = "capability")
-  private String capability;
+  public String getCapability() {
+    return capability;
+  }
 
   public String getSharePointLink() {
     return sharePointLink;
@@ -69,10 +63,6 @@ public class JobRole {
 
   public List<Location> getLocations() {
     return locations;
-  }
-
-  public String getCapability() {
-    return capability;
   }
 
   public Integer getId() {
@@ -91,8 +81,12 @@ public class JobRole {
     return contractType;
   }
 
-  public String getBand() {
+  public Band getBand() {
     return band;
+  }
+
+  public String getBandAsString() {
+    return band.getName();
   }
 
   public String getPosted() {
