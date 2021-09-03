@@ -1,6 +1,8 @@
 package com.team404.kainosproject.integrationtests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.json.JSONArray;
@@ -38,7 +40,7 @@ public class JobRoleControllerTest {
         assertAll("Should contain Test Job Row",
                 () -> assertEquals("Head of test job", firstObj.get("title")),
                 () -> assertEquals("full_time", firstObj.get("contractType")),
-                () -> assertEquals("Test Link", firstObj.get("sharePointLink")
+                () -> assertEquals("Test Link", firstObj.get("sharePointLink"))
         );
     }
 
@@ -118,7 +120,7 @@ public class JobRoleControllerTest {
                 .getForEntity(createURLWithPort("/job-roles/" + 1), String.class)
                 .getBody());
 
-        assertEquals("Associate", (String) jobRole.get("band"));
+        assertEquals("Leadership", (String) jobRole.get("band"));
     }
 
     @Test
@@ -143,7 +145,7 @@ public class JobRoleControllerTest {
 
     /**
      * Check if String of "responsibilities" column
-     * from JobRole object got by ID is not an empty String
+     * from JobRole object got by ID is not an empty String.
      */
     @Test
     public void when_getJobById_expect_responsibilitiesToBe_NonEmpty(){
@@ -155,10 +157,8 @@ public class JobRoleControllerTest {
         assertFalse(jobRole.get("responsibilities").toString().isEmpty());
     }
 
-
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
     }
-
 }
 

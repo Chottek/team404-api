@@ -22,8 +22,6 @@ CREATE TABLE job_location (
     location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES location(location_id)
 );
 
-DROP TABLE IF EXISTS job_detail;
-
 CREATE TABLE job_detail (
     job_detail_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     job_id INT NOT NULL, FOREIGN KEY (job_id) REFERENCES job_role(job_id),
@@ -50,13 +48,33 @@ ALTER TABLE job_role ADD COLUMN capability ENUM (
     'Business_Services_Support'
 ) NOT NULL;
 
-ALTER TABLE job_role ADD COLUMN band ENUM (
-    'Leadership',
-    'Principal',
-    'Manager',
-    'Consultant',
-    'Senior_Associate',
-    'Associate',
-    'Trainee',
-    'Apprentice'
-) NOT NULL;
+CREATE TABLE band (
+    band_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    priority INT NOT NULL,
+    name VARCHAR(100) NOT NULL
+);
+
+ALTER TABLE job_role ADD COLUMN band_id INT NOT NULL;
+ALTER TABLE job_role ADD FOREIGN KEY (band_id) REFERENCES band(band_id);
+
+CREATE TABLE competency (
+    competency_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE sub_competency (
+    sub_competency_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(200) NOT NULL,
+    competency_id INT NOT NULL,
+    FOREIGN KEY (competency_id) REFERENCES competency(competency_id)
+);
+
+CREATE TABLE competency_indicator (
+    competency_indicator_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    sub_competency_id INT NOT NULL,
+    band_id INT NOT NULL,
+    description VARCHAR(200) NOT NULL,
+    FOREIGN KEY (band_id) REFERENCES band(band_id),
+    FOREIGN KEY (sub_competency_id) REFERENCES sub_competency(sub_competency_id)
+);
+

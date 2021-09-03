@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
@@ -34,28 +35,33 @@ public class JobRole {
   @Column(name = "description", table = "job_detail")
   private String description;
 
-  @Column(name = "contractType")
-  private String contractType;
-
-  @Column(name = "posted")
-  private String posted;
-
-  @Column(name = "band")
-  private String band;
-
-  @Column(name = "sharepoint_link")
-  private String sharePointLink;
-
   @ManyToMany
   @JoinTable(
       name = "job_location",
       joinColumns = @JoinColumn(name = "job_id"),
       inverseJoinColumns = @JoinColumn(name = "location_id")
   )
-  private List<Location> locations;
+  List<Location> locations;
+
+  @Column(name = "contractType")
+  private String contractType;
+
+  @Column(name = "posted")
+  private String posted;
 
   @Column(name = "capability")
   private String capability;
+
+  @ManyToOne
+  @JoinColumn(name = "band_id", nullable = false)
+  private Band band;
+
+  @Column(name = "sharepoint_link")
+  private String sharePointLink;
+
+  public String getCapability() {
+    return capability;
+  }
 
   @Column(name = "responsibilities")
   private String responsibilities;
@@ -66,10 +72,6 @@ public class JobRole {
 
   public List<Location> getLocations() {
     return locations;
-  }
-
-  public String getCapability() {
-    return capability;
   }
 
   public Integer getId() {
@@ -88,8 +90,12 @@ public class JobRole {
     return contractType;
   }
 
-  public String getBand() {
+  public Band getBand() {
     return band;
+  }
+
+  public String getBandAsString() {
+    return band.getName();
   }
 
   public String getPosted() {
@@ -99,5 +105,4 @@ public class JobRole {
   public String getResponsibilities() {
     return responsibilities;
   }
-
 }
