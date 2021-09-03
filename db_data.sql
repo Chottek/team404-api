@@ -107,36 +107,36 @@ VALUES
 (25, 1, "Acting with integrity"),
 
 -- Manager - Executive Working with others
-(26, 1, "Mobilises people to drive business improvement & innovation"),
-(27, 1, "Champions continuous improvement in self & others creating a positive environment and encouraging contribution"),
-(28, 1, "Managing performance"),
-(29, 1, "Developing networks and building and maintaining relationships"),
-(30, 1, "Working within teams"),
+(26, 2, "Mobilises people to drive business improvement & innovation"),
+(27, 2, "Champions continuous improvement in self & others creating a positive environment and encouraging contribution"),
+(28, 2, "Managing performance"),
+(29, 2, "Developing networks and building and maintaining relationships"),
+(30, 2, "Working within teams"),
 
 -- Manager - Executive Setting Direction
-(31, 1, "Identifying the contexts for change"),
-(32, 1, "Improvement and Innovation"),
-(33, 1, "Making decisions"),
-(34, 1, "Creating and Evaluating impact"),
+(31, 3, "Identifying the contexts for change"),
+(32, 3, "Improvement and Innovation"),
+(33, 3, "Making decisions"),
+(34, 3, "Creating and Evaluating impact"),
 
 -- Manager - Executive Supporting and Delivering
-(35, 1, "Framing the strategy"),
-(36, 1, "Developing the strategy"),
-(37, 1, "Implementing the strategy "),
-(38, 1, "Embedding the strategy"),
+(35, 4, "Framing the strategy"),
+(36, 4, "Developing the strategy"),
+(37, 4, "Implementing the strategy "),
+(38, 4, "Embedding the strategy"),
 
 -- Manager - Executive Commerciality and Risk
-(39, 1, "Demonstrates commercial awareness and behaviours"),
-(40, 1, "Contributes to the ongoing development of new business to support Kainos’ growth ambitions"),
-(41, 1, "Improves efficiency and effectiveness to drive profitability "),
-(42, 1, "Manages risk to Kainos and the interest of our shareholders "),
-(43, 1, "Promotes and adheres to Kainos process and policies "),
+(39, 5, "Demonstrates commercial awareness and behaviours"),
+(40, 5, "Contributes to the ongoing development of new business to support Kainos’ growth ambitions"),
+(41, 5, "Improves efficiency and effectiveness to drive profitability "),
+(42, 5, "Manages risk to Kainos and the interest of our shareholders "),
+(43, 5, "Promotes and adheres to Kainos process and policies "),
 
 -- Manager - Executive Communicating and Influence
-(44, 1, "Develops, communicates and promotes the Kainos vision and strategy"),
-(45, 1, "Influencing the vision and beyond"),
-(46, 1, "Influencing change and transformation"),
-(47, 1, "Stakeholder management");
+(44, 6, "Develops, communicates and promotes the Kainos vision and strategy"),
+(45, 6, "Influencing the vision and beyond"),
+(46, 6, "Influencing change and transformation"),
+(47, 6, "Stakeholder management");
 
 
 INSERT INTO competency_indicator (band_id, sub_competency_id, description)
