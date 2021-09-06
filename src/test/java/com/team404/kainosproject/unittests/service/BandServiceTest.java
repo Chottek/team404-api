@@ -49,8 +49,7 @@ public class BandServiceTest {
   @Mock
   BandRepository bandRepository;
 
-  @Test
-  public void when_getAllBandDtos_expect_correctDTOsAreCreated(){
+  private void setupMocks(){
 
     // Mock two bands to test with
     when(mockBand1.getName()).thenReturn("test band one");
@@ -90,39 +89,47 @@ public class BandServiceTest {
       add(mockBand2);
     }});
 
+  }
+
+  @Test
+  public void when_getAllBandDtos_expect_correctDTOsAreCreated(){
+    setupMocks();
     BandService testService = new BandService(bandRepository);
     List<BandDto> result = (ArrayList<BandDto>) testService.getAllBandsDtos();
+    checkBandDtoStructure(result);
+  }
 
-    // should match structure of JSON with
+
+  private void checkBandDtoStructure(List<BandDto> bands) {
 
     assertAll(
-      () -> assertEquals("First test band had an unexpected name",
-          "test band one", result.get(0).getBand()
-      ),
-      () -> assertEquals("Second test band had an unexpected name",
-          "test band two", result.get(1).getBand()
-      ),
+        () -> assertEquals("First test band had an unexpected name",
+            "test band one", bands.get(0).getBand()
+        ),
+        () -> assertEquals("Second test band had an unexpected name",
+            "test band two", bands.get(1).getBand()
+        ),
 
-      () -> assertEquals("First test band had an unexpected competency name",
-          "test competency", result.get(0).getCompetencies().get(0).getName()
-      ),
-      () -> assertEquals("Second test band had an unexpected competency name",
-          "test competency", result.get(1).getCompetencies().get(0).getName()
-      ),
+        () -> assertEquals("First test band had an unexpected competency name",
+            "test competency", bands.get(0).getCompetencies().get(0).getName()
+        ),
+        () -> assertEquals("Second test band had an unexpected competency name",
+            "test competency", bands.get(1).getCompetencies().get(0).getName()
+        ),
 
-      () -> assertEquals("First test band had an unexpected sub-competency name",
-          "test sub competency", result.get(0).getCompetencies().get(0).getIndicators().get(0).getName()
-      ),
-      () -> assertEquals("Second test band had an unexpected sub-competency name",
-          "test sub competency", result.get(1).getCompetencies().get(0).getIndicators().get(0).getName()
-      ),
+        () -> assertEquals("First test band had an unexpected sub-competency name",
+            "test sub competency", bands.get(0).getCompetencies().get(0).getIndicators().get(0).getName()
+        ),
+        () -> assertEquals("Second test band had an unexpected sub-competency name",
+            "test sub competency", bands.get(1).getCompetencies().get(0).getIndicators().get(0).getName()
+        ),
 
-      () -> assertEquals("First test band had an unexpected indicator description",
-          "test indicator one", result.get(0).getCompetencies().get(0).getIndicators().get(0).getDescription()
-      ),
-      () -> assertEquals("Second test band had an unexpected indicator description",
-          "test indicator two", result.get(1).getCompetencies().get(0).getIndicators().get(0).getDescription()
-      )
+        () -> assertEquals("First test band had an unexpected indicator description",
+            "test indicator one", bands.get(0).getCompetencies().get(0).getIndicators().get(0).getDescription()
+        ),
+        () -> assertEquals("Second test band had an unexpected indicator description",
+            "test indicator two", bands.get(1).getCompetencies().get(0).getIndicators().get(0).getDescription()
+        )
     );
 
     /* Expected is
@@ -146,7 +153,6 @@ public class BandServiceTest {
       ...
     ]
   */
-
   }
 
   @Test
