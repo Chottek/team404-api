@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JobRoleController {
 
-    private final JobRoleService service;
+  private final JobRoleService service;
 
-    @Autowired
-    public JobRoleController(JobRoleService service) {
+  @Autowired
+  public JobRoleController(JobRoleService service) {
         this.service = service;
     }
 
@@ -46,5 +46,4 @@ public class JobRoleController {
     return service.getById(id).map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
-
 }

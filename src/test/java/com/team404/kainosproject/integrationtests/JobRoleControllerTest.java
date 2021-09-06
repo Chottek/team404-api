@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,8 @@ public class JobRoleControllerTest {
 
     private JSONArray jobMatrixEngineering;
 
-    @BeforeClass
-    private void setup() {
+    @Before
+    public void setup() {
         jobMatrixEngineering = new JSONArray(restTemplate
             .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
             .getBody()

@@ -41,4 +41,12 @@ public class JobFamily {
     return name;
   }
 
+  public List<JobRole> getJobRoles() {
+    return jobRoles;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
 }
