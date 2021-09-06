@@ -34,6 +34,9 @@ public class Band {
   @OneToMany(mappedBy = "band")
   private List<CompetencyIndicator> competencyIndicators;
 
+  @Column(name = "priority")
+  private int priority;
+
   public void setId(Integer id) {
     this.id = id;
   }
@@ -46,10 +49,22 @@ public class Band {
     this.name = name;
   }
 
+  public List<JobRole> getJobs() {
+    return jobs;
+  }
+
+  public int getPriority() {
+    return priority;
+  }
+
   // Serialise this normally, but don't serialise any reference to this in competencyIndicators
   @JsonManagedReference
   public List<CompetencyIndicator> getCompetencyIndicators() {
     return competencyIndicators;
+  }
+
+  public Integer getId() {
+    return id;
   }
 
   @Override

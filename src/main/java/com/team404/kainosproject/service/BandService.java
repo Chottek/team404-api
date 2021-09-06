@@ -1,15 +1,18 @@
 package com.team404.kainosproject.service;
 
 import com.team404.kainosproject.model.Band;
-import com.team404.kainosproject.model.dto.BandDto;
+import com.team404.kainosproject.model.dto.BandCompetenciesDto;
 import com.team404.kainosproject.model.dto.CompetencyDto;
 import com.team404.kainosproject.model.dto.IndicatorDto;
 import com.team404.kainosproject.repository.BandRepository;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 /**
@@ -35,7 +38,8 @@ public class BandService {
    * @return Band objects list
    */
   public Iterable<Band> getAllBands() {
-    Iterable<Band> bands = repository.findAll();
+    Iterable<Band> bands = repository.findAll(Sort.by(Sort.Direction.ASC, "priority"));
+
     LOG.info("Got {} Band entries from database", bands.spliterator().estimateSize());
     return bands;
   }
@@ -46,7 +50,7 @@ public class BandService {
    *
    * @return Iterable of BandDTO objects
    */
-  public Iterable<BandDto> getAllBandsDtos() {
+  public Iterable<BandCompetenciesDto> getAllBandsDtos() {
     Iterable<Band> bands = repository.findAll();
     List<String> competencies = new ArrayList<>();
     List<String> bandNames = new ArrayList<>();
@@ -64,11 +68,11 @@ public class BandService {
           .forEach(bandNames::add);
     });
 
-    List<BandDto> bandDtosList = new ArrayList<>();
+    List<BandCompetenciesDto> bandCompetenciesDtosList = new ArrayList<>();
 
     for (String bandName : bandNames) {
-      BandDto bandDto = new BandDto();
-      bandDto.setBand(bandName);
+      BandCompetenciesDto bandCompetenciesDto = new BandCompetenciesDto();
+      bandCompetenciesDto.setBand(bandName);
       final List<CompetencyDto> competencyDtos = new ArrayList<>();
       for (String competency : competencies) {
         final List<IndicatorDto> indicators = new ArrayList<>();
@@ -88,10 +92,10 @@ public class BandService {
         }
       }
       LOG.info("[{}] BandDTO contains [{}] competencies", bandName, competencyDtos.size());
-      bandDto.setCompetencies(competencyDtos);
-      bandDtosList.add(bandDto);
+      bandCompetenciesDto.setCompetencies(competencyDtos);
+      bandCompetenciesDtosList.add(bandCompetenciesDto);
     }
-    LOG.info("Created [{}] Band Data Transfer Objects from Band model", bandDtosList.size());
-    return bandDtosList;
+    LOG.info("Created [{}] Band Data Transfer Objects from Band model", bandCompetenciesDtosList.size());
+    return bandCompetenciesDtosList;
   }
 }
