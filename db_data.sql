@@ -11,15 +11,15 @@ VALUES
 
 INSERT INTO band (band_id, name, priority)
 VALUES
-(1, 'Leadership', 2),
-(2, 'Principal', 3),
-(3, 'Manager', 4),
-(4, 'Consultant', 5),
-(5, 'Senior_Associate', 6),
-(6, 'Associate', 7),
-(7, 'Trainee', 8),
-(8, 'Apprentice', 9),
-(9, 'Executive', 1);
+(1, 'Executive', 1),
+(2, 'Leadership', 2),
+(3, 'Principal', 3),
+(4, 'Manager', 4),
+(5, 'Consultant', 5),
+(6, 'Senior_Associate', 6),
+(7, 'Associate', 7),
+(8, 'Trainee', 8),
+(9, 'Apprentice', 9);
 
 INSERT INTO job_role (job_id, title, contract_type, capability, band_id, sharepoint_link, responsibilities)
 VALUES

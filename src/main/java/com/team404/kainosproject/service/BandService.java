@@ -94,4 +94,11 @@ public class BandService {
     LOG.info("Created [{}] Band Data Transfer Objects from Band model", bandDtosList.size());
     return bandDtosList;
   }
+
+
+  public Iterable<String> getAllBandNames(){
+    return repository.getAllBandNames();
+  }
+
+
 }
