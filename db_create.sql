@@ -78,3 +78,10 @@ CREATE TABLE competency_indicator (
     FOREIGN KEY (sub_competency_id) REFERENCES sub_competency(sub_competency_id)
 );
 
+CREATE TABLE appuser (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  mail VARCHAR(50) NOT NULL,
+  pass VARCHAR(200) NOT NULL,
+  op TINYINT NOT NULL
+)
+
