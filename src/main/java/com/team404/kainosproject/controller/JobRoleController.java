@@ -5,6 +5,7 @@ import com.team404.kainosproject.model.dto.JobRoleDto;
 import com.team404.kainosproject.service.JobRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +46,13 @@ public class JobRoleController {
   public ResponseEntity<JobRoleDto> getById(@PathVariable("id") int id) {
     return service.getById(id).map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
+
+  @DeleteMapping("/remove-role/{id}")
+  public ResponseEntity<?> removeById(@PathVariable("id") int id){
+    return service.removeById(id) ? ResponseEntity.ok().build()
+        : ResponseEntity.badRequest().build();
   }
 
 }

@@ -15,8 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.HttpClientErrorException;
 
 // https://spring.io/guides/gs/testing-web/
 
@@ -32,13 +35,13 @@ public class JobRoleControllerTest {
 
     private JSONArray jobMatrixEngineering;
 
-    @BeforeClass
-    private void setup() {
+    /*@BeforeClass
+    public void setup() {
         jobMatrixEngineering = new JSONArray(restTemplate
             .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
             .getBody()
         );
-    }
+    }*/
 
     @Test
     public void when_gettingFirstRowFromJobRoleTable_Expect_ReturnsTestJobRow() {
@@ -195,6 +198,14 @@ public class JobRoleControllerTest {
 
         }
 
+    }
+
+    @Test
+    public void when_request_ExistingJobRoleDeletion_Expect_Done(){
+        final int ID = 1;
+        restTemplate.delete(createURLWithPort("/remove-role/" + ID));
+        assertEquals("Something went wrong while trying to delete Job Role of ID=" + ID,
+            404, restTemplate.getForEntity(createURLWithPort("/job-roles/" + 1), String.class).getStatusCode().value());
     }
 
   private boolean jsonArrayIsNotEmpty(JSONObject json, String arrayName) {
