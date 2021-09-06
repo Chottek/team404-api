@@ -201,6 +201,7 @@ public class JobRoleControllerTest {
     }
 
     /**
+     * (First, the object of ID has to be in Database!)
      * Check if on attempt of removing an existing object from database,
      * Response returns 200 OK status code
      */
