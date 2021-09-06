@@ -9,7 +9,7 @@ import com.team404.kainosproject.model.Band;
 import com.team404.kainosproject.model.Competency;
 import com.team404.kainosproject.model.CompetencyIndicator;
 import com.team404.kainosproject.model.SubCompetency;
-import com.team404.kainosproject.model.dto.BandDto;
+import com.team404.kainosproject.model.dto.BandCompetenciesDto;
 import com.team404.kainosproject.repository.BandRepository;
 import com.team404.kainosproject.service.BandService;
 import java.util.ArrayList;
@@ -52,6 +52,8 @@ public class BandServiceTest {
   @Test
   public void when_getAllBandDtos_expect_correctDTOsAreCreated(){
 
+    // todo extract mock to set up
+
     // Mock two bands to test with
     when(mockBand1.getName()).thenReturn("test band one");
     when(mockBand2.getName()).thenReturn("test band two");
@@ -91,9 +93,11 @@ public class BandServiceTest {
     }});
 
     BandService testService = new BandService(bandRepository);
-    List<BandDto> result = (ArrayList<BandDto>) testService.getAllBandsDtos();
+    List<BandCompetenciesDto> result = (ArrayList<BandCompetenciesDto>) testService.getAllBandsDtos();
 
     // should match structure of JSON with
+
+    // todo extract assertions to method
 
     assertAll(
       () -> assertEquals("First test band had an unexpected name",
@@ -155,7 +159,7 @@ public class BandServiceTest {
     when(bandRepository.findAll()).thenReturn(new ArrayList<>());
 
     BandService testService = new BandService(bandRepository);
-    List<BandDto> result = (ArrayList<BandDto>) testService.getAllBandsDtos();
+    List<BandCompetenciesDto> result = (ArrayList<BandCompetenciesDto>) testService.getAllBandsDtos();
 
     assertEquals("Had a result even though no bands were given",0, result.size());
   }

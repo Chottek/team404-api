@@ -34,8 +34,6 @@ public class JobFamilyService {
   private CapabilityRepository capabilityRepository;
   private JobRoleRepository jobRoleRepository;
 
-  // TODO capability service.
-
   @Autowired
   public JobFamilyService(JobFamilyRepository repository) {
     this.repository = repository;
@@ -60,6 +58,10 @@ public class JobFamilyService {
    * @return JobFamilyDto objects list
    */
   public Iterable<BandJobFamiliesDto> getJobFamiliesForCapabilityByBand(String capabilityName) {
+    // todo refactor to make more test-able
+    // todo put getting capability by name into CapabilityService
+    // todo get all bands in priority order using BandService
+    // todo move into jobRoleService
 
     // Get the capability object
     List<Capability> capabilities = capabilityRepository.findByName(capabilityName);
@@ -81,6 +83,7 @@ public class JobFamilyService {
 
     for (Band band: bands) {
 
+      // todo extract this into its own method
       List<JobFamilyDto> jobFamilyDtos = new ArrayList<>();
 
       for(JobFamily jobFamily : jobFamilies){
@@ -96,6 +99,7 @@ public class JobFamilyService {
           new JobFamilyDto(jobFamily.getName(), roles)
         );
       }
+      // !!
 
       jobFamiliesByBand.add(
           new BandJobFamiliesDto(band.getName(), jobFamilyDtos)
