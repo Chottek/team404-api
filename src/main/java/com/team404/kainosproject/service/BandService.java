@@ -103,7 +103,9 @@ public class BandService {
    * @return Iterable of Band name Strings
    */
   public Iterable<String> getAllBandNames(){
-    return repository.getAllBandNames();
+    Iterable<String> bandNames = repository.getAllBandNames();
+    LOG.info("Got [{}] Band Names as Iterable of Strings", bandNames.spliterator().estimateSize());
+    return bandNames;
   }
 
 
