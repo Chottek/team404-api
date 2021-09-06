@@ -200,12 +200,30 @@ public class JobRoleControllerTest {
 
     }
 
+    /**
+     * Check if on attempt of removing an existing object from database,
+     * Response returns 200 OK status code
+     */
     @Test
-    public void when_request_ExistingJobRoleDeletion_Expect_Done(){
+    public void when_request_ExistingJobRoleDeletion_Expect_OKResponse(){
         final int ID = 1;
-        restTemplate.delete(createURLWithPort("/remove-role/" + ID));
-        assertEquals("Something went wrong while trying to delete Job Role of ID=" + ID,
-            404, restTemplate.getForEntity(createURLWithPort("/job-roles/" + 1), String.class).getStatusCode().value());
+
+        ResponseEntity<Void> exchange = restTemplate.exchange(createURLWithPort("/remove-role/" + ID),
+        HttpMethod.DELETE, null, Void.class);
+        assertEquals(200, exchange.getStatusCode().value());
+    }
+
+    /**
+     * Check if on attempt of removing non-existing object from database,
+     * Response returns 400 Bad Request status code
+     */
+    @Test
+    public void when_request_NonExistingJobRoleDeletion_Expect_BadRequestResponse(){
+        final int ID = -1;
+
+        ResponseEntity<Void> exchange = restTemplate.exchange(createURLWithPort("/remove-role/" + ID),
+        HttpMethod.DELETE, null, Void.class);
+        assertEquals(400, exchange.getStatusCode().value());
     }
 
   private boolean jsonArrayIsNotEmpty(JSONObject json, String arrayName) {
