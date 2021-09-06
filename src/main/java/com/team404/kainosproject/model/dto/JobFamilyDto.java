@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class JobFamilyDto {
 
-  private String familyName;
+  private String jobFamilyName;
   private List<String> jobTitles;
 
   /**
@@ -22,7 +22,7 @@ public class JobFamilyDto {
    * @param jobs selection of jobs to place in the family dto
    */
   public JobFamilyDto(String familyName, List<JobRole> jobs) {
-    this.familyName = familyName;
+    this.jobFamilyName = familyName;
     this.jobTitles = new ArrayList<>();
 
     jobs.forEach( job -> {
@@ -36,7 +36,7 @@ public class JobFamilyDto {
    * @param jobFamily the family to create the DTO for
    */
   public JobFamilyDto(JobFamily jobFamily) {
-    this.familyName = jobFamily.getName();
+    this.jobFamilyName = jobFamily.getName();
     this.jobTitles = new ArrayList<>();
 
     jobFamily.getJobRoles().forEach( jobRole -> {
@@ -44,8 +44,8 @@ public class JobFamilyDto {
     });
   }
 
-  public String getFamilyName() {
-    return familyName;
+  public String getJobFamilyName() {
+    return jobFamilyName;
   }
 
   public List<String> getJobTitles() {

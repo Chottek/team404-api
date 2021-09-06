@@ -30,16 +30,6 @@ public class JobRoleControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private JSONArray jobMatrixEngineering;
-
-    @Before
-    public void setup() {
-        jobMatrixEngineering = new JSONArray(restTemplate
-            .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
-            .getBody()
-        );
-    }
-
     @Test
     public void when_gettingFirstRowFromJobRoleTable_Expect_ReturnsTestJobRow() {
         final JSONArray jobRoles = new JSONArray(restTemplate
@@ -150,29 +140,40 @@ public class JobRoleControllerTest {
         );
     }
 
+    private JSONArray jobMatrixEngineering;
+
+    @Before
+    public void setup() {
+        jobMatrixEngineering = new JSONArray(restTemplate
+            .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
+            .getBody()
+        );
+    }
+
     @Test
     public void when_requestJobRoleMatrix_Expect_JobRolesAndFamiliesReturned(){
+
+        System.out.println(jobMatrixEngineering);
 
         // Check each band has family and job titles
         jobMatrixEngineering.forEach(band -> {
 
             assertAll(
-                () -> assertTrue(jsonHasAttribute((JSONObject) band, "band_name")),
-                () -> assertTrue(jsonHasAttribute((JSONObject) band, "job_families")),
-                () -> assertTrue(jsonArrayIsNotEmpty((JSONObject) band, "job_families"))
+                () -> assertTrue("a band had no attribute \"bandName\"", jsonHasAttribute((JSONObject) band, "bandName")),
+                () -> assertTrue("a band had no attribute \"jobFamilies\"", jsonHasAttribute((JSONObject) band, "jobFamilies")),
+                () -> assertTrue("a band " + band + " contained no jobFamilies", jsonArrayIsNotEmpty((JSONObject) band, "jobFamilies"))
             );
         });
 
         jobMatrixEngineering.forEach( band -> {
 
-            JSONArray jobFamilies = ((JSONObject) band).getJSONArray("job_families");
+            JSONArray jobFamilies = ((JSONObject) band).getJSONArray("jobFamilies");
 
             jobFamilies.forEach( family -> {
 
                 assertAll(
-                    () -> assertTrue(jsonHasAttribute((JSONObject) family, "job_family_name")),
-                    () -> assertTrue(jsonHasAttribute((JSONObject) family, "job_titles")),
-                    () -> assertTrue(jsonArrayIsNotEmpty((JSONObject) family, "job_titles"))
+                    () -> assertTrue("a family had no attribute \"jobFamilyName\"", jsonHasAttribute((JSONObject) family, "jobFamilyName")),
+                    () -> assertTrue("a family had no attribute \"jobTitles\"", jsonHasAttribute((JSONObject) family, "jobTitles"))
                 );
 
             });
@@ -189,8 +190,9 @@ public class JobRoleControllerTest {
         for (int i = 0; i < bandOrder.length; i++){
 
             assertEquals(
+                "Band order mis-matching",
                 bandOrder[i],
-                jobMatrixEngineering.getJSONObject(0).get("band_name")
+                jobMatrixEngineering.getJSONObject(i).get("bandName")
             );
 
         }
@@ -201,7 +203,7 @@ public class JobRoleControllerTest {
 
         try{
 
-            if(json.getJSONArray(arrayName).length() >= 0)
+            if(json.getJSONArray(arrayName).length() <= 0)
                 return false;
         }
         catch (JSONException e){
