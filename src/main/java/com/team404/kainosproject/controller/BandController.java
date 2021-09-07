@@ -22,7 +22,7 @@ public class BandController {
     this.service = service;
   }
 
-  @GetMapping("/bands")
+  @GetMapping("/bandnames")
   public Iterable<String> getBandNames() {
     return service.getAllBandNames();
   }
