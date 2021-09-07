@@ -126,7 +126,7 @@ public class JobRoleService {
 
     //Locations
     if(role.getLocations() == null || role.getLocations().size() == 0){
-      errorMessage.append("Locations should not be null nor empty!");
+      errorMessage.append("Locations should not be null nor empty!\n");
     }else{
       List<Location> locationList = new ArrayList<>();
       for(Location l: locationRepository.findAll()){
