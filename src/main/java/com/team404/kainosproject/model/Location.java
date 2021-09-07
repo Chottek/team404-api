@@ -32,4 +32,12 @@ public class Location {
   public String getName() {
     return name;
   }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public List<JobRole> getJobs() {
+    return jobs;
+  }
 }
