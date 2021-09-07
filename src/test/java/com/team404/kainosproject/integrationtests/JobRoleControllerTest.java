@@ -1,5 +1,7 @@
 package com.team404.kainosproject.integrationtests;
 
+import static com.team404.kainosproject.integrationtests.JsonTestHelpers.jsonArrayIsNotEmpty;
+import static com.team404.kainosproject.integrationtests.JsonTestHelpers.jsonHasAttribute;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -197,32 +199,6 @@ public class JobRoleControllerTest {
 
         }
 
-    }
-
-  private boolean jsonArrayIsNotEmpty(JSONObject json, String arrayName) {
-
-        try{
-
-            if(json.getJSONArray(arrayName).length() <= 0)
-                return false;
-        }
-        catch (JSONException e){
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean jsonHasAttribute(JSONObject json, String attributeName){
-
-        try{
-            json.get(attributeName);
-        }
-        catch (JSONException e){
-            return false;
-        }
-
-        return true;
     }
 
     private String createURLWithPort(String uri) {
