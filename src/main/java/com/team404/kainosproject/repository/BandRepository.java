@@ -1,6 +1,8 @@
 package com.team404.kainosproject.repository;
 
 import com.team404.kainosproject.model.Band;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,11 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BandRepository extends CrudRepository<Band, Integer> {
 
-    /*@Query("SELECT b FROM Band b " +
-            "JOIN CompetencyIndicator USING (band_id) " +
-            "JOIN SubCompetency USING (sub_competency_id) " +
-            "JOIN Competency USING (competency_id)")
-    Iterable<Band> getBandsList();*/
-
+  @Query("SELECT b FROM Band b WHERE name=?1")
+  Optional<Band> getByName(String name);
 
 }

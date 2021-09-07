@@ -4,9 +4,12 @@ import com.team404.kainosproject.model.JobRole;
 import com.team404.kainosproject.model.dto.JobRoleDto;
 import com.team404.kainosproject.service.JobRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -45,6 +48,22 @@ public class JobRoleController {
   public ResponseEntity<JobRoleDto> getById(@PathVariable("id") int id) {
     return service.getById(id).map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
+
+  /**
+   * Adds a Job Role based on POST request Body
+   *
+   * @param jobRole DTO object containing Job Role data
+   * @return ResponseEntity (200 OK) if created, (422 Unprocessable Entity) otherwise
+   */
+  @PostMapping("/job-roles/add")
+  public ResponseEntity<?> addJobRole(@RequestBody JobRoleDto jobRole){
+    if(service.addJobRole(jobRole)){
+      return ResponseEntity.ok().build();
+    }else {
+      return ResponseEntity.unprocessableEntity().build();
+    }
   }
 
 }

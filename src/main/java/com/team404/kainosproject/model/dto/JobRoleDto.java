@@ -12,26 +12,38 @@ public class JobRoleDto {
   private String title;
   private String description;
   private String contractType;
-  private List<Location> locations;
+  private List<String> locations;
   private String capability;
+  private String responsibilities;
   private String band;
+  private String jobFamily;
+  private String sharepointLink;
 
-  public JobRoleDto(String title, String description, String contractType, List<Location> locations, String capability, String band) {
+
+  public JobRoleDto(String title, String description, String contractType,
+      List<String> locations, String capability, String band, String sharepointLink, String jobFamily, String responsibilities) {
     this.title = title;
     this.description = description;
     this.contractType = contractType;
     this.locations = locations;
     this.capability = capability;
     this.band = band;
+    this.sharepointLink = sharepointLink;
+    this.jobFamily = jobFamily;
+    this.responsibilities = responsibilities;
   }
 
   public JobRoleDto(JobRole jr) {
     this.title = jr.getTitle();
     this.description = jr.getDescription();
     this.contractType = jr.getContractType();
-    this.locations = jr.getLocations();
-    this.capability = jr.getCapability().toString();
+
+    jr.getLocations().forEach(location -> this.locations.add(location.getName()));
+
+    this.capability = jr.getCapability();
     this.band = jr.getBandAsString();
+    this.sharepointLink = jr.getSharePointLink();
+    this.jobFamily = jr.getJobFamily().getName();
   }
 
   public JobRoleDto() {
@@ -61,11 +73,11 @@ public class JobRoleDto {
     this.contractType = contractType;
   }
 
-  public List<Location> getLocations() {
+  public List<String> getLocations() {
     return locations;
   }
 
-  public void setLocations(List<Location> locations) {
+  public void setLocations(List<String> locations) {
     this.locations = locations;
   }
 
@@ -83,5 +95,44 @@ public class JobRoleDto {
 
   public void setBand(String band) {
     this.band = band;
+  }
+
+  public String getSharepointLink() {
+    return sharepointLink;
+  }
+
+  public void setSharepointLink(String sharepointLink) {
+    this.sharepointLink = sharepointLink;
+  }
+
+  public String getJobFamily() {
+    return jobFamily;
+  }
+
+  public void setJobFamily(String jobFamily) {
+    this.jobFamily = jobFamily;
+  }
+
+  public String getResponsibilities() {
+    return responsibilities;
+  }
+
+  public void setResponsibilities(String responsibilities) {
+    this.responsibilities = responsibilities;
+  }
+
+  @Override
+  public String toString() {
+    return "JobRoleDto{" +
+        "title='" + title + '\'' +
+        ", description='" + description + '\'' +
+        ", contractType='" + contractType + '\'' +
+        ", locations=" + locations +
+        ", capability='" + capability + '\'' +
+        ", band='" + band + '\'' +
+        ", jobFamily='" + jobFamily + '\'' +
+        ", sharepointLink='" + sharepointLink + '\'' +
+        ", responsibilities='" + responsibilities + '\'' +
+        '}';
   }
 }

@@ -41,6 +41,9 @@ public class JobRole {
     @Column(name = "posted")
     private String posted;
 
+    @Column(name = "responsibilities")
+    private String responsibilities;
+
     @ManyToMany
     @JoinTable(
             name = "job_location",
@@ -106,6 +109,50 @@ public class JobRole {
 
   public String getPosted() {
     return posted;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public void setContractType(String contractType) {
+    this.contractType = contractType;
+  }
+
+  public void setPosted(String posted) {
+    this.posted = posted;
+  }
+
+  public void setLocations(List<Location> locations) {
+    this.locations = locations;
+  }
+
+  public void setCapability(Capability capability) {
+    this.capability = capability;
+  }
+
+  public void setJobFamily(JobFamily jobFamily) {
+    this.jobFamily = jobFamily;
+  }
+
+  public void setBand(Band band) {
+    this.band = band;
+  }
+
+  public void setSharePointLink(String sharePointLink) {
+    this.sharePointLink = sharePointLink;
+  }
+
+  public String getResponsibilities() {
+    return responsibilities;
+  }
+
+  public void setResponsibilities(String responsibilities) {
+    this.responsibilities = responsibilities;
   }
 
   @Override
