@@ -3,21 +3,13 @@ package com.team404.kainosproject.service;
 import com.team404.kainosproject.model.Band;
 import com.team404.kainosproject.model.Capability;
 import com.team404.kainosproject.model.JobFamily;
-import com.team404.kainosproject.model.JobRole;
-import com.team404.kainosproject.model.dto.BandJobFamiliesDto;
 import com.team404.kainosproject.model.dto.JobFamilyDto;
-import com.team404.kainosproject.repository.BandRepository;
-import com.team404.kainosproject.repository.CapabilityRepository;
 import com.team404.kainosproject.repository.JobFamilyRepository;
-import com.team404.kainosproject.repository.JobRoleRepository;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 /**
@@ -31,9 +23,9 @@ public class JobFamilyService {
   private static final Logger LOG = LoggerFactory.getLogger(JobRoleService.class);
 
   private final JobFamilyRepository repository;
-  private BandRepository bandRepository;
-  private CapabilityRepository capabilityRepository;
-  private JobRoleRepository jobRoleRepository;
+
+  // This is a circular dependency
+  private JobRoleService jobRoleService;
 
   @Autowired
   public JobFamilyService(JobFamilyRepository repository) {
@@ -58,79 +50,39 @@ public class JobFamilyService {
         .collect(Collectors.toList());
   }
 
-  // todo this method actually should now be for JobRoleService instead of job family
   /**
-   * Gets a List of JobFamily objects from database
-   * and groups them by band.
+   * Groups Job roles of the same band and capability by job family.
    *
-   * @return JobFamilyDto objects list
+   * @param jobFamilies Families to group roles by
+   * @param band the band which all job roles in the list belong to
+   * @param capability the capability of the job families
+   * @return a list of created job families as Data transfer objects
    */
-  public Iterable<BandJobFamiliesDto> getJobFamiliesForCapabilityByBand(String capabilityName) {
-    // todo refactor to make more test-able
-    // todo put getting capability by name into CapabilityService
-    // todo get all bands in priority order using BandService
-    // todo move into jobRoleService
+  public List<JobFamilyDto> getJobFamiliesByBandAsDto(List<JobFamily> jobFamilies, Band band, Capability capability){
 
-    // Get the capability object
-    List<Capability> capabilities = capabilityRepository.findByName(capabilityName);
-    LOG.info("Got {} capability entries from database", capabilities.spliterator().estimateSize());
+    return jobFamilies
+        .stream()
+        .map(
+        family -> getJobFamilyDtoByCapabilityAndBandAndFamily(family, band, capability)
+        )
+        .collect(Collectors.toList());
+  }
 
-    if(capabilities.size() == 0){
-      return new ArrayList<>();
-    }
+  // todo this should call a job service method, not the repository
+  /**
+   * Creates a job family dto consisting of all jobs of the same
+   * capability, band and job family.
+   */
+  private JobFamilyDto getJobFamilyDtoByCapabilityAndBandAndFamily(JobFamily jobFamily, Band band, Capability capability){
 
-    // Assume capability names are unique ( which they should be )
-    Capability capability = capabilities.get(0);
-
-    // Construct the list of bands in order
-
-    List<JobFamily> jobFamilies = (ArrayList<JobFamily>) repository.findAll();
-    List<Band> bands = bandRepository.findAll(Sort.by(Direction.ASC, "priority"));
-
-    List<BandJobFamiliesDto> jobFamiliesByBand = new ArrayList<>();
-
-    for (Band band: bands) {
-
-      // todo extract this into its own method
-      List<JobFamilyDto> jobFamilyDtos = new ArrayList<>();
-
-      for(JobFamily jobFamily : jobFamilies){
-
-        // This method involves making a lot of requests to the db
-        List<JobRole> roles = jobRoleRepository.findByCapabilityAndBandAndJobFamily(
-                capability,
-                band,
-                jobFamily
-        );
-
-        jobFamilyDtos.add(
-          new JobFamilyDto(jobFamily.getName(), roles)
-        );
-      }
-      // !!
-
-      jobFamiliesByBand.add(
-          new BandJobFamiliesDto(band.getName(), jobFamilyDtos)
-      );
-    }
-
-    return jobFamiliesByBand;
+    return new JobFamilyDto(
+        jobFamily.getName(),
+        jobRoleService.getByCapabilityAndBandAndFamily(jobFamily, band, capability)
+    );
   }
 
   @Autowired
-  public void setBandRepository(BandRepository bandRepository){
-    this.bandRepository = bandRepository;
-  }
-
-  @Autowired
-  public void setCapabilityRepository(
-      CapabilityRepository capabilityRepository) {
-    this.capabilityRepository = capabilityRepository;
-  }
-
-  @Autowired
-  public void setJobRoleRepository(
-      JobRoleRepository jobRoleRepository) {
-    this.jobRoleRepository = jobRoleRepository;
+  public void setJobRoleService(JobRoleService jobRoleService) {
+    this.jobRoleService = jobRoleService;
   }
 }

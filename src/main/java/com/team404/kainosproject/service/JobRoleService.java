@@ -1,9 +1,17 @@
 package com.team404.kainosproject.service;
 
+import com.team404.kainosproject.model.Band;
+import com.team404.kainosproject.model.Capability;
+import com.team404.kainosproject.model.JobFamily;
 import com.team404.kainosproject.model.JobRole;
+import com.team404.kainosproject.model.dto.BandJobFamiliesDto;
+import com.team404.kainosproject.model.dto.JobFamilyDto;
 import com.team404.kainosproject.model.dto.JobRoleDto;
 import com.team404.kainosproject.repository.JobRoleRepository;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +29,10 @@ public class JobRoleService {
   private static final Logger LOG = LoggerFactory.getLogger(JobRoleService.class);
 
   private final JobRoleRepository repository;
+
+  private CapabilityService capabilityService;
+  private BandService bandService;
+  private JobFamilyService jobFamilyService;
 
   @Autowired
   public JobRoleService(JobRoleRepository repository) {
@@ -47,5 +59,55 @@ public class JobRoleService {
   public Optional<JobRoleDto> getById(int id) {
     Optional<JobRole> jobRole = repository.findById(id);
     return jobRole.map(JobRoleDto::new).or(Optional::empty);
+  }
+
+  /**
+   * get a list of job role by their capability, band, and family.
+   */
+  public List<JobRole> getByCapabilityAndBandAndFamily(JobFamily jobFamily, Band band, Capability capability){
+    return repository.findByCapabilityAndBandAndJobFamily(capability, band, jobFamily);
+  }
+
+  /**
+   * Gets a List of JobFamily objects for a capability
+   * and groups them by band.
+   *
+   * @return JobFamilyDto objects list
+   */
+  public Iterable<BandJobFamiliesDto> getJobBandFamilyMatrixByCapability(String capabilityName) {
+
+    // Extract Optional Capability
+    Optional<Capability> opt = capabilityService.getRawCapabilityByName(capabilityName);
+
+    if(opt.isEmpty()){
+      LOG.warn("search for unrecognised capability " + capabilityName);
+      return new ArrayList<>();
+    }
+
+    Capability capability = opt.get();
+    List<JobFamily> jobFamilies = (List<JobFamily>) jobFamilyService.getAll();
+    List<Band> bands = (List<Band>) bandService.getAllBands();
+
+    return bands.stream().map(
+        band -> new BandJobFamiliesDto(
+            band.getName(),
+            jobFamilyService.getJobFamiliesByBandAsDto(jobFamilies, band, capability)
+        )
+    ).collect(Collectors.toList());
+  }
+
+  @Autowired
+  public void setCapabilityService(CapabilityService capabilityService) {
+    this.capabilityService = capabilityService;
+  }
+
+  @Autowired
+  public void setBandService(BandService bandService) {
+    this.bandService = bandService;
+  }
+
+  @Autowired
+  public void setJobFamilyService(JobFamilyService jobFamilyService) {
+    this.jobFamilyService = jobFamilyService;
   }
 }

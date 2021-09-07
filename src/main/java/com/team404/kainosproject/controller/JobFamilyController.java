@@ -33,18 +33,4 @@ public class JobFamilyController {
   public Iterable<JobFamilyDto> getAllJobFamilies() {
     return service.getAllAsDto();
   }
-
-  /**
-   * Gets a list of all Job Families for a particular capability
-   * grouped by band.
-   *
-   * @return List of JobRole objects
-   */
-  @GetMapping("/job-matrix/{capability}")
-  public Iterable<BandJobFamiliesDto> getJobMatrixByCapability(@PathVariable("capability") String capability){
-
-    return service.getJobFamiliesForCapabilityByBand(capability);
-  }
-
-
 }

@@ -1,153 +1,129 @@
 package service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.team404.kainosproject.model.Band;
 import com.team404.kainosproject.model.Capability;
 import com.team404.kainosproject.model.JobFamily;
 import com.team404.kainosproject.model.JobRole;
-import com.team404.kainosproject.model.dto.BandJobFamiliesDto;
-import com.team404.kainosproject.repository.BandRepository;
-import com.team404.kainosproject.repository.CapabilityRepository;
+import com.team404.kainosproject.model.dto.JobFamilyDto;
 import com.team404.kainosproject.repository.JobFamilyRepository;
-import com.team404.kainosproject.repository.JobRoleRepository;
 import com.team404.kainosproject.service.JobFamilyService;
+import com.team404.kainosproject.service.JobRoleService;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JobFamilyServiceTest {
 
   @Mock
-  CapabilityRepository mockCapabilityRepository;
+  JobRoleService mockJobRoleService;
+
+  @Mock
+  JobFamilyRepository mockRepository;
+
+  @Mock
+  List<JobFamily> mockJobFamilies;
+
+  @Mock
+  Band mockBand;
+
   @Mock
   Capability mockCapability;
 
-  @Mock
-  BandRepository mockBandRepository;
-  @Mock
-  Band mockBand1;
-  @Mock
-  Band mockBand2;
 
-  @Mock
-  JobFamilyRepository mockJobFamilyRepository;
-  @Mock
-  JobFamily mockJobFamily;
-
-  @Mock
-  JobRoleRepository mockJobRoleRepository;
-  @Mock
-  JobRole mockJobRole1;
-  @Mock
-  JobRole mockJobRole2;
-
-  private void setupMockBands(){
-
-    when(mockBand1.getName()).thenReturn("test Band 1");
-    when(mockBand2.getName()).thenReturn("test Band 2");
-
-    when(mockBandRepository.findAll(Sort.by(Direction.ASC, "priority"))).thenReturn(new ArrayList<>(){{
-      add(mockBand1);
-      add(mockBand2);
-    }});
-  }
-
-  private void setupMockCapability(){
-
-    when(mockCapabilityRepository.findByName("Test"))
-        .thenReturn(new ArrayList<>(){{
-          add(mockCapability);
-        }});
-  }
-
-  private void setupMockJobFamily(){
-
-    when(mockJobFamily.getName())
-        .thenReturn("Test Job Family");
-
-    when(mockJobFamilyRepository.findAll())
-        .thenReturn(new ArrayList<>(){{
-          add(mockJobFamily);
-        }});
-  }
-
-  private void setupMockJobRoles(){
-
-    when(mockJobRole1.getTitle()).thenReturn("Test Job role 1");
-    when(mockJobRole2.getTitle()).thenReturn("Test Job role 2");
-
-    when(mockJobRoleRepository.findByCapabilityAndBandAndJobFamily(
-        mockCapability, mockBand1, mockJobFamily
-    )).thenReturn(new ArrayList<>(){{
-      add(mockJobRole1);
-    }});
-
-    when(mockJobRoleRepository.findByCapabilityAndBandAndJobFamily(
-        mockCapability, mockBand2, mockJobFamily
-    )).thenReturn(new ArrayList<>(){{
-      add(mockJobRole2);
-    }});
-  }
+  List<JobFamilyDto> JobFamiliesByBand;
 
   private void setupMocks(){
-    setupMockBands();
-    setupMockCapability();
-    setupMockJobFamily();
-    setupMockJobRoles();
+
+    JobFamily mockJobFamily1 = mock(JobFamily.class);
+    when(mockJobFamily1.getName()).thenReturn("Test Job Family One");
+
+    JobFamily mockJobFamily2 = mock(JobFamily.class);
+    when(mockJobFamily2.getName()).thenReturn("Test Job Family Two");
+
+    mockJobFamilies = new ArrayList<>(){{
+      add(mockJobFamily1);
+      add(mockJobFamily2);
+    }};
+
+    JobRole mockJobRole1 = mock(JobRole.class);
+    when(mockJobRole1.getTitle()).thenReturn("Test Job One");
+    JobRole mockJobRole2 = mock(JobRole.class);
+    when(mockJobRole2.getTitle()).thenReturn("Test Job Two");
+
+    // Job Role 1 is the same band and capability, but in family 1
+    when(mockJobRoleService.getByCapabilityAndBandAndFamily(
+        mockJobFamily1,
+        mockBand,
+        mockCapability)
+    ).thenReturn(
+        new ArrayList<>(){{
+          add(mockJobRole1);
+        }}
+    );
+
+    // Job Role 1 is the same band and capability, but in family 2
+    when(mockJobRoleService.getByCapabilityAndBandAndFamily(
+        mockJobFamily2,
+        mockBand,
+        mockCapability)
+    ).thenReturn(
+        new ArrayList<>(){{
+          add(mockJobRole2);
+        }}
+    );
+
   }
 
-  // todo when refactoring JobFamiliesService, split this test method across the created separate methods.
-
-  @Test
-  public void when_getJobFamiliesForCapabilityByBand_expect_allBandsAndJobFamiliesReturned() {
-
+  @Before
+  public void getSetup(){
     setupMocks();
 
-    // todo assert that the DTO's constructors are called?
-    JobFamilyService service = new JobFamilyService(mockJobFamilyRepository);
-    service.setCapabilityRepository(mockCapabilityRepository);
-    service.setBandRepository(mockBandRepository);
-    service.setJobRoleRepository(mockJobRoleRepository);
+    JobFamilyService test = new JobFamilyService(mockRepository);
+    test.setJobRoleService(mockJobRoleService);
 
-    List<BandJobFamiliesDto> result = (ArrayList<BandJobFamiliesDto>) service.getJobFamiliesForCapabilityByBand("Test");
-
-    checkJobFamiliesBandStructure(result);
+    JobFamiliesByBand = test.getJobFamiliesByBandAsDto(mockJobFamilies, mockBand, mockCapability);
   }
 
-  private void checkJobFamiliesBandStructure(List<BandJobFamiliesDto> jobFamilyBands) {
-
-    // todo these messages arnt great, as if anything is wrong with the structure its likely there will be ann exception.
-
-    assertEquals("First band had an unexpected name",
-        "test Band 1", jobFamilyBands.get(0).getBandName()
-    );
-    assertEquals("Second band had an unexpected name",
-        "test Band 2", jobFamilyBands.get(1).getBandName()
-    );
-
-    assertEquals("First band had an unexpected job family",
-        "Test Job Family", jobFamilyBands.get(0).getJobFamilies().get(0).getJobFamilyName()
-    );
-    assertEquals("Second band had an unexpected job family",
-        "Test Job Family", jobFamilyBands.get(1).getJobFamilies().get(0).getJobFamilyName()
-    );
-
-    assertEquals("First band had an unexpected job role",
-        "Test Job role 1", jobFamilyBands.get(0).getJobFamilies().get(0).getJobTitles().get(0)
-    );
-    assertEquals("Second band had an unexpected job role",
-        "Test Job role 2", jobFamilyBands.get(1).getJobFamilies().get(0).getJobTitles().get(0)
-    );
-
-    // todo expected JSON Structure
+  @Test
+  public void when_getJobFamiliesByBandAsDto_Expect_TwoTestResults(){
+    assertEquals("Unexpected number of results", 2, JobFamiliesByBand.size());
   }
 
+  @Test
+  public void when_getJobFamiliesByBandAsDto_Expect_ResultsGroupedByFamily(){
+
+    assertAll(
+        () -> assertEquals("Expected first result to be first test family",
+            "Test Job Family One", JobFamiliesByBand.get(0).getJobFamilyName()
+        ),
+
+        () -> assertEquals("Expected second result to be second test family",
+            "Test Job Family Two", JobFamiliesByBand.get(1).getJobFamilyName()
+        )
+    );
+  }
+
+  @Test
+  public void when_getJobFamiliesByBandAsDto_Expect_ResultsContainTestJobs(){
+    assertAll(
+      () -> assertTrue("expected first result to contain test job one",
+          JobFamiliesByBand.get(0).getJobTitles().contains("Test Job One")
+      ),
+
+      () -> assertTrue("expected second result to contain test job two",
+          JobFamiliesByBand.get(1).getJobTitles().contains("Test Job Two")
+      )
+    );
+  }
 }
