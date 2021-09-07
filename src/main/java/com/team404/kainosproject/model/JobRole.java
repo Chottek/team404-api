@@ -72,31 +72,31 @@ public class JobRole {
     return sharePointLink;
   }
 
-    public List<Location> getLocations() {
-        return locations;
-    }
+  public List<Location> getLocations() {
+      return locations;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public Integer getId() {
+      return id;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public String getTitle() {
+      return title;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getDescription() {
+      return description;
+  }
 
-    public String getContractType() {
-        return contractType;
-    }
+  public String getContractType() {
+      return contractType;
+  }
 
-//    public Band getBand() {
-//        return band;
-//    }
+  public Band getBand() {
+      return band;
+  }
 
-    public JobFamily getJobFamily() {
+  public JobFamily getJobFamily() {
         return jobFamily;
     }
 

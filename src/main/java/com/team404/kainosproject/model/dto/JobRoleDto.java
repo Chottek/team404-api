@@ -7,8 +7,6 @@ import java.util.List;
 
 public class JobRoleDto {
 
-  //TODO: Nothing in common with US005
-
   private String title;
   private String description;
   private String contractType;
@@ -18,8 +16,20 @@ public class JobRoleDto {
   private String sharePointLink;
   private String jobFamilyName;
 
+  private String responsibilities;
 
-  public JobRoleDto(String title, String description, String contractType, List<Location> locations, String capability, String band, String sharePointLink, String jobFamilyName) {
+  /**
+   * Create a new Data Transfer Object to contain the below information.
+   *
+   * @param title job title
+   * @param description job description
+   * @param contractType type of contract (part_time, full_time, consultant)
+   * @param locations office locations job is available for
+   * @param capability Kainos capability that the job belongs to
+   * @param band management level of the job
+   */
+  public JobRoleDto(String title, String description, String contractType, List<Location> locations, String capability, String band,
+      String sharePointLink, String jobFamilyName, String responsibilities) {
     this.title = title;
     this.description = description;
     this.contractType = contractType;
@@ -28,6 +38,7 @@ public class JobRoleDto {
     this.band = band;
     this.jobFamilyName = jobFamilyName;
     this.sharePointLink = sharePointLink;
+    this.responsibilities = responsibilities;
   }
 
   public JobRoleDto(JobRole jr) {
@@ -35,9 +46,10 @@ public class JobRoleDto {
     this.description = jr.getDescription();
     this.contractType = jr.getContractType();
     this.locations = jr.getLocations();
-    this.capability = jr.getCapability().toString();
+    this.capability = jr.getCapability();
     this.band = jr.getBandAsString();
     this.sharePointLink = jr.getSharePointLink();
+    //this.responsibilities = jr.getResponsibilities();
 
     if(jr.getJobFamily() != null){
       this.jobFamilyName = jr.getJobFamily().getName();
