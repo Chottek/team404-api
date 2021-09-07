@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class BandJobFamiliesDto {
 
-  private String bandName;
-  private List<JobFamilyDto> jobFamilies;
+  private final String bandName;
+  private final List<JobFamilyDto> jobFamilies;
 
   public BandJobFamiliesDto(String bandName, List<JobFamilyDto> jobFamilyDtos) {
     this.bandName = bandName;

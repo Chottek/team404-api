@@ -43,7 +43,7 @@ public class JobFamilyService {
     return jobFamilies;
   }
 
-  public Iterable<JobFamilyDto> getAllAsDto(){
+  public Iterable<JobFamilyDto> getAllAsDto() {
     return ((List<JobFamily>) repository.findAll())
         .stream()
         .map(JobFamilyDto::new)
@@ -54,26 +54,28 @@ public class JobFamilyService {
    * Groups Job roles of the same band and capability by job family.
    *
    * @param jobFamilies Families to group roles by
-   * @param band the band which all job roles in the list belong to
-   * @param capability the capability of the job families
+   * @param band        the band which all job roles in the list belong to
+   * @param capability  the capability of the job families
    * @return a list of created job families as Data transfer objects
    */
-  public List<JobFamilyDto> getJobFamiliesByBandAsDto(List<JobFamily> jobFamilies, Band band, Capability capability){
+  public List<JobFamilyDto> getJobFamiliesByBandAsDto(List<JobFamily> jobFamilies, Band band,
+      Capability capability) {
 
     return jobFamilies
         .stream()
         .map(
-        family -> getJobFamilyDtoByCapabilityAndBandAndFamily(family, band, capability)
+            family -> getJobFamilyDtoByCapabilityAndBandAndFamily(family, band, capability)
         )
         .collect(Collectors.toList());
   }
 
   // todo this should call a job service method, not the repository
+
   /**
-   * Creates a job family dto consisting of all jobs of the same
-   * capability, band and job family.
+   * Creates a job family dto consisting of all jobs of the same capability, band and job family.
    */
-  private JobFamilyDto getJobFamilyDtoByCapabilityAndBandAndFamily(JobFamily jobFamily, Band band, Capability capability){
+  private JobFamilyDto getJobFamilyDtoByCapabilityAndBandAndFamily(JobFamily jobFamily, Band band,
+      Capability capability) {
 
     return new JobFamilyDto(
         jobFamily.getName(),

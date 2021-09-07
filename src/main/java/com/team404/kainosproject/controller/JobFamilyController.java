@@ -1,12 +1,9 @@
 package com.team404.kainosproject.controller;
 
-import com.team404.kainosproject.model.JobFamily;
-import com.team404.kainosproject.model.dto.BandJobFamiliesDto;
 import com.team404.kainosproject.model.dto.JobFamilyDto;
 import com.team404.kainosproject.service.JobFamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**

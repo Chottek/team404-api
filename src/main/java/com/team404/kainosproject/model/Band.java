@@ -11,8 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * Model object representing the band table.
- * Bands represent Kainos management levels.
+ * Model object representing the band table. Bands represent Kainos management levels.
  *
  * @author team 404
  */
@@ -36,10 +35,6 @@ public class Band {
 
   @Column(name = "priority")
   private int priority;
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
 
   public String getName() {
     return name;
@@ -65,6 +60,10 @@ public class Band {
 
   public Integer getId() {
     return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   @Override
