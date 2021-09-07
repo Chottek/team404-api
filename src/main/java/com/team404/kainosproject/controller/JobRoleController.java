@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JobRoleController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JobRoleController.class);
-
     private final JobRoleService service;
 
     @Autowired
@@ -68,7 +66,6 @@ public class JobRoleController {
     try{
       service.addJobRole(jobRole);
     }catch (WrongEntityFieldException wefe){
-      LOG.error("[Post JobRole] -> {}", wefe.getMessage());
       return ResponseEntity.badRequest().header("ErrorMessage", wefe.getMessage()).build();
     }
     return ResponseEntity.ok().build();

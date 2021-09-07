@@ -84,48 +84,60 @@ public class JobRoleService {
   }
 
 
+  /**
+   * Add JobRole to repository after field validation
+   *
+   * @param role JobRoleDto object containing necessary fields
+   * @throws WrongEntityFieldException Thrown when there's an error during validation
+   */
   public void addJobRole(JobRoleDto role) throws WrongEntityFieldException {
     StringBuilder errorMessage = new StringBuilder();
     LOG.info("Got a POST for JobRole with title=[{}]", role.getTitle());
     JobRole newRole = new JobRole();
 
     if(role.getTitle() == null || role.getTitle().isEmpty()){
-      errorMessage.append("Title should not be null or empty!\n");
+      errorMessage.append("Title should not be null nor empty!\n");
+    }else{
+      newRole.setTitle(role.getTitle());
     }
-    newRole.setTitle(role.getTitle());
 
-    if(role.getDescription().isEmpty()){
-      errorMessage.append("Description should not be null or empty!\n");
+    if(role.getDescription() == null || role.getDescription().isEmpty()){
+      errorMessage.append("Description should not be null nor empty!\n");
+    }else{
+      newRole.setDescription(role.getDescription());
     }
-    newRole.setDescription(role.getDescription());
 
     if(Arrays.stream(ContractType.values()).noneMatch((t) -> t.name().equals(role.getContractType()))){
       errorMessage.append("Contract Type ").append(role.getContractType())
           .append(" doesn't match any Contract Types ")
           .append(Arrays.toString(ContractType.values())).append("\n");
 
+    }else{
+      newRole.setContractType(role.getContractType());
     }
-    newRole.setContractType(role.getContractType());
-
 
     newRole.setPosted(String.valueOf(new Timestamp(System.currentTimeMillis())));
 
     if(role.getResponsibilities() == null || role.getResponsibilities().isEmpty()){
-      errorMessage.append("Responsibilities should not be null or empty!\n");
+      errorMessage.append("Responsibilities should not be null nor empty!\n");
+    }else{
+      newRole.setResponsibilities(role.getResponsibilities());
     }
-    newRole.setResponsibilities(role.getResponsibilities());
-
 
     //Locations
-    List<Location> locationList = new ArrayList<>();
-    for(Location l: locationRepository.findAll()){
-      for(String locationString : role.getLocations()){
-        if(l.getName().equals(locationString)){
-          locationList.add(l);
+    if(role.getLocations() == null || role.getLocations().size() == 0){
+      errorMessage.append("Locations should not be null nor empty!");
+    }else{
+      List<Location> locationList = new ArrayList<>();
+      for(Location l: locationRepository.findAll()){
+        for(String locationString : role.getLocations()){
+          if(l.getName().equals(locationString)){
+            locationList.add(l);
+          }
         }
       }
+      newRole.setLocations(locationList);
     }
-    newRole.setLocations(locationList);
 
     //Capability
     Optional<Capability> capability = capRepository.getByName(role.getCapability());
@@ -153,12 +165,12 @@ public class JobRoleService {
     }
 
     if(role.getSharepointLink() == null || role.getSharepointLink().isEmpty()){
-      errorMessage.append("SharePoint link should not be null or empty!\n");
+      errorMessage.append("SharePoint link should not be null nor empty!\n");
     }
     newRole.setSharePointLink(role.getSharepointLink());
 
     if(!errorMessage.toString().isEmpty()){
-      LOG.error("");
+      LOG.error("[POST JobRole] -> {}", errorMessage);
       throw new WrongEntityFieldException(errorMessage.toString());
     }
 

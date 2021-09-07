@@ -1,6 +1,7 @@
 package com.team404.kainosproject.integrationtests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -169,6 +170,24 @@ public class JobRoleControllerTest {
             200,
             restTemplate.postForEntity(createURLWithPort("/job-roles/add"), request, String.class).getStatusCode().value());
     }
+
+    @Test
+    public void when_PostNewJobRoleWithEmptyOrNullFields_Expect_ErrorMessage_ToBe_NotNull(){
+        final JSONObject jobRoleObject = new JSONObject();
+        jobRoleObject.put("title", "");
+        jobRoleObject.put("description", JSONObject.NULL);
+        jobRoleObject.put("contractType", "full_time");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> request = new HttpEntity<>(jobRoleObject.toString(), headers);
+        ResponseEntity<?> response = restTemplate.postForEntity(createURLWithPort("/job-roles/add"), request, String.class);
+
+        assertTrue("Response should contain an error message!",
+            response.getHeaders().containsKey("ErrorMessage"));
+    }
+
 
 
     private String createURLWithPort(String uri) {
