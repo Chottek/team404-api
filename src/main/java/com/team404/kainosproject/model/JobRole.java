@@ -1,5 +1,6 @@
 package com.team404.kainosproject.model;
 
+import com.team404.kainosproject.model.dto.JobRoleDto;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
+import org.springframework.boot.autoconfigure.batch.BatchProperties.Job;
 
 /**
  * Job Role.
@@ -23,6 +25,18 @@ import javax.persistence.Table;
 @Table(name = "job_role")
 @SecondaryTable(name = "job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name = "job_id"))
 public class JobRole {
+
+  public JobRole(){
+
+  }
+
+  public JobRole(JobRoleDto dto){
+    this.title = dto.getTitle();
+    this.description = dto.getDescription();
+    this.contractType = dto.getContractType();
+    this.responsibilities = dto.getResponsibilities();
+    this.sharePointLink = dto.getSharepointLink();
+  }
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

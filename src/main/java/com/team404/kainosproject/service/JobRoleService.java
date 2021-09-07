@@ -2,6 +2,7 @@ package com.team404.kainosproject.service;
 
 import com.team404.kainosproject.model.Band;
 import com.team404.kainosproject.model.Capability;
+import com.team404.kainosproject.model.ContractType;
 import com.team404.kainosproject.model.JobFamily;
 import com.team404.kainosproject.model.JobRole;
 import com.team404.kainosproject.model.Location;
@@ -16,6 +17,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -82,14 +84,38 @@ public class JobRoleService {
   }
 
 
-  public boolean addJobRole(JobRoleDto role){
+  public void addJobRole(JobRoleDto role) throws WrongEntityFieldException {
+    StringBuilder errorMessage = new StringBuilder();
     LOG.info("Got a POST for JobRole with title=[{}]", role.getTitle());
     JobRole newRole = new JobRole();
+
+    if(role.getTitle() == null || role.getTitle().isEmpty()){
+      errorMessage.append("Title should not be null or empty!\n");
+    }
     newRole.setTitle(role.getTitle());
+
+    if(role.getDescription().isEmpty()){
+      errorMessage.append("Description should not be null or empty!\n");
+    }
     newRole.setDescription(role.getDescription());
+
+    if(Arrays.stream(ContractType.values()).noneMatch((t) -> t.name().equals(role.getContractType()))){
+      errorMessage.append("Contract Type ").append(role.getContractType())
+          .append(" doesn't match any Contract Types ")
+          .append(Arrays.toString(ContractType.values())).append("\n");
+
+    }
     newRole.setContractType(role.getContractType());
+
+
     newRole.setPosted(String.valueOf(new Timestamp(System.currentTimeMillis())));
+
+    if(role.getResponsibilities() == null || role.getResponsibilities().isEmpty()){
+      errorMessage.append("Responsibilities should not be null or empty!\n");
+    }
     newRole.setResponsibilities(role.getResponsibilities());
+
+
     //Locations
     List<Location> locationList = new ArrayList<>();
     for(Location l: locationRepository.findAll()){
@@ -106,7 +132,8 @@ public class JobRoleService {
     if(capability.isPresent()){
       newRole.setCapability(capability.get());
     }else{
-      return false;
+      errorMessage.append("Capability of name ").append(role.getCapability())
+          .append(" doesn't exist!\n");
     }
 
     //JobFamily
@@ -114,20 +141,28 @@ public class JobRoleService {
     if(jobFamily.isPresent()){
       newRole.setJobFamily(jobFamily.get());
     }else{
-      return false;
+      errorMessage.append("Job Family of name ").append(role.getJobFamily())
+          .append(" doesn't exist!\n");
     }
     //Band
     Optional<Band> band = bandRepository.getByName(role.getBand());
     if(band.isPresent()){
       newRole.setBand(band.get());
     }else{
-      return false;
+      errorMessage.append("Band of name ").append(role.getBand()).append(" doesn't exist!\n");
     }
 
+    if(role.getSharepointLink() == null || role.getSharepointLink().isEmpty()){
+      errorMessage.append("SharePoint link should not be null or empty!\n");
+    }
     newRole.setSharePointLink(role.getSharepointLink());
 
+    if(!errorMessage.toString().isEmpty()){
+      LOG.error("");
+      throw new WrongEntityFieldException(errorMessage.toString());
+    }
+
     repository.save(newRole);
-    return true;
   }
 
 }

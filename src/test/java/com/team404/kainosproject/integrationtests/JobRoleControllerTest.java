@@ -160,8 +160,6 @@ public class JobRoleControllerTest {
         jobRoleObject.put("jobFamily", "Engineering");
         jobRoleObject.put("sharepointLink", "testHTTPLink");
 
-        System.out.println(jobRoleObject);
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 

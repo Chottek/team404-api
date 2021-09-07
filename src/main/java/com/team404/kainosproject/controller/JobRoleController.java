@@ -3,6 +3,9 @@ package com.team404.kainosproject.controller;
 import com.team404.kainosproject.model.JobRole;
 import com.team404.kainosproject.model.dto.JobRoleDto;
 import com.team404.kainosproject.service.JobRoleService;
+import com.team404.kainosproject.service.WrongEntityFieldException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class JobRoleController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(JobRoleController.class);
 
     private final JobRoleService service;
 
@@ -55,15 +60,18 @@ public class JobRoleController {
    * Adds a Job Role based on POST request Body
    *
    * @param jobRole DTO object containing Job Role data
-   * @return ResponseEntity (200 OK) if created, (422 Unprocessable Entity) otherwise
+   * @return ResponseEntity (200 OK) if created or (400 Bad Request) with
+   * error message in headers
    */
   @PostMapping("/job-roles/add")
   public ResponseEntity<?> addJobRole(@RequestBody JobRoleDto jobRole){
-    if(service.addJobRole(jobRole)){
-      return ResponseEntity.ok().build();
-    }else {
-      return ResponseEntity.unprocessableEntity().build();
+    try{
+      service.addJobRole(jobRole);
+    }catch (WrongEntityFieldException wefe){
+      LOG.error("[Post JobRole] -> {}", wefe.getMessage());
+      return ResponseEntity.badRequest().header("ErrorMessage", wefe.getMessage()).build();
     }
+    return ResponseEntity.ok().build();
   }
 
 }
