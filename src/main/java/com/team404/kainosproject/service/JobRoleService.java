@@ -4,16 +4,20 @@ import com.team404.kainosproject.model.Band;
 import com.team404.kainosproject.model.Capability;
 import com.team404.kainosproject.model.JobFamily;
 import com.team404.kainosproject.model.JobRole;
+import com.team404.kainosproject.model.Location;
 import com.team404.kainosproject.model.dto.JobRoleDto;
 import com.team404.kainosproject.repository.BandRepository;
 import com.team404.kainosproject.repository.CapabilityRepository;
 import com.team404.kainosproject.repository.JobFamilyRepository;
 import com.team404.kainosproject.repository.JobRoleRepository;
+import com.team404.kainosproject.repository.LocationRepository;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -37,13 +41,16 @@ public class JobRoleService {
   private final CapabilityRepository capRepository;
   private final JobFamilyRepository jfRepository;
   private final BandRepository bandRepository;
+  private final LocationRepository locationRepository;
 
   @Autowired
-  public JobRoleService(JobRoleRepository repository, CapabilityRepository capRepository, JobFamilyRepository jfRepository, BandRepository bandRepository) {
+  public JobRoleService(JobRoleRepository repository, CapabilityRepository capRepository,
+      JobFamilyRepository jfRepository, BandRepository bandRepository, LocationRepository locationRepository) {
     this.repository = repository;
     this.capRepository = capRepository;
     this.jfRepository = jfRepository;
     this.bandRepository = bandRepository;
+    this.locationRepository = locationRepository;
   }
 
   /**
@@ -65,7 +72,13 @@ public class JobRoleService {
    */
   public Optional<JobRoleDto> getById(int id) {
     Optional<JobRole> jobRole = repository.findById(id);
-    return jobRole.map(JobRoleDto::new).or(Optional::empty);
+    if(jobRole.isPresent()){
+      LOG.info("Got JobRole object with id=[{}]", id);
+      return Optional.of(new JobRoleDto(jobRole.get()));
+    }else{
+      LOG.error("No JobRole object with id=[{}]", id);
+      return Optional.empty();
+    }
   }
 
 
@@ -78,7 +91,15 @@ public class JobRoleService {
     newRole.setPosted(String.valueOf(new Timestamp(System.currentTimeMillis())));
     newRole.setResponsibilities(role.getResponsibilities());
     //Locations
-    //newRole.setLocations();
+    List<Location> locationList = new ArrayList<>();
+    for(Location l: locationRepository.findAll()){
+      for(String locationString : role.getLocations()){
+        if(l.getName().equals(locationString)){
+          locationList.add(l);
+        }
+      }
+    }
+    newRole.setLocations(locationList);
 
     //Capability
     Optional<Capability> capability = capRepository.getByName(role.getCapability());

@@ -3,6 +3,7 @@ package com.team404.kainosproject.model.dto;
 import com.team404.kainosproject.model.JobRole;
 import com.team404.kainosproject.model.Location;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JobRoleDto {
@@ -37,13 +38,14 @@ public class JobRoleDto {
     this.title = jr.getTitle();
     this.description = jr.getDescription();
     this.contractType = jr.getContractType();
-
-    jr.getLocations().forEach(location -> this.locations.add(location.getName()));
+    this.locations = new ArrayList<>();
+    jr.getLocations().forEach(l -> this.locations.add(l.getName()));
 
     this.capability = jr.getCapability();
     this.band = jr.getBandAsString();
     this.sharepointLink = jr.getSharePointLink();
     this.jobFamily = jr.getJobFamily().getName();
+    this.responsibilities = jr.getResponsibilities();
   }
 
   public JobRoleDto() {

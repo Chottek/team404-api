@@ -25,7 +25,7 @@ import javax.persistence.Table;
 public class JobRole {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="job_id")
     private Integer id;
 
