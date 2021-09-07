@@ -1,5 +1,6 @@
 package com.team404.kainosproject.repository;
 
+import com.team404.kainosproject.model.Capability;
 import com.team404.kainosproject.model.JobFamily;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
@@ -11,6 +12,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface JobFamilyRepository extends CrudRepository<JobFamily, Integer> {
 
-  List<JobFamily> findByCapability(int capabilityID);
+  List<JobFamily> findByCapability(Capability capability);
 
 }

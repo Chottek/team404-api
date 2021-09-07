@@ -33,4 +33,9 @@ public class JobFamilyController {
   public Iterable<JobFamilyDto> getAllJobFamilies() {
     return service.getAllAsDto();
   }
+
+  @GetMapping("/job-family/{capability}")
+  public Iterable<JobFamilyDto> getAllJobFamiliesForCapability(@PathVariable("capability") String capability){
+    return service.getAllDtoByCapability(capability);
+  }
 }
