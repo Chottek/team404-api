@@ -44,10 +44,11 @@ public class JobRoleService {
    *
    * @return JobRole objects list
    */
-  public Iterable<JobRole> getAll() {
-    Iterable<JobRole> jobRoles = repository.findAll();
+  public Iterable<JobRoleDto> getAllDto() {
+    List<JobRole> jobRoles = (List<JobRole>) repository.findAll();
     LOG.info("Got {} JobRole entries from database", jobRoles.spliterator().estimateSize());
-    return jobRoles;
+
+    return jobRoles.stream().map(JobRoleDto::new).collect(Collectors.toList());
   }
 
   /**

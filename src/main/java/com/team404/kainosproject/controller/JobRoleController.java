@@ -1,6 +1,5 @@
 package com.team404.kainosproject.controller;
 
-import com.team404.kainosproject.model.JobRole;
 import com.team404.kainosproject.model.dto.BandJobFamiliesDto;
 import com.team404.kainosproject.model.dto.JobRoleDto;
 import com.team404.kainosproject.service.JobRoleService;
@@ -31,8 +30,8 @@ public class JobRoleController {
    * @return List of JobRole objects
    */
   @GetMapping("/job-roles") //produces = "application/json"
-  public Iterable<JobRole> getAllJobRoles() {
-    return service.getAll();
+  public Iterable<JobRoleDto> getAllJobRoles() {
+    return service.getAllDto();  // fixme this needs to be a DTO
   }
 
   /**

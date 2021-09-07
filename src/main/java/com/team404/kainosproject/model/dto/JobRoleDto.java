@@ -15,14 +15,19 @@ public class JobRoleDto {
   private List<Location> locations;
   private String capability;
   private String band;
+  private String sharePointLink;
+  private String jobFamilyName;
 
-  public JobRoleDto(String title, String description, String contractType, List<Location> locations, String capability, String band) {
+
+  public JobRoleDto(String title, String description, String contractType, List<Location> locations, String capability, String band, String sharePointLink, String jobFamilyName) {
     this.title = title;
     this.description = description;
     this.contractType = contractType;
     this.locations = locations;
     this.capability = capability;
     this.band = band;
+    this.jobFamilyName = jobFamilyName;
+    this.sharePointLink = sharePointLink;
   }
 
   public JobRoleDto(JobRole jr) {
@@ -32,17 +37,15 @@ public class JobRoleDto {
     this.locations = jr.getLocations();
     this.capability = jr.getCapability().toString();
     this.band = jr.getBandAsString();
-  }
+    this.sharePointLink = jr.getSharePointLink();
 
-  public JobRoleDto() {
+    if(jr.getJobFamily() != null){
+      this.jobFamilyName = jr.getJobFamily().getName();
+    }
   }
 
   public String getTitle() {
     return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
   }
 
   public String getDescription() {
@@ -57,24 +60,12 @@ public class JobRoleDto {
     return contractType;
   }
 
-  public void setContractType(String contractType) {
-    this.contractType = contractType;
-  }
-
   public List<Location> getLocations() {
     return locations;
   }
 
-  public void setLocations(List<Location> locations) {
-    this.locations = locations;
-  }
-
   public String getCapability() {
     return capability;
-  }
-
-  public void setCapability(String capability) {
-    this.capability = capability;
   }
 
   public String getBand() {
@@ -83,5 +74,13 @@ public class JobRoleDto {
 
   public void setBand(String band) {
     this.band = band;
+  }
+
+  public String getSharePointLink() {
+    return sharePointLink;
+  }
+
+  public String getJobFamilyName() {
+    return jobFamilyName;
   }
 }
