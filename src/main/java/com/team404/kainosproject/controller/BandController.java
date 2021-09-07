@@ -22,9 +22,9 @@ public class BandController {
     this.service = service;
   }
 
-  @GetMapping("/bands")
-  public Iterable<Band> getAllBands() {
-    return service.getAllBands();
+  @GetMapping("/bandnames")
+  public Iterable<String> getBandNames() {
+    return service.getAllBandNames();
   }
 
   @GetMapping("/bands-competencies")

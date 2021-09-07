@@ -94,4 +94,19 @@ public class BandService {
     LOG.info("Created [{}] Band Data Transfer Objects from Band model", bandDtosList.size());
     return bandDtosList;
   }
+
+
+  /**
+   * Gets a list of Band names as String distinctly
+   * from database, in order of priority.
+   *
+   * @return Iterable of Band name Strings
+   */
+  public Iterable<String> getAllBandNames() {
+    Iterable<String> bandNames = repository.getAllBandNames();
+    LOG.info("Got [{}] Band Names as Iterable of Strings", bandNames.spliterator().estimateSize());
+    return bandNames;
+  }
+
+
 }
