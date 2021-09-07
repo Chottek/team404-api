@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -29,16 +32,6 @@ public class JobRoleControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
-
-    private JSONArray jobMatrixEngineering;
-
-    @BeforeClass
-    private void setup() {
-        jobMatrixEngineering = new JSONArray(restTemplate
-            .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
-            .getBody()
-        );
-    }
 
     @Test
     public void when_gettingFirstRowFromJobRoleTable_Expect_ReturnsTestJobRow() {
@@ -151,77 +144,34 @@ public class JobRoleControllerTest {
     }
 
     @Test
-    public void when_requestJobRoleMatrix_Expect_JobRolesAndFamiliesReturned(){
+    public void when_PostNewJobRole_Expect_ItPosted(){
+        final JSONObject jobRoleObject = new JSONObject();
+        jobRoleObject.put("title", "Test Job Role");
+        jobRoleObject.put("description", "Test Description");
+        jobRoleObject.put("contractType", "full_time");
 
-        // Check each band has family and job titles
-        jobMatrixEngineering.forEach(band -> {
+        final JSONArray locations = new JSONArray();
+        locations.put("Gdansk").put("London");
 
-            assertAll(
-                () -> assertTrue(jsonHasAttribute((JSONObject) band, "band_name")),
-                () -> assertTrue(jsonHasAttribute((JSONObject) band, "job_families")),
-                () -> assertTrue(jsonArrayIsNotEmpty((JSONObject) band, "job_families"))
-            );
-        });
+        jobRoleObject.put("locations", locations);
+        jobRoleObject.put("capability", "Engineering");
+        jobRoleObject.put("responsibilities", "DoesHaveToDoSomething");
+        jobRoleObject.put("band", "Manager");
+        jobRoleObject.put("jobFamily", "Engineering");
+        jobRoleObject.put("sharepointLink", "testHTTPLink");
 
-        jobMatrixEngineering.forEach( band -> {
+        System.out.println(jobRoleObject);
 
-            JSONArray jobFamilies = ((JSONObject) band).getJSONArray("job_families");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-            jobFamilies.forEach( family -> {
+        HttpEntity<String> request = new HttpEntity<>(jobRoleObject.toString(), headers);
 
-                assertAll(
-                    () -> assertTrue(jsonHasAttribute((JSONObject) family, "job_family_name")),
-                    () -> assertTrue(jsonHasAttribute((JSONObject) family, "job_titles")),
-                    () -> assertTrue(jsonArrayIsNotEmpty((JSONObject) family, "job_titles"))
-                );
-
-            });
-        });
+        assertEquals("Cannot process adding JobRole Entity!",
+            200,
+            restTemplate.postForEntity(createURLWithPort("/job-roles/add"), request, String.class).getStatusCode().value());
     }
 
-    @Test
-    public void when_requestJobRoleMatrix_Expect_ReturnedInOrderOfBand(){
-
-        // This test will need improving when admin users are given the ability to create new bands
-
-        String[] bandOrder = {"Executive", "Leadership", "Principal", "Manager", "Consultant", "Senior_Associate", "Associate", "Trainee", "Apprentice"};
-
-        for (int i = 0; i < bandOrder.length; i++){
-
-            assertEquals(
-                bandOrder[i],
-                jobMatrixEngineering.getJSONObject(0).get("band_name")
-            );
-
-        }
-
-    }
-
-  private boolean jsonArrayIsNotEmpty(JSONObject json, String arrayName) {
-
-        try{
-
-            if(json.getJSONArray(arrayName).length() >= 0)
-                return false;
-        }
-        catch (JSONException e){
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean jsonHasAttribute(JSONObject json, String attributeName){
-
-        try{
-            json.get(attributeName);
-        }
-        catch (JSONException e){
-            return false;
-        }
-
-        return true;
-    }
 
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
