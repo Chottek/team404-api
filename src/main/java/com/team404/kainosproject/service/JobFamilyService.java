@@ -12,6 +12,7 @@ import com.team404.kainosproject.repository.JobFamilyRepository;
 import com.team404.kainosproject.repository.JobRoleRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,13 @@ public class JobFamilyService {
     Iterable<JobFamily> jobFamilies = repository.findAll();
     LOG.info("Got {} Job Family entries from database", jobFamilies.spliterator().estimateSize());
     return jobFamilies;
+  }
+
+  public Iterable<JobFamilyDto> getAllAsDto(){
+    return ((List<JobFamily>) repository.findAll())
+        .stream()
+        .map(JobFamilyDto::new)
+        .collect(Collectors.toList());
   }
 
   // todo this method actually should now be for JobRoleService instead of job family

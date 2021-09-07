@@ -2,6 +2,7 @@ package com.team404.kainosproject.controller;
 
 import com.team404.kainosproject.model.JobFamily;
 import com.team404.kainosproject.model.dto.BandJobFamiliesDto;
+import com.team404.kainosproject.model.dto.JobFamilyDto;
 import com.team404.kainosproject.service.JobFamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +30,8 @@ public class JobFamilyController {
    * @return List of JobRole objects
    */
   @GetMapping("/job-family") //produces = "application/json"
-  public Iterable<JobFamily> getAllJobFamilies() {
-    return service.getAll();
+  public Iterable<JobFamilyDto> getAllJobFamilies() {
+    return service.getAllAsDto();
   }
 
   /**
