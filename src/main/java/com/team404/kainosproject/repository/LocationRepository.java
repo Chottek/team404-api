@@ -7,10 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LocationRepository extends CrudRepository<Location, Integer> {
-
-  String FIND_NAMES = "SELECT DISTINCT name FROM location";
-
-  @Query(value = FIND_NAMES, nativeQuery = true)
-  Iterable<String> getAllLocationNames();
-
 }
