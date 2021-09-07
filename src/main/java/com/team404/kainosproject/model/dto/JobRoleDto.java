@@ -4,6 +4,9 @@ import com.team404.kainosproject.model.JobRole;
 import com.team404.kainosproject.model.Location;
 import java.util.List;
 
+/**
+ * Data transfer object abstrcting a {@link JobRole} model object.
+ */
 public class JobRoleDto {
 
   private final String title;
