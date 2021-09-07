@@ -21,7 +21,7 @@ public class JobRoleController {
 
   @Autowired
   public JobRoleController(JobRoleService service) {
-        this.service = service;
+    this.service = service;
   }
 
   /**
@@ -38,8 +38,8 @@ public class JobRoleController {
    * Gets Job Role object based on ID.
    *
    * @param id Numeric id of Job Role in database
-   * @return ResponseEntity containing an object if it exists,
-   *         else ResponseEntity with 404 Not Found Status
+   * @return ResponseEntity containing an object if it exists, else ResponseEntity with 404 Not
+   *         Found Status
    */
   @GetMapping("/job-roles/{id}")
   public ResponseEntity<JobRoleDto> getById(@PathVariable("id") int id) {
@@ -48,13 +48,13 @@ public class JobRoleController {
   }
 
   /**
-   * Gets a list of all Job Families for a particular capability
-   * grouped by band.
+   * Gets a list of all Job Families for a particular capability grouped by band.
    *
    * @return List of JobRole objects
    */
   @GetMapping("/job-matrix/{capability}")
-  public Iterable<BandJobFamiliesDto> getJobMatrixByCapability(@PathVariable("capability") String capability){
+  public Iterable<BandJobFamiliesDto> getJobMatrixByCapability(
+      @PathVariable("capability") String capability) {
 
     return service.getJobBandFamilyMatrixByCapability(capability);
   }

@@ -7,12 +7,10 @@ import com.team404.kainosproject.model.dto.IndicatorDto;
 import com.team404.kainosproject.repository.BandRepository;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 /**
@@ -45,8 +43,8 @@ public class BandService {
   }
 
   /**
-   * Gets a List of Band objects from database and maps it to the BandDTO
-   * of form that can be easily parsed.
+   * Gets a List of Band objects from database and maps it to the BandDTO of form that can be easily
+   * parsed.
    *
    * @return Iterable of BandDTO objects
    */
@@ -95,7 +93,8 @@ public class BandService {
       bandCompetenciesDto.setCompetencies(competencyDtos);
       bandCompetenciesDtosList.add(bandCompetenciesDto);
     }
-    LOG.info("Created [{}] Band Data Transfer Objects from Band model", bandCompetenciesDtosList.size());
+    LOG.info("Created [{}] Band Data Transfer Objects from Band model",
+        bandCompetenciesDtosList.size());
     return bandCompetenciesDtosList;
   }
 }

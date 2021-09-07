@@ -15,12 +15,4 @@ import org.springframework.stereotype.Repository;
 public interface BandRepository extends CrudRepository<Band, Integer> {
 
   List<Band> findAll(Sort sort);
-
-    /*@Query("SELECT b FROM Band b " +
-            "JOIN CompetencyIndicator USING (band_id) " +
-            "JOIN SubCompetency USING (sub_competency_id) " +
-            "JOIN Competency USING (competency_id)")
-    Iterable<Band> getBandsList();*/
-
-
 }

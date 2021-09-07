@@ -12,26 +12,22 @@ import java.util.List;
  */
 public class CapabilityDto {
 
-  private Integer id;
+  private final Integer id;
 
-  private String name;
+  private final String name;
 
   private List<JobRole> jobRoles;
 
   private List<JobFamily> jobFamilies;
 
+  /**
+   * Create a new data transfer object from a capability
+   * model objet.
+   */
   public CapabilityDto(Capability capability) {
 
     this.id = capability.getId();
     this.name = capability.getName();
-  }
-
-  public CapabilityDto(Integer id, String name,
-      List<JobRole> jobRoles, List<JobFamily> jobFamilies) {
-    this.id = id;
-    this.name = name;
-    this.jobRoles = jobRoles;
-    this.jobFamilies = jobFamilies;
   }
 
   public Integer getId() {

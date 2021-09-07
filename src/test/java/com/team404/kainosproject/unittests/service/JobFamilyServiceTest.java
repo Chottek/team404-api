@@ -43,7 +43,7 @@ public class JobFamilyServiceTest {
 
   List<JobFamilyDto> JobFamiliesByBand;
 
-  private void setupMocks(){
+  private void setupMocks() {
 
     JobFamily mockJobFamily1 = mock(JobFamily.class);
     when(mockJobFamily1.getName()).thenReturn("Test Job Family One");
@@ -51,7 +51,7 @@ public class JobFamilyServiceTest {
     JobFamily mockJobFamily2 = mock(JobFamily.class);
     when(mockJobFamily2.getName()).thenReturn("Test Job Family Two");
 
-    mockJobFamilies = new ArrayList<>(){{
+    mockJobFamilies = new ArrayList<>() {{
       add(mockJobFamily1);
       add(mockJobFamily2);
     }};
@@ -67,7 +67,7 @@ public class JobFamilyServiceTest {
         mockBand,
         mockCapability)
     ).thenReturn(
-        new ArrayList<>(){{
+        new ArrayList<>() {{
           add(mockJobRole1);
         }}
     );
@@ -78,7 +78,7 @@ public class JobFamilyServiceTest {
         mockBand,
         mockCapability)
     ).thenReturn(
-        new ArrayList<>(){{
+        new ArrayList<>() {{
           add(mockJobRole2);
         }}
     );
@@ -86,7 +86,7 @@ public class JobFamilyServiceTest {
   }
 
   @Before
-  public void getSetup(){
+  public void getSetup() {
     setupMocks();
 
     JobFamilyService test = new JobFamilyService(mockRepository);
@@ -96,12 +96,12 @@ public class JobFamilyServiceTest {
   }
 
   @Test
-  public void when_getJobFamiliesByBandAsDto_Expect_TwoTestResults(){
+  public void when_getJobFamiliesByBandAsDto_Expect_TwoTestResults() {
     assertEquals("Unexpected number of results", 2, JobFamiliesByBand.size());
   }
 
   @Test
-  public void when_getJobFamiliesByBandAsDto_Expect_ResultsGroupedByFamily(){
+  public void when_getJobFamiliesByBandAsDto_Expect_ResultsGroupedByFamily() {
 
     assertAll(
         () -> assertEquals("Expected first result to be first test family",
@@ -115,15 +115,15 @@ public class JobFamilyServiceTest {
   }
 
   @Test
-  public void when_getJobFamiliesByBandAsDto_Expect_ResultsContainTestJobs(){
+  public void when_getJobFamiliesByBandAsDto_Expect_ResultsContainTestJobs() {
     assertAll(
-      () -> assertTrue("expected first result to contain test job one",
-          JobFamiliesByBand.get(0).getJobTitles().contains("Test Job One")
-      ),
+        () -> assertTrue("expected first result to contain test job one",
+            JobFamiliesByBand.get(0).getJobTitles().contains("Test Job One")
+        ),
 
-      () -> assertTrue("expected second result to contain test job two",
-          JobFamiliesByBand.get(1).getJobTitles().contains("Test Job Two")
-      )
+        () -> assertTrue("expected second result to contain test job two",
+            JobFamiliesByBand.get(1).getJobTitles().contains("Test Job Two")
+        )
     );
   }
 }

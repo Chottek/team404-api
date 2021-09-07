@@ -18,5 +18,6 @@ public interface JobRoleRepository extends CrudRepository<JobRole, Integer> {
 
   List<JobRole> findByCapability(int capabilityId);
 
-  List<JobRole> findByCapabilityAndBandAndJobFamily(Capability capability, Band band, JobFamily jobFamily);
+  List<JobRole> findByCapabilityAndBandAndJobFamily(Capability capability, Band band,
+      JobFamily jobFamily);
 }
