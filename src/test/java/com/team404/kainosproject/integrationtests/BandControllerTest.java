@@ -1,9 +1,12 @@
 package com.team404.kainosproject.integrationtests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -109,6 +112,22 @@ public class BandControllerTest {
         });
       });
     }
+  }
+
+  @Test
+  public void when_GetBandNames_ExpectList_ToBe_NotNullNotEmpty(){
+    String s = restTemplate.getForEntity(createURLWithPort("/bands"), String.class).getBody();
+    assertFalse("Result of Band Names query is empty!", s == null && s.isEmpty());
+  }
+
+  @Test
+  public void when_GetBandNames_ExpectFirst_ToBe_OfHighestPriority(){
+    final String BAND_OF_HIGHEST_PRIORITY = "Executive";
+    String[] s = restTemplate.getForEntity(createURLWithPort("/bands"), String.class).getBody()
+        .replace("[", "").replace("]", "").replaceAll("\"", "")
+        .split(",");
+
+    assertEquals("First entry of Band Names is not " + BAND_OF_HIGHEST_PRIORITY + "!", BAND_OF_HIGHEST_PRIORITY, s[0]);
   }
 
   private boolean isPresentInObject(JSONObject obj, String fieldName) {
