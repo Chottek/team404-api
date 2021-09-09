@@ -3,13 +3,15 @@ package com.team404.kainosproject.model.dto;
 import com.team404.kainosproject.model.JobRole;
 import com.team404.kainosproject.model.Location;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class JobRoleDto {
 
+  private int id;
   private final String title;
   private String description;
   private final String contractType;
-  private final List<Location> locations;
+  private final List<LocationDto> locations;
   private final String capability;
   private String band;
   private final String sharePointLink;
@@ -27,7 +29,7 @@ public class JobRoleDto {
    * @param capability   Kainos capability that the job belongs to
    * @param band         management level of the job
    */
-  public JobRoleDto(String title, String description, String contractType, List<Location> locations,
+  public JobRoleDto(String title, String description, String contractType, List<LocationDto> locations,
       String capability, String band,
       String sharePointLink, String jobFamilyName, String responsibilities) {
     this.title = title;
@@ -41,19 +43,28 @@ public class JobRoleDto {
     this.responsibilities = responsibilities;
   }
 
-  public JobRoleDto(JobRole jr) {
-    this.title = jr.getTitle();
-    this.description = jr.getDescription();
-    this.contractType = jr.getContractType();
-    this.locations = jr.getLocations();
-    this.capability = jr.getCapability();
-    this.band = jr.getBandAsString();
-    this.sharePointLink = jr.getSharePointLink();
+  public JobRoleDto(JobRole jobRole) {
+    this.id = jobRole.getId();
+    this.title = jobRole.getTitle();
+    this.description = jobRole.getDescription();
+    this.contractType = jobRole.getContractType();
+    this.capability = jobRole.getCapability();
+    this.band = jobRole.getBandAsString();
+    this.sharePointLink = jobRole.getSharePointLink();
     //this.responsibilities = jr.getResponsibilities();
 
-    if (jr.getJobFamily() != null) {
-      this.jobFamilyName = jr.getJobFamily().getName();
+    this.locations = jobRole.getLocations()
+                        .stream()
+                        .map(LocationDto::new)
+                        .collect(Collectors.toList());
+
+    if (jobRole.getJobFamily() != null) {
+      this.jobFamilyName = jobRole.getJobFamily().getName();
     }
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String getTitle() {
@@ -72,7 +83,7 @@ public class JobRoleDto {
     return contractType;
   }
 
-  public List<Location> getLocations() {
+  public List<LocationDto> getLocations() {
     return locations;
   }
 

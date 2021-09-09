@@ -69,22 +69,32 @@ public class JobRoleControllerTest {
 
   @Test
   public void when_wrongIDForJobSpecification_Expect_JobSpecificationNotFound() {
-    final int jobRolesSize = new JSONArray(restTemplate
+
+    JSONArray jobRoles = new JSONArray(restTemplate
         .getForEntity(createURLWithPort("/job-roles"), String.class)
-        .getBody()).length();
+        .getBody());
+
+    // this assumes return is in ID order
+    int maxId = jobRoles.getJSONObject(jobRoles.length()-1).getInt("id");
 
     assertAll("Should return 404 Status",
-        () -> assertEquals(restTemplate
-            .getForEntity(createURLWithPort("/job-roles/" + (-1)), String.class)
-            .getStatusCode(), ResponseEntity.notFound().build().getStatusCode()),
+        () -> assertEquals("-1 is an invalid job role id but did not return 404",
+            ResponseEntity.notFound().build().getStatusCode(),
+            restTemplate.getForEntity(createURLWithPort("/job-roles/" + (-1)), String.class)
+            .getStatusCode()
+        ),
 
-        () -> assertEquals(restTemplate
-            .getForEntity(createURLWithPort("/job-roles/" + (0)), String.class)
-            .getStatusCode(), ResponseEntity.notFound().build().getStatusCode()),
+        () -> assertEquals("0 is an invalid job role id but did not return 404",
+            ResponseEntity.notFound().build().getStatusCode(),
+            restTemplate.getForEntity(createURLWithPort("/job-roles/" + (0)), String.class)
+            .getStatusCode()
+        ),
 
-        () -> assertEquals(restTemplate
-            .getForEntity(createURLWithPort("/job-roles/" + (jobRolesSize + 1)), String.class)
-            .getStatusCode(), ResponseEntity.notFound().build().getStatusCode())
+        () -> assertEquals((maxId + 1) + " is out of the range of job ids but did not return 404",
+            ResponseEntity.notFound().build().getStatusCode(),
+            restTemplate.getForEntity(createURLWithPort("/job-roles/" + (maxId + 1)), String.class)
+            .getStatusCode()
+        )
     );
   }
 

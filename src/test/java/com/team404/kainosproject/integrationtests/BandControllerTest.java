@@ -1,9 +1,12 @@
 package com.team404.kainosproject.integrationtests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -109,6 +112,12 @@ public class BandControllerTest {
         });
       });
     }
+  }
+
+  @Test
+  public void when_GetBandNames_ExpectList_ToBe_NotNullNotEmpty(){
+    String s = restTemplate.getForEntity(createURLWithPort("/bands"), String.class).getBody();
+    assertFalse("Result of Band Names query is empty!", s == null && s.isEmpty());
   }
 
   private boolean isPresentInObject(JSONObject obj, String fieldName) {
