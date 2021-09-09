@@ -23,7 +23,7 @@ public class JobRoleDto {
   private String responsibilities;
 
   /**
-   *  Create a new data transfer object from a model object
+   *  Create a new data transfer object from a model object.
    */
   public JobRoleDto(JobRole jobRole) {
     this.id = jobRole.getId();
