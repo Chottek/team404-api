@@ -63,7 +63,7 @@ VALUES
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbWlHfJkEF1HhJ6_BC4aqLoBAGXd7z6SYRwcdEBcNgygCQ?e=nTVpB6");
 
 
-INSERT INTO job_role (job_id, title, contract_type, capability_id, band_id, job_family_id)
+INSERT INTO job_role (job_id, title, contract_type, capability_id, band_id, job_family_id, sharepoint_link)
 VALUES
 (5, "Technical Architect", "full_time", 1, 4, 3,
 "https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Workday/Product%20Development/Job%20Profile%20-%20Product%20Manager%20(Manager).pdf?web=1"),
@@ -71,7 +71,7 @@ VALUES
 (6, "Senior Software Engineer (Java)", "full_time", 1, 5, 2,
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EeS73plMEQ9Fjf-tovttXuYBEo-0tlfT-U3bFMcgryapVw?e=wJFypU"),
 
-(7, "Test Engineer", "full_time", 1, 6, 5
+(7, "Test Engineer", "full_time", 1, 6, 5,
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh");
 
 
