@@ -1,7 +1,6 @@
 package com.team404.kainosproject.model.dto;
 
 import com.team404.kainosproject.model.JobRole;
-import com.team404.kainosproject.model.Location;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +22,6 @@ public class JobRoleDto {
   private List<LocationDto> locations;
   private String capability;
   private String sharePointLink;
-
 
   /**
    * Create a new data transfer object from a model object.
@@ -48,8 +46,9 @@ public class JobRoleDto {
     }
   }
 
- 
-  public JobRoleDto(Integer id, String title, String description, String contractType, List<LocationDto> locations, String capability, String band) {
+
+  public JobRoleDto(Integer id, String title, String description,
+      String contractType, List<LocationDto> locations, String capability, String band) {
     this.id = id;
     this.title = title;
     this.description = description;
@@ -61,7 +60,7 @@ public class JobRoleDto {
 
 
   public JobRoleDto() {
-  
+
   }
 
   public Integer getId() {

@@ -167,20 +167,6 @@ public class JobRoleControllerTest {
     );
   }
 
-
-  /**
-   * (First, the object of ID has to be in Database!) Check if on attempt of removing an existing
-   * object from database, Response returns 200 OK status code
-   */
-  @Test
-  public void when_request_ExistingJobRoleDeletion_Expect_OKResponse() {
-    final int ID = 1;
-
-    ResponseEntity<Void> exchange = restTemplate.exchange(createURLWithPort("/remove-role/" + ID),
-        HttpMethod.DELETE, null, Void.class);
-    assertEquals(200, exchange.getStatusCode().value());
-  }
-
   /**
    * Check if on attempt of removing non-existing object from database, Response returns 400 Bad
    * Request status code
@@ -193,19 +179,6 @@ public class JobRoleControllerTest {
         HttpMethod.DELETE, null, Void.class);
     assertEquals(400, exchange.getStatusCode().value());
   }
-
-  private boolean jsonArrayIsNotEmpty(JSONObject json, String arrayName) {
-    try {
-
-      if (json.getJSONArray(arrayName).length() >= 0) {
-        return false;
-      }
-    } catch (JSONException e) {
-      return false;
-    }
-    return true;
-  }
-
 
   /**
    * Check if String of "responsibilities" column from JobRole object got by ID is not an empty
@@ -275,17 +248,6 @@ public class JobRoleControllerTest {
 
     }
 
-  }
-
-
-  private boolean jsonHasAttribute(JSONObject json, String attributeName) {
-    try {
-      json.get(attributeName);
-    } catch (JSONException e) {
-      return false;
-    }
-
-    return true;
   }
 
   private String createURLWithPort(String uri) {

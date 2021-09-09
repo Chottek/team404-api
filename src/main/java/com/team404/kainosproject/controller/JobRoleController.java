@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JobRoleController {
 
-    private final JobRoleService service;
+  private final JobRoleService service;
 
-    @Autowired
-    public JobRoleController(JobRoleService service) {
-        this.service = service;
-    }
+  @Autowired
+  public JobRoleController(JobRoleService service) {
+    this.service = service;
+  }
 
   /**
    * Gets a list of JobRole objects from JobRoleService.
@@ -40,7 +40,7 @@ public class JobRoleController {
    *
    * @param id Numeric id of Job Role in database
    * @return ResponseEntity containing an object if it exists, else ResponseEntity with 404 Not
-   *         Found Status
+   * Found Status
    */
   @GetMapping("/job-roles/{id}")
   public ResponseEntity<JobRoleDto> getById(@PathVariable("id") int id) {
@@ -68,7 +68,7 @@ public class JobRoleController {
    * @return ResponseEntity (200 OK) if done or (400 Bad Request) if not
    */
   @DeleteMapping("/remove-role/{id}")
-  public ResponseEntity<?> removeById(@PathVariable("id") int id){
+  public ResponseEntity<?> removeById(@PathVariable("id") int id) {
     return service.removeById(id) ? ResponseEntity.ok().build()
         : ResponseEntity.badRequest().build();
   }
