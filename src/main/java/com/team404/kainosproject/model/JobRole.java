@@ -24,6 +24,7 @@ import javax.persistence.Table;
 @SecondaryTable(name = "job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name = "job_id"))
 public class JobRole {
 
+
   @ManyToMany
   @JoinTable(
       name = "job_location",
@@ -31,6 +32,7 @@ public class JobRole {
       inverseJoinColumns = @JoinColumn(name = "location_id")
   )
   List<Location> locations;
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "job_id")

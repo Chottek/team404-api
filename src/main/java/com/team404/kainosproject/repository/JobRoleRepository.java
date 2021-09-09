@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface JobRoleRepository extends CrudRepository<JobRole, Integer> {
-
   List<JobRole> findByCapability(int capabilityId);
 
   List<JobRole> findByCapabilityAndBandAndJobFamily(Capability capability, Band band,

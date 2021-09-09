@@ -12,14 +12,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.HttpClientErrorException;
 
 // https://spring.io/guides/gs/testing-web/
 
@@ -33,6 +37,14 @@ public class JobRoleControllerTest {
   @Autowired
   private TestRestTemplate restTemplate;
   private JSONArray jobMatrixEngineering;
+
+  @Before
+  public void setup() {
+    jobMatrixEngineering = new JSONArray(restTemplate
+        .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
+        .getBody()
+    );
+  }
 
   @Test
   public void when_gettingFirstRowFromJobRoleTable_Expect_ReturnsTestJobRow() {
@@ -124,9 +136,9 @@ public class JobRoleControllerTest {
           } catch (JSONException e) {
             fail("Object " + jobRole + " is missing a capability");
           }
-        }
-    );
+        });
   }
+
 
   @Test
   public void when_getJobSpecification_Expect_JobBandIsReturned() {
@@ -155,12 +167,17 @@ public class JobRoleControllerTest {
     );
   }
 
-  @Before
-  public void setup() {
-    jobMatrixEngineering = new JSONArray(restTemplate
-        .getForEntity(createURLWithPort("/job-matrix/Engineering"), String.class)
-        .getBody()
-    );
+  /**
+   * Check if on attempt of removing non-existing object from database, Response returns 400 Bad
+   * Request status code
+   */
+  @Test
+  public void when_request_NonExistingJobRoleDeletion_Expect_BadRequestResponse() {
+    final int ID = -1;
+
+    ResponseEntity<Void> exchange = restTemplate.exchange(createURLWithPort("/remove-role/" + ID),
+        HttpMethod.DELETE, null, Void.class);
+    assertEquals(400, exchange.getStatusCode().value());
   }
 
   /**

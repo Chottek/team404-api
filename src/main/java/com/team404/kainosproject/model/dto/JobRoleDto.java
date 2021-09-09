@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
  */
 public class JobRoleDto {
 
-  private final String title;
-  private final String contractType;
-  private final List<LocationDto> locations;
-  private final String capability;
-  private final String sharePointLink;
-  private final int id;
+  private Integer id;
+  private String title;
   private String description;
   private String band;
   private String jobFamilyName;
-  private final String responsibilities;
+  private String responsibilities;
+  private String contractType;
+  private List<LocationDto> locations;
+  private String capability;
+  private String sharePointLink;
 
   /**
    * Create a new data transfer object from a model object.
@@ -45,7 +45,27 @@ public class JobRoleDto {
     }
   }
 
-  public int getId() {
+
+  /**
+   * Parameterized constructor.
+   */
+  public JobRoleDto(Integer id, String title, String description,
+      String contractType, List<LocationDto> locations, String capability, String band) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.contractType = contractType;
+    this.locations = locations;
+    this.capability = capability;
+    this.band = band;
+  }
+
+
+  public JobRoleDto() {
+
+  }
+
+  public Integer getId() {
     return id;
   }
 
@@ -93,3 +113,4 @@ public class JobRoleDto {
     return jobFamilyName;
   }
 }
+
