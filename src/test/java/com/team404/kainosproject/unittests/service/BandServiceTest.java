@@ -1,7 +1,6 @@
 package com.team404.kainosproject.unittests.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
 
@@ -9,7 +8,7 @@ import com.team404.kainosproject.model.Band;
 import com.team404.kainosproject.model.Competency;
 import com.team404.kainosproject.model.CompetencyIndicator;
 import com.team404.kainosproject.model.SubCompetency;
-import com.team404.kainosproject.model.dto.BandDto;
+import com.team404.kainosproject.model.dto.BandCompetenciesDto;
 import com.team404.kainosproject.repository.BandRepository;
 import com.team404.kainosproject.service.BandService;
 import java.util.ArrayList;
@@ -21,14 +20,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BandServiceTest {
-
-  // Is this technically testing BandService, BandDto, CompetencyDto and IndicatorDto...
-
-  // Todo create a list of mock bands
-
-  // todo create a mock of a BandRepository where find all will return the list of mocks
-
-  // todo initialize a band service with this mock repository then test
 
   @Mock
   Band mockBand1;
@@ -56,13 +47,13 @@ public class BandServiceTest {
     when(mockBand2.getName()).thenReturn("test band two");
 
     when(mockBand1.getCompetencyIndicators()).thenReturn(
-        new ArrayList<>(){{
+        new ArrayList<>() {{
           add(mockIndicator1);
         }}
     );
 
     when(mockBand2.getCompetencyIndicators()).thenReturn(
-        new ArrayList<>(){{
+        new ArrayList<>() {{
           add(mockIndicator2);
         }}
     );
@@ -84,7 +75,7 @@ public class BandServiceTest {
     when(mockCompetency.getName()).thenReturn("test competency");
 
     // Mock a repository which will return the mock bands
-    when(bandRepository.findAll()).thenReturn(new ArrayList<>(){{
+    when(bandRepository.findAll()).thenReturn(new ArrayList<>() {{
       add(mockBand1);
       add(mockBand2);
     }});
@@ -95,12 +86,13 @@ public class BandServiceTest {
   public void when_getAllBandDtos_expect_correctDTOsAreCreated(){
     setupMocks();
     BandService testService = new BandService(bandRepository);
-    List<BandDto> result = (ArrayList<BandDto>) testService.getAllBandsDtos();
+
+    List<BandCompetenciesDto> result = (ArrayList<BandCompetenciesDto>) testService.getAllBandsDtos();
     checkBandDtoStructure(result);
   }
 
 
-  private void checkBandDtoStructure(List<BandDto> bands) {
+  private void checkBandDtoStructure(List<BandCompetenciesDto> bands) {
 
     assertAll(
         () -> assertEquals("First test band had an unexpected name",
@@ -156,13 +148,14 @@ public class BandServiceTest {
   }
 
   @Test
-  public void when_NoBandsToGetDtos_expect_emptyResult(){
+  public void when_NoBandsToGetDtos_expect_emptyResult() {
 
     when(bandRepository.findAll()).thenReturn(new ArrayList<>());
 
     BandService testService = new BandService(bandRepository);
-    List<BandDto> result = (ArrayList<BandDto>) testService.getAllBandsDtos();
+    List<BandCompetenciesDto> result = (ArrayList<BandCompetenciesDto>) testService
+        .getAllBandsDtos();
 
-    assertEquals("Had a result even though no bands were given",0, result.size());
+    assertEquals("Had a result even though no bands were given", 0, result.size());
   }
 }

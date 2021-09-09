@@ -24,17 +24,6 @@ import javax.persistence.Table;
 @SecondaryTable(name = "job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name = "job_id"))
 public class JobRole {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "job_id")
-  private Integer id;
-
-  @Column(name = "title")
-  private String title;
-
-  @Column(name = "description", table = "job_detail")
-  private String description;
-
   @ManyToMany
   @JoinTable(
       name = "job_location",
@@ -42,15 +31,25 @@ public class JobRole {
       inverseJoinColumns = @JoinColumn(name = "location_id")
   )
   List<Location> locations;
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "job_id")
+  private Integer id;
+  @Column(name = "title")
+  private String title;
+  @Column(name = "description", table = "job_detail")
+  private String description;
   @Column(name = "contractType")
   private String contractType;
-
   @Column(name = "posted")
   private String posted;
+  @ManyToOne
+  @JoinColumn(name = "capability_id")
+  private Capability capability;
 
-  @Column(name = "capability")
-  private String capability;
+  @ManyToOne
+  @JoinColumn(name = "job_family_id")
+  private JobFamily jobFamily;
 
   @ManyToOne
   @JoinColumn(name = "band_id", nullable = false)
@@ -60,11 +59,8 @@ public class JobRole {
   private String sharePointLink;
 
   public String getCapability() {
-    return capability;
+    return capability.getName();
   }
-
-  @Column(name = "responsibilities")
-  private String responsibilities;
 
   public String getSharePointLink() {
     return sharePointLink;
@@ -94,16 +90,16 @@ public class JobRole {
     return band;
   }
 
+  public JobFamily getJobFamily() {
+    return jobFamily;
+  }
+
   public String getBandAsString() {
     return band.getName();
   }
 
   public String getPosted() {
     return posted;
-  }
-
-  public String getResponsibilities() {
-    return responsibilities;
   }
 
   @Override

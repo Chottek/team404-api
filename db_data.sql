@@ -21,35 +21,59 @@ VALUES
 (8, 'Apprentice', 9),
 (9, 'Executive', 1);
 
-INSERT INTO job_role (job_id, title, contract_type, capability, band_id, sharepoint_link, responsibilities)
+INSERT INTO capability (capability_id, name)
 VALUES
-(1, "Head of test job", "full_time", "Engineering", 1,
-"Test Link",
-"\nBasically just existing and showing that everything works fine :)"),
+(1, 'Engineering'),
+(2, 'Platforms'),
+(3, 'Data'),
+(4, 'Artificial_Intelligence'),
+(5, 'Cyber_Security'),
+(6, 'Workday'),
+(7, 'Experience_Design'),
+(8, 'Product'),
+(9, 'Delivery'),
+(10, 'Operations'),
+(11, 'Business_Development_and_Marketing'),
+(12, 'Organisation_Strategy_and_Planning'),
+(13, 'People'),
+(14, 'Commercial_and_Financial_Management'),
+(15, 'Business_Services_Support');
 
-(2, "Head of People Operations", "full_time", "People", 1,
-"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EXYqFjDBzXZFiXMGdbXni2YBIM8ZztDBqB5naCdnXhbYew?e=DWvKrR",
-"\nLead and manage a busy global HR operational function\nIn tandem transform the function to ensure key people initiatives and processes are user centric, standardised, efficient and delivered within clearly defined SLA’s\nWorking closely with Systems team, you will drive a road map of HCM improvements with a focus on employee and manager self-serve\nEnsuring that new functionality is fully embedded"),
+INSERT INTO job_family (job_family_id, name, capability_id)
+VALUES
+(1,"Engineering Strategy and Planning",1),
+(2,"Engineering",1),
+(3,"Architecture",1),
+(4,"Testing and Quality Assurance",1),
+(5,"Product Specialist",1);
 
-(3, "Technical Architect", "full_time", "Engineering", 4,
-"https://kainossoftwareltd.sharepoint.com/:b:/g/people/ERa52ZFdOhxJuKYbwl5w27YBUGgHxFh6qz9AtTflB2YPGA?e=mMeOWH",
-"\nLeading teams and developing high quality solutions\nWork with customer architects to agree technical designs, advising on estimated effort and technical implications of user stories and user journeys\nYou’ll manage, coach and develop a small number of staff, with a focus on managing employee performance and assisting in their career development"),
 
-(4, "Security Engineer", "full_time", "Cyber_Security", 5,
-"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbWlHfJkEF1HhJ6_BC4aqLoBAGXd7z6SYRwcdEBcNgygCQ?e=nTVpB6",
-"\nIdentifying and introducing appropriate security controls\nTraining the team in secure development practices\nSharing knowledge on threats and vulnerabilities"),
+INSERT INTO job_role (job_id, title, contract_type, capability_id, band_id, sharepoint_link)
+VALUES
+(1, "Head of test job", "full_time", 1, 1,
+"Test Link"),
 
-(5, "Product Owner", "full_time", "Business_Development_and_Marketing", 3,
-"https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Workday/Product%20Development/Job%20Profile%20-%20Product%20Manager%20(Manager).pdf?web=1",
-"\nGathering and prioritising product and customer requirements\nWorking closely with development, sales, pre-sales, marketing and professional services to ensure customer satisfaction goals are met and exceeded\nHelping us maintain our leading market position"),
+(2, "Head of People Operations", "full_time", 13, 1,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EXYqFjDBzXZFiXMGdbXni2YBIM8ZztDBqB5naCdnXhbYew?e=DWvKrR"),
 
-(6, "Senior Software Engineer (Java)", "full_time", "Engineering", 5,
-"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EeS73plMEQ9Fjf-tovttXuYBEo-0tlfT-U3bFMcgryapVw?e=wJFypU",
-"\nDeveloping high quality solutions which delight our customers and impact the lives of users worldwide"),
+(3, "Security Engineer", "full_time", 5, 5,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/ERa52ZFdOhxJuKYbwl5w27YBUGgHxFh6qz9AtTflB2YPGA?e=mMeOWH"),
 
-(7, "Test Engineer", "full_time", "Engineering", 6,
-"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh",
- "\nDeveloping and executing functional automated and manual tests to help the team deliver working application software that meets user needs");
+(4, "Product Owner", "full_time", 11, 3,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbWlHfJkEF1HhJ6_BC4aqLoBAGXd7z6SYRwcdEBcNgygCQ?e=nTVpB6");
+
+
+INSERT INTO job_role (job_id, title, contract_type, capability_id, band_id, job_family_id, sharepoint_link)
+VALUES
+(5, "Technical Architect", "full_time", 1, 4, 3,
+"https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Workday/Product%20Development/Job%20Profile%20-%20Product%20Manager%20(Manager).pdf?web=1"),
+
+(6, "Senior Software Engineer (Java)", "full_time", 1, 5, 2,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EeS73plMEQ9Fjf-tovttXuYBEo-0tlfT-U3bFMcgryapVw?e=wJFypU"),
+
+(7, "Test Engineer", "full_time", 1, 6, 4,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh");
+
 
 -- Link inserted Jobs to their available locations
 INSERT INTO job_location (job_id, location_id)
