@@ -40,7 +40,7 @@ public class BandServiceTest {
   @Mock
   BandRepository bandRepository;
 
-  private void setupMocks(){
+  private void setupMocks() {
 
     // Mock two bands to test with
     when(mockBand1.getName()).thenReturn("test band one");
@@ -83,11 +83,12 @@ public class BandServiceTest {
   }
 
   @Test
-  public void when_getAllBandDtos_expect_correctDTOsAreCreated(){
+  public void when_getAllBandDtos_expect_correctDTOsAreCreated() {
     setupMocks();
     BandService testService = new BandService(bandRepository);
 
-    List<BandCompetenciesDto> result = (ArrayList<BandCompetenciesDto>) testService.getAllBandsDtos();
+    List<BandCompetenciesDto> result = (ArrayList<BandCompetenciesDto>) testService
+        .getAllBandsDtos();
     checkBandDtoStructure(result);
   }
 
@@ -110,17 +111,21 @@ public class BandServiceTest {
         ),
 
         () -> assertEquals("First test band had an unexpected sub-competency name",
-            "test sub competency", bands.get(0).getCompetencies().get(0).getIndicators().get(0).getName()
+            "test sub competency",
+            bands.get(0).getCompetencies().get(0).getIndicators().get(0).getName()
         ),
         () -> assertEquals("Second test band had an unexpected sub-competency name",
-            "test sub competency", bands.get(1).getCompetencies().get(0).getIndicators().get(0).getName()
+            "test sub competency",
+            bands.get(1).getCompetencies().get(0).getIndicators().get(0).getName()
         ),
 
         () -> assertEquals("First test band had an unexpected indicator description",
-            "test indicator one", bands.get(0).getCompetencies().get(0).getIndicators().get(0).getDescription()
+            "test indicator one",
+            bands.get(0).getCompetencies().get(0).getIndicators().get(0).getDescription()
         ),
         () -> assertEquals("Second test band had an unexpected indicator description",
-            "test indicator two", bands.get(1).getCompetencies().get(0).getIndicators().get(0).getDescription()
+            "test indicator two",
+            bands.get(1).getCompetencies().get(0).getIndicators().get(0).getDescription()
         )
     );
 
@@ -145,6 +150,7 @@ public class BandServiceTest {
       ...
     ]
   */
+
   }
 
   @Test

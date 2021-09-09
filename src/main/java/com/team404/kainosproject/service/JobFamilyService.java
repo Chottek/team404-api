@@ -5,7 +5,9 @@ import com.team404.kainosproject.model.Capability;
 import com.team404.kainosproject.model.JobFamily;
 import com.team404.kainosproject.model.dto.JobFamilyDto;
 import com.team404.kainosproject.repository.JobFamilyRepository;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,8 @@ public class JobFamilyService {
   // This is a circular dependency
   private JobRoleService jobRoleService;
 
+  private CapabilityService capabilityService;
+
   @Autowired
   public JobFamilyService(JobFamilyRepository repository) {
     this.repository = repository;
@@ -44,11 +48,33 @@ public class JobFamilyService {
   }
 
   /**
-   * Get all Job Family Objects from data base as
-   * Data transfer objects.
+   * Get all Job Family Objects from data base as Data transfer objects.
    */
   public Iterable<JobFamilyDto> getAllAsDto() {
     return ((List<JobFamily>) repository.findAll())
+        .stream()
+        .map(JobFamilyDto::new)
+        .collect(Collectors.toList());
+  }
+
+  /**
+   * gets a list of JobFamilyDto's by the capability they belong to.
+   *
+   * @param capabilityName name of the capability to search
+   */
+  public Iterable<JobFamilyDto> getAllDtoByCapability(String capabilityName) {
+
+    // Extract Optional Capability
+    Optional<Capability> opt = capabilityService.getRawCapabilityByName(capabilityName);
+
+    if (opt.isEmpty()) {
+      LOG.warn("search for unrecognised capability " + capabilityName);
+      return new ArrayList<>();
+    }
+
+    Capability capability = opt.get();
+
+    return repository.findByCapability(capability)
         .stream()
         .map(JobFamilyDto::new)
         .collect(Collectors.toList());
@@ -91,5 +117,10 @@ public class JobFamilyService {
   @Autowired
   public void setJobRoleService(JobRoleService jobRoleService) {
     this.jobRoleService = jobRoleService;
+  }
+
+  @Autowired
+  public void setCapabilityService(CapabilityService capabilityService) {
+    this.capabilityService = capabilityService;
   }
 }

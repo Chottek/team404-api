@@ -1,6 +1,9 @@
 package com.team404.kainosproject.integrationtests;
 
+import static com.team404.kainosproject.integrationtests.JsonTestHelpers.jsonArrayIsNotEmpty;
+import static com.team404.kainosproject.integrationtests.JsonTestHelpers.jsonHasAttribute;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -41,7 +44,8 @@ public class JobRoleControllerTest {
 
     assertAll("Should contain Test Job Row",
         () -> assertEquals("Head of test job", firstObj.get("title")),
-        () -> assertEquals("full_time", firstObj.get("contractType"))
+        () -> assertEquals("full_time", firstObj.get("contractType")),
+        () -> assertEquals("Test Link", firstObj.get("sharePointLink"))
     );
   }
 
@@ -67,22 +71,32 @@ public class JobRoleControllerTest {
 
   @Test
   public void when_wrongIDForJobSpecification_Expect_JobSpecificationNotFound() {
-    final int jobRolesSize = new JSONArray(restTemplate
+
+    JSONArray jobRoles = new JSONArray(restTemplate
         .getForEntity(createURLWithPort("/job-roles"), String.class)
-        .getBody()).length();
+        .getBody());
+
+    // this assumes return is in ID order
+    int maxId = jobRoles.getJSONObject(jobRoles.length() - 1).getInt("id");
 
     assertAll("Should return 404 Status",
-        () -> assertEquals(restTemplate
-            .getForEntity(createURLWithPort("/job-roles/" + (-1)), String.class)
-            .getStatusCode(), ResponseEntity.notFound().build().getStatusCode()),
+        () -> assertEquals("-1 is an invalid job role id but did not return 404",
+            ResponseEntity.notFound().build().getStatusCode(),
+            restTemplate.getForEntity(createURLWithPort("/job-roles/" + (-1)), String.class)
+                .getStatusCode()
+        ),
 
-        () -> assertEquals(restTemplate
-            .getForEntity(createURLWithPort("/job-roles/" + (0)), String.class)
-            .getStatusCode(), ResponseEntity.notFound().build().getStatusCode()),
+        () -> assertEquals("0 is an invalid job role id but did not return 404",
+            ResponseEntity.notFound().build().getStatusCode(),
+            restTemplate.getForEntity(createURLWithPort("/job-roles/" + (0)), String.class)
+                .getStatusCode()
+        ),
 
-        () -> assertEquals(restTemplate
-            .getForEntity(createURLWithPort("/job-roles/" + (jobRolesSize + 1)), String.class)
-            .getStatusCode(), ResponseEntity.notFound().build().getStatusCode())
+        () -> assertEquals((maxId + 1) + " is out of the range of job ids but did not return 404",
+            ResponseEntity.notFound().build().getStatusCode(),
+            restTemplate.getForEntity(createURLWithPort("/job-roles/" + (maxId + 1)), String.class)
+                .getStatusCode()
+        )
     );
   }
 
@@ -149,6 +163,21 @@ public class JobRoleControllerTest {
     );
   }
 
+  /**
+   * Check if String of "responsibilities" column from JobRole object got by ID is not an empty
+   * String.
+   */
+  @Test
+  public void when_getJobById_expect_responsibilitiesToBe_NonEmpty() {
+    final int ID = 1;
+    final JSONObject jobRole = new JSONObject(restTemplate
+        .getForEntity(createURLWithPort("/job-roles/" + ID), String.class)
+        .getBody());
+
+    assertFalse(jobRole.get("responsibilities").toString().isEmpty());
+  }
+
+
   @Test
   public void when_requestJobRoleMatrix_Expect_JobRolesAndFamiliesReturned() {
 
@@ -204,33 +233,7 @@ public class JobRoleControllerTest {
 
   }
 
-  private boolean jsonArrayIsNotEmpty(JSONObject json, String arrayName) {
-
-    try {
-
-      if (json.getJSONArray(arrayName).length() <= 0) {
-        return false;
-      }
-    } catch (JSONException e) {
-      return false;
-    }
-
-    return true;
-  }
-
-  private boolean jsonHasAttribute(JSONObject json, String attributeName) {
-
-    try {
-      json.get(attributeName);
-    } catch (JSONException e) {
-      return false;
-    }
-
-    return true;
-  }
-
   private String createURLWithPort(String uri) {
     return "http://localhost:" + port + uri;
   }
-
 }

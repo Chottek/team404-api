@@ -1,6 +1,5 @@
 package com.team404.kainosproject.controller;
 
-import com.team404.kainosproject.model.Band;
 import com.team404.kainosproject.model.dto.BandCompetenciesDto;
 import com.team404.kainosproject.service.BandService;
 import org.springframework.beans.factory.annotation.Autowired;

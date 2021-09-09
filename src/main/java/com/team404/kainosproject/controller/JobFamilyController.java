@@ -4,6 +4,7 @@ import com.team404.kainosproject.model.dto.JobFamilyDto;
 import com.team404.kainosproject.service.JobFamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,5 +30,11 @@ public class JobFamilyController {
   @GetMapping("/job-family") //produces = "application/json"
   public Iterable<JobFamilyDto> getAllJobFamilies() {
     return service.getAllAsDto();
+  }
+
+  @GetMapping("/job-family/{capability}")
+  public Iterable<JobFamilyDto> getAllJobFamiliesForCapability(
+      @PathVariable("capability") String capability) {
+    return service.getAllDtoByCapability(capability);
   }
 }

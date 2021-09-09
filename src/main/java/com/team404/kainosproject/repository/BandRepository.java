@@ -15,9 +15,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BandRepository extends CrudRepository<Band, Integer> {
 
-  List<Band> findAll(Sort sort);
-
   String FIND_NAMES = "SELECT DISTINCT name FROM band ORDER BY priority ASC";
+
+  List<Band> findAll(Sort sort);
 
   @Query(value = FIND_NAMES, nativeQuery = true)
   Iterable<String> getAllBandNames();

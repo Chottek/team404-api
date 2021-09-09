@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * Model Object representing the capability table.
+ * A Model object representing a row of the capability table.
  */
 @Entity
 @Table(name = "capability")
