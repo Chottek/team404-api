@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Provides an abstraction for accessing the capability table.
+ * Abstraction for the storage of Capability Objects.
  */
 public interface CapabilityRepository extends CrudRepository<Capability, Integer> {
 

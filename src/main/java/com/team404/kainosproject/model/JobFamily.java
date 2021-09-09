@@ -49,4 +49,7 @@ public class JobFamily {
     return id;
   }
 
+  public Capability getCapability() {
+    return capability;
+  }
 }

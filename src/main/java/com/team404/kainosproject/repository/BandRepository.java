@@ -21,5 +21,4 @@ public interface BandRepository extends CrudRepository<Band, Integer> {
 
   @Query(value = FIND_NAMES, nativeQuery = true)
   Iterable<String> getAllBandNames();
-
 }

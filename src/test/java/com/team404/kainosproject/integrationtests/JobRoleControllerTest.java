@@ -43,7 +43,8 @@ public class JobRoleControllerTest {
 
     assertAll("Should contain Test Job Row",
         () -> assertEquals("Head of test job", firstObj.get("title")),
-        () -> assertEquals("full_time", firstObj.get("contractType"))
+        () -> assertEquals("full_time", firstObj.get("contractType")),
+        () -> assertEquals("Test Link", firstObj.get("sharePointLink"))
     );
   }
 
@@ -75,25 +76,25 @@ public class JobRoleControllerTest {
         .getBody());
 
     // this assumes return is in ID order
-    int maxId = jobRoles.getJSONObject(jobRoles.length()-1).getInt("id");
+    int maxId = jobRoles.getJSONObject(jobRoles.length() - 1).getInt("id");
 
     assertAll("Should return 404 Status",
         () -> assertEquals("-1 is an invalid job role id but did not return 404",
             ResponseEntity.notFound().build().getStatusCode(),
             restTemplate.getForEntity(createURLWithPort("/job-roles/" + (-1)), String.class)
-            .getStatusCode()
+                .getStatusCode()
         ),
 
         () -> assertEquals("0 is an invalid job role id but did not return 404",
             ResponseEntity.notFound().build().getStatusCode(),
             restTemplate.getForEntity(createURLWithPort("/job-roles/" + (0)), String.class)
-            .getStatusCode()
+                .getStatusCode()
         ),
 
         () -> assertEquals((maxId + 1) + " is out of the range of job ids but did not return 404",
             ResponseEntity.notFound().build().getStatusCode(),
             restTemplate.getForEntity(createURLWithPort("/job-roles/" + (maxId + 1)), String.class)
-            .getStatusCode()
+                .getStatusCode()
         )
     );
   }
@@ -161,6 +162,21 @@ public class JobRoleControllerTest {
     );
   }
 
+  /**
+   * Check if String of "responsibilities" column from JobRole object got by ID is not an empty
+   * String.
+   */
+  @Test
+  public void when_getJobById_expect_responsibilitiesToBe_NonEmpty() {
+    final int ID = 1;
+    final JSONObject jobRole = new JSONObject(restTemplate
+        .getForEntity(createURLWithPort("/job-roles/" + ID), String.class)
+        .getBody());
+
+    assertFalse(jobRole.get("responsibilities").toString().isEmpty());
+  }
+
+
   @Test
   public void when_requestJobRoleMatrix_Expect_JobRolesAndFamiliesReturned() {
 
@@ -219,5 +235,4 @@ public class JobRoleControllerTest {
   private String createURLWithPort(String uri) {
     return "http://localhost:" + port + uri;
   }
-
 }

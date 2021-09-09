@@ -1,5 +1,6 @@
 package com.team404.kainosproject.model.dto;
 
+import com.team404.kainosproject.model.Capability;
 import com.team404.kainosproject.model.JobFamily;
 import com.team404.kainosproject.model.JobRole;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class JobFamilyDto {
 
   private final String jobFamilyName;
   private final List<String> jobTitles;
+  private final CapabilityDto capability;
 
   /**
    * Creates a new JobFamilyDTO with a selection of jobs.
@@ -21,13 +23,15 @@ public class JobFamilyDto {
    * @param familyName name of the family
    * @param jobs       selection of jobs to place in the family dto
    */
-  public JobFamilyDto(String familyName, List<JobRole> jobs) {
+  public JobFamilyDto(String familyName, List<JobRole> jobs, Capability capability) {
     this.jobFamilyName = familyName;
     this.jobTitles = new ArrayList<>();
 
     jobs.forEach(job -> {
       this.jobTitles.add(job.getTitle());
     });
+
+    this.capability = new CapabilityDto(capability);
   }
 
   /**
@@ -42,6 +46,8 @@ public class JobFamilyDto {
     jobFamily.getJobRoles().forEach(jobRole -> {
       this.jobTitles.add(jobRole.getTitle());
     });
+
+    this.capability = new CapabilityDto(jobFamily.getCapability());
   }
 
   public String getJobFamilyName() {
@@ -50,5 +56,9 @@ public class JobFamilyDto {
 
   public List<String> getJobTitles() {
     return jobTitles;
+  }
+
+  public String getCapabilityName() {
+    return capability.getName();
   }
 }

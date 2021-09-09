@@ -1,12 +1,13 @@
 package com.team404.kainosproject.model.dto;
 
 import com.team404.kainosproject.model.JobRole;
-import com.team404.kainosproject.model.Location;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * A data transfer object abstracting a {@link JobRole} model object.
+ * Data transfer object abstrcting a {@link JobRole} model object.
+ *
+ * @author team404
  */
 public class JobRoleDto {
 
@@ -19,11 +20,10 @@ public class JobRoleDto {
   private String band;
   private final String sharePointLink;
   private String jobFamilyName;
-
   private String responsibilities;
 
   /**
-   *  Create a new data transfer object from a model object.
+   * Create a new data transfer object from a model object.
    */
   public JobRoleDto(JobRole jobRole) {
     this.id = jobRole.getId();
@@ -33,7 +33,7 @@ public class JobRoleDto {
     this.capability = jobRole.getCapability();
     this.band = jobRole.getBandAsString();
     this.sharePointLink = jobRole.getSharePointLink();
-    //this.responsibilities = jr.getResponsibilities();
+    //this.responsibilities = jobRole.getResponsibilities();
 
     this.locations = jobRole.getLocations()
                         .stream()
@@ -79,6 +79,10 @@ public class JobRoleDto {
 
   public void setBand(String band) {
     this.band = band;
+  }
+
+  public String getResponsibilities() {
+    return responsibilities;
   }
 
   public String getSharePointLink() {

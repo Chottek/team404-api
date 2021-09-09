@@ -48,7 +48,8 @@ public class JobFamilyService {
   }
 
   /**
-   * Get a list of job families as data transfer objects.
+   * Get all Job Family Objects from data base as
+   * Data transfer objects.
    */
   public Iterable<JobFamilyDto> getAllAsDto() {
     return ((List<JobFamily>) repository.findAll())
@@ -109,7 +110,8 @@ public class JobFamilyService {
 
     return new JobFamilyDto(
         jobFamily.getName(),
-        jobRoleService.getByCapabilityAndBandAndFamily(jobFamily, band, capability)
+        jobRoleService.getByCapabilityAndBandAndFamily(jobFamily, band, capability),
+        capability
     );
   }
 
