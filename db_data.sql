@@ -60,15 +60,13 @@ VALUES
 
 (2, "Head of People Operations", "full_time", 13, 1,
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EXYqFjDBzXZFiXMGdbXni2YBIM8ZztDBqB5naCdnXhbYew?e=DWvKrR",
-"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EXYqFjDBzXZFiXMGdbXni2YBIM8ZztDBqB5naCdnXhbYew?e=DWvKrR",
 "\nLead and manage a busy global HR operational function\nIn tandem transform the function to ensure key people initiatives and processes are user centric, standardised, efficient and delivered within clearly defined SLA’s\nWorking closely with Systems team, you will drive a road map of HCM improvements with a focus on employee and manager self-serve\nEnsuring that new functionality is fully embedded"),
 
 (4, "Product Owner", "full_time", 11, 3,
-"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbWlHfJkEF1HhJ6_BC4aqLoBAGXd7z6SYRwcdEBcNgygCQ?e=nTVpB6",
 "https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Workday/Product%20Development/Job%20Profile%20-%20Product%20Manager%20(Manager).pdf?web=1",
 "\nGathering and prioritising product and customer requirements\nWorking closely with development, sales, pre-sales, marketing and professional services to ensure customer satisfaction goals are met and exceeded\nHelping us maintain our leading market position");
 
-INSERT INTO job_role (job_id, title, contract_type, capability_id, band_id, job_family_id, sharepoint_link)
+INSERT INTO job_role (job_id, title, contract_type, capability_id, band_id, job_family_id, sharepoint_link, responsibilities)
 VALUES
 (5, "Technical Architect", "full_time", 1, 4, 3,
 "https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Workday/Product%20Development/Job%20Profile%20-%20Product%20Manager%20(Manager).pdf?web=1",
@@ -87,8 +85,8 @@ VALUES
 "\nIdentifying and introducing appropriate security controls\nTraining the team in secure development practices\nSharing knowledge on threats and vulnerabilities"),
 
 (8, "Senior Security Analyst", "full_time", 5, 5, 8,
-"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh"
-);
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh",
+null);
 
 -- Link inserted Jobs to their available locations
 INSERT INTO job_location (job_id, location_id)

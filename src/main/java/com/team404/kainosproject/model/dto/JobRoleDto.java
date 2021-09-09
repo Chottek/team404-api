@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
  */
 public class JobRoleDto {
 
-  private int id;
   private final String title;
-  private String description;
   private final String contractType;
   private final List<LocationDto> locations;
   private final String capability;
-  private String band;
   private final String sharePointLink;
+  private final int id;
+  private String description;
+  private String band;
   private String jobFamilyName;
-  private String responsibilities;
+  private final String responsibilities;
 
   /**
    * Create a new data transfer object from a model object.
@@ -33,12 +33,12 @@ public class JobRoleDto {
     this.capability = jobRole.getCapability();
     this.band = jobRole.getBandAsString();
     this.sharePointLink = jobRole.getSharePointLink();
-    //this.responsibilities = jobRole.getResponsibilities();
+    this.responsibilities = jobRole.getResponsibilities();
 
     this.locations = jobRole.getLocations()
-                        .stream()
-                        .map(LocationDto::new)
-                        .collect(Collectors.toList());
+        .stream()
+        .map(LocationDto::new)
+        .collect(Collectors.toList());
 
     if (jobRole.getJobFamily() != null) {
       this.jobFamilyName = jobRole.getJobFamily().getName();

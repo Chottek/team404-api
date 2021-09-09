@@ -3,6 +3,7 @@ package com.team404.kainosproject.integrationtests;
 import static com.team404.kainosproject.integrationtests.JsonTestHelpers.jsonArrayIsNotEmpty;
 import static com.team404.kainosproject.integrationtests.JsonTestHelpers.jsonHasAttribute;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertAll;

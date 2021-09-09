@@ -21,8 +21,7 @@ public class CapabilityDto {
   private List<JobFamily> jobFamilies;
 
   /**
-   * Create a new data transfer object from a capability
-   * model objet.
+   * Create a new data transfer object from a capability model objet.
    */
   public CapabilityDto(Capability capability) {
 

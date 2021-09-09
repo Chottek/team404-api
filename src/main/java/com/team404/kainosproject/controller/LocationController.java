@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *  contains routes related to kainos office locations.
+ * contains routes related to kainos office locations.
  */
 @RestController
 public class LocationController {

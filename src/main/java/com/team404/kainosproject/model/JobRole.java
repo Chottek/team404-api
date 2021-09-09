@@ -43,6 +43,10 @@ public class JobRole {
   private String contractType;
   @Column(name = "posted")
   private String posted;
+
+  @Column(name = "responsibilities")
+  private String responsibilities;
+
   @ManyToOne
   @JoinColumn(name = "capability_id")
   private Capability capability;
@@ -100,6 +104,10 @@ public class JobRole {
 
   public String getPosted() {
     return posted;
+  }
+
+  public String getResponsibilities() {
+    return responsibilities;
   }
 
   @Override

@@ -48,8 +48,7 @@ public class JobFamilyService {
   }
 
   /**
-   * Get all Job Family Objects from data base as
-   * Data transfer objects.
+   * Get all Job Family Objects from data base as Data transfer objects.
    */
   public Iterable<JobFamilyDto> getAllAsDto() {
     return ((List<JobFamily>) repository.findAll())

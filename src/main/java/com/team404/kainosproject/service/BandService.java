@@ -100,8 +100,7 @@ public class BandService {
 
 
   /**
-   * Gets a list of Band names as String distinctly
-   * from database, in order of priority.
+   * Gets a list of Band names as String distinctly from database, in order of priority.
    *
    * @return Iterable of Band name Strings
    */
