@@ -18,11 +18,11 @@ public class JobRoleDto {
   private String description;
   private String band;
   private String jobFamilyName;
-  private final String responsibilities;
-  private final String contractType;
-  private final List<LocationDto> locations;
-  private final String capability;
-  private final String sharePointLink;
+  private String responsibilities;
+  private String contractType;
+  private List<LocationDto> locations;
+  private String capability;
+  private String sharePointLink;
 
 
   /**
@@ -49,7 +49,7 @@ public class JobRoleDto {
   }
 
  
-  public JobRoleDto(Integer id, String title, String description, String contractType, List<Location> locations, String capability, String band) {
+  public JobRoleDto(Integer id, String title, String description, String contractType, List<LocationDto> locations, String capability, String band) {
     this.id = id;
     this.title = title;
     this.description = description;

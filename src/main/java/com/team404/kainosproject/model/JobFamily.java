@@ -35,4 +35,20 @@ public class JobFamily {
   @JoinColumn(name = "capability_id")
   private Capability capability;
 
+  public String getName() {
+    return name;
+  }
+
+  public List<JobRole> getJobRoles() {
+    return jobRoles;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public Capability getCapability() {
+    return capability;
+  }
+
 }
