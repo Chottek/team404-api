@@ -47,6 +47,9 @@ public class JobFamilyService {
     return jobFamilies;
   }
 
+  /**
+   * Get a list of job families as data transfer objects.
+   */
   public Iterable<JobFamilyDto> getAllAsDto() {
     return ((List<JobFamily>) repository.findAll())
         .stream()

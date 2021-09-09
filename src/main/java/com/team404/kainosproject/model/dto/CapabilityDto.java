@@ -20,18 +20,13 @@ public class CapabilityDto {
 
   private List<JobFamily> jobFamilies;
 
+  /**
+   * Create a new data transfer object from a model object.
+   */
   public CapabilityDto(Capability capability) {
 
     this.id = capability.getId();
     this.name = capability.getName();
-  }
-
-  public CapabilityDto(Integer id, String name,
-      List<JobRole> jobRoles, List<JobFamily> jobFamilies) {
-    this.id = id;
-    this.name = name;
-    this.jobRoles = jobRoles;
-    this.jobFamilies = jobFamilies;
   }
 
   public Integer getId() {

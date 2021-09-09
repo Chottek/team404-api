@@ -1,9 +1,10 @@
 package com.team404.kainosproject.model.dto;
 
-import com.team404.kainosproject.model.JobRole;
 import com.team404.kainosproject.model.Location;
-import java.util.List;
 
+/**
+ * Data transfer object abstracting a {@link Location} model object.
+ */
 public class LocationDto {
 
   private final Integer id;
@@ -14,6 +15,9 @@ public class LocationDto {
     this.name = name;
   }
 
+  /**
+   * Create a new data transfer object from a model object.
+   */
   public LocationDto(Location location) {
 
     id = location.getId();

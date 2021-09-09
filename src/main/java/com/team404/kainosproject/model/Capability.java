@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * A Model object representing a row of the capability table.
+ */
 @Entity
 @Table(name = "capability")
 public class Capability {

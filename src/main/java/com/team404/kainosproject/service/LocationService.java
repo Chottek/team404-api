@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Used to retrieve information about kainos office locations.
+ */
 @Service
 public class LocationService {
 
@@ -18,6 +21,9 @@ public class LocationService {
     this.repository = repository;
   }
 
+  /**
+   * Get a list of locations as data transfer objects.
+   */
   public Iterable<LocationDto> getAllDtos() {
 
     return ((List<Location>) repository.findAll())

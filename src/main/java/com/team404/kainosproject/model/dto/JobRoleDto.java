@@ -5,6 +5,9 @@ import com.team404.kainosproject.model.Location;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * A data transfer object abstracting a {@link JobRole} model object.
+ */
 public class JobRoleDto {
 
   private int id;
@@ -20,29 +23,8 @@ public class JobRoleDto {
   private String responsibilities;
 
   /**
-   * Create a new Data Transfer Object to contain the below information.
-   *
-   * @param title        job title
-   * @param description  job description
-   * @param contractType type of contract (part_time, full_time, consultant)
-   * @param locations    office locations job is available for
-   * @param capability   Kainos capability that the job belongs to
-   * @param band         management level of the job
+   *  Create a new data transfer object from a model object
    */
-  public JobRoleDto(String title, String description, String contractType, List<LocationDto> locations,
-      String capability, String band,
-      String sharePointLink, String jobFamilyName, String responsibilities) {
-    this.title = title;
-    this.description = description;
-    this.contractType = contractType;
-    this.locations = locations;
-    this.capability = capability;
-    this.band = band;
-    this.jobFamilyName = jobFamilyName;
-    this.sharePointLink = sharePointLink;
-    this.responsibilities = responsibilities;
-  }
-
   public JobRoleDto(JobRole jobRole) {
     this.id = jobRole.getId();
     this.title = jobRole.getTitle();

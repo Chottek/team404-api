@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * Represents the job_family table
+ * Represents the job_family table.
  *
  * @author team 404
  */
