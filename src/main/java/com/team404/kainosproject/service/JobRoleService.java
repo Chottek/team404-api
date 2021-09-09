@@ -112,7 +112,7 @@ public class JobRoleService {
   }
 
   /**
-   * Removes a JobRole by given id
+   * Removes a JobRole by given id.
    *
    * @param id id of JobRole object to attempt to remove
    * @return true if done, false if not successful

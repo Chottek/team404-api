@@ -62,7 +62,7 @@ public class JobRoleController {
 
 
   /**
-   * Delete a Job Role object based on ID
+   * Delete a Job Role object based on ID.
    *
    * @param id Numeric value by which the JobRole would be deleted
    * @return ResponseEntity (200 OK) if done or (400 Bad Request) if not
