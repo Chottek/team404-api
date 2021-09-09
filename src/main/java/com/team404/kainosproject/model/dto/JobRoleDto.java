@@ -1,8 +1,6 @@
 package com.team404.kainosproject.model.dto;
 
 import com.team404.kainosproject.model.JobRole;
-
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,7 +47,7 @@ public class JobRoleDto {
 
 
   /**
-   * Parameterized constructor
+   * Parameterized constructor.
    */
   public JobRoleDto(Integer id, String title, String description,
       String contractType, List<LocationDto> locations, String capability, String band) {
