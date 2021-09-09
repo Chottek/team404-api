@@ -21,14 +21,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class BandServiceTest {
 
-  // Is this technically testing BandService, BandDto, CompetencyDto and IndicatorDto...
-
-  // Todo create a list of mock bands
-
-  // todo create a mock of a BandRepository where find all will return the list of mocks
-
-  // todo initialize a band service with this mock repository then test
-
   @Mock
   Band mockBand1;
   @Mock
@@ -50,8 +42,6 @@ public class BandServiceTest {
 
   @Test
   public void when_getAllBandDtos_expect_correctDTOsAreCreated() {
-
-    // todo extract mock to set up
 
     // Mock two bands to test with
     when(mockBand1.getName()).thenReturn("test band one");
@@ -94,10 +84,6 @@ public class BandServiceTest {
     BandService testService = new BandService(bandRepository);
     List<BandCompetenciesDto> result = (ArrayList<BandCompetenciesDto>) testService
         .getAllBandsDtos();
-
-    // should match structure of JSON with
-
-    // todo extract assertions to method
 
     assertAll(
         () -> assertEquals("First test band had an unexpected name",
