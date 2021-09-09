@@ -24,6 +24,7 @@ import javax.persistence.Table;
 @SecondaryTable(name = "job_detail", pkJoinColumns = @PrimaryKeyJoinColumn(name = "job_id"))
 public class JobRole {
 
+
   @ManyToMany
   @JoinTable(
       name = "job_location",
@@ -31,6 +32,7 @@ public class JobRole {
       inverseJoinColumns = @JoinColumn(name = "location_id")
   )
   List<Location> locations;
+  
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "job_id")
@@ -69,29 +71,29 @@ public class JobRole {
   public String getSharePointLink() {
     return sharePointLink;
   }
-
-  public List<Location> getLocations() {
-    return locations;
+  
+  public List<Location> getLocations(){
+    return locations; 
   }
-
-  public Integer getId() {
-    return id;
+  
+  public Integer getId(){
+    return id; 
   }
-
-  public String getTitle() {
+  
+  public String getTitle(){
     return title;
   }
-
-  public String getDescription() {
-    return description;
+  
+  public String getDescription(){
+    return description; 
   }
-
-  public String getContractType() {
-    return contractType;
+  
+  public String getContractType(){
+    return contractType; 
   }
-
-  public Band getBand() {
-    return band;
+  
+  public Band getBand(){
+    return band; 
   }
 
   public JobFamily getJobFamily() {

@@ -41,6 +41,7 @@ VALUES
 
 INSERT INTO job_family (job_family_id, name, capability_id)
 VALUES
+
 -- Engineering
 (1,"Engineering Strategy and Planning",1),
 (2,"Engineering",1),

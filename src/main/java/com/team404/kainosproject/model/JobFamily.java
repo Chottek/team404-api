@@ -28,8 +28,6 @@ public class JobFamily {
   @Column(name = "name")
   private String name;
 
-  // TODO relationships with capability and job role
-
   @OneToMany(mappedBy = "jobFamily")
   private List<JobRole> jobRoles;
 
@@ -37,19 +35,4 @@ public class JobFamily {
   @JoinColumn(name = "capability_id")
   private Capability capability;
 
-  public String getName() {
-    return name;
-  }
-
-  public List<JobRole> getJobRoles() {
-    return jobRoles;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
-  public Capability getCapability() {
-    return capability;
-  }
 }

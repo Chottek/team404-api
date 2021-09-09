@@ -110,4 +110,23 @@ public class JobRoleService {
   public void setJobFamilyService(JobFamilyService jobFamilyService) {
     this.jobFamilyService = jobFamilyService;
   }
+
+
+  public boolean removeById(int id){
+    if(repository.findById(id).isPresent()){
+      repository.deleteById(id);
+    }else{
+      LOG.error("Job Role with id=[{}] doesn't exist!", id);
+      return false;
+    }
+
+    if(repository.findById(id).isPresent()){
+      LOG.error("Deleting JobRole using id=[{}] wasn't successful ", id);
+      return false;
+    }
+
+    LOG.info("Successfuly removed JobRole with id=[{}]", id);
+    return true;
+  }
+
 }
