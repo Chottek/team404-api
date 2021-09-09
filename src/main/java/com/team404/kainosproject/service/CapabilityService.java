@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CapabilityService {
 
-  private CapabilityRepository repository;
+  private final CapabilityRepository repository;
 
   @Autowired
   public CapabilityService(CapabilityRepository repository) {
@@ -27,14 +27,14 @@ public class CapabilityService {
   /**
    * get all capabilities as raw data objects.
    */
-  protected Iterable<Capability> getAllRaw(){
+  protected Iterable<Capability> getAllRaw() {
     return repository.findAll();
   }
 
   /**
    * get all capabilities as data transfer objects.
    */
-  public Iterable<CapabilityDto> getAllDto(){
+  public Iterable<CapabilityDto> getAllDto() {
 
     return ((List<Capability>) repository.findAll())
         .stream()
@@ -45,20 +45,19 @@ public class CapabilityService {
   /**
    * Transforms a capability model object into it's data transfer object.
    */
-  public CapabilityDto getCapabilityAsDto(Capability capability){
+  public CapabilityDto getCapabilityAsDto(Capability capability) {
     return new CapabilityDto(capability);
   }
 
   /**
-   * get a capability object using it's name.
-   * If there are multiple capabilities by this name the first one
-   * will be returned.
+   * get a capability object using it's name. If there are multiple capabilities by this name the
+   * first one will be returned.
    */
-  public Optional<Capability> getRawCapabilityByName(String name){
+  public Optional<Capability> getRawCapabilityByName(String name) {
 
     List<Capability> capabilities = repository.findByName(name);
 
-    if(capabilities.size() == 0){
+    if (capabilities.size() == 0) {
       return Optional.empty();
     }
 

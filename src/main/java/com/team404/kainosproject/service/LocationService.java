@@ -18,7 +18,7 @@ public class LocationService {
     this.repository = repository;
   }
 
-  public Iterable<LocationDto> getAllDtos(){
+  public Iterable<LocationDto> getAllDtos() {
 
     return ((List<Location>) repository.findAll())
         .stream()

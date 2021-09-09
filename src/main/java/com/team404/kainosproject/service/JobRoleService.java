@@ -5,7 +5,6 @@ import com.team404.kainosproject.model.Capability;
 import com.team404.kainosproject.model.JobFamily;
 import com.team404.kainosproject.model.JobRole;
 import com.team404.kainosproject.model.dto.BandJobFamiliesDto;
-import com.team404.kainosproject.model.dto.JobFamilyDto;
 import com.team404.kainosproject.model.dto.JobRoleDto;
 import com.team404.kainosproject.repository.JobRoleRepository;
 import java.util.ArrayList;
@@ -65,13 +64,13 @@ public class JobRoleService {
   /**
    * get a list of job role by their capability, band, and family.
    */
-  public List<JobRole> getByCapabilityAndBandAndFamily(JobFamily jobFamily, Band band, Capability capability){
+  public List<JobRole> getByCapabilityAndBandAndFamily(JobFamily jobFamily, Band band,
+      Capability capability) {
     return repository.findByCapabilityAndBandAndJobFamily(capability, band, jobFamily);
   }
 
   /**
-   * Gets a List of JobFamily objects for a capability
-   * and groups them by band.
+   * Gets a List of JobFamily objects for a capability and groups them by band.
    *
    * @return JobFamilyDto objects list
    */
@@ -80,7 +79,7 @@ public class JobRoleService {
     // Extract Optional Capability
     Optional<Capability> opt = capabilityService.getRawCapabilityByName(capabilityName);
 
-    if(opt.isEmpty()){
+    if (opt.isEmpty()) {
       LOG.warn("search for unrecognised capability " + capabilityName);
       return new ArrayList<>();
     }

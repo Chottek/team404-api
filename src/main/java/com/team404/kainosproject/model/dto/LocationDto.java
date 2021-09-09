@@ -6,9 +6,9 @@ import java.util.List;
 
 public class LocationDto {
 
-  private Integer id;
-  private String name;
-  private List<JobRole> jobs;
+  private final Integer id;
+  private final String name;
+  private final List<JobRole> jobs;
 
   public LocationDto(Integer id, String name,
       List<JobRole> jobs) {
@@ -28,7 +28,7 @@ public class LocationDto {
     return id;
   }
 
-  public String getName(){
+  public String getName() {
     return name;
   }
 }

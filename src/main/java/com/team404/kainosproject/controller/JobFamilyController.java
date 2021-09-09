@@ -1,7 +1,5 @@
 package com.team404.kainosproject.controller;
 
-import com.team404.kainosproject.model.JobFamily;
-import com.team404.kainosproject.model.dto.BandJobFamiliesDto;
 import com.team404.kainosproject.model.dto.JobFamilyDto;
 import com.team404.kainosproject.service.JobFamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +33,8 @@ public class JobFamilyController {
   }
 
   @GetMapping("/job-family/{capability}")
-  public Iterable<JobFamilyDto> getAllJobFamiliesForCapability(@PathVariable("capability") String capability){
+  public Iterable<JobFamilyDto> getAllJobFamiliesForCapability(
+      @PathVariable("capability") String capability) {
     return service.getAllDtoByCapability(capability);
   }
 }

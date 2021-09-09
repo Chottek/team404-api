@@ -8,24 +8,23 @@ public class JsonTestHelpers {
 
   public static boolean jsonArrayIsNotEmpty(JSONObject json, String arrayName) {
 
-    try{
+    try {
 
-      if(json.getJSONArray(arrayName).length() <= 0)
+      if (json.getJSONArray(arrayName).length() <= 0) {
         return false;
-    }
-    catch (JSONException e){
+      }
+    } catch (JSONException e) {
       return false;
     }
 
     return true;
   }
 
-  public static boolean jsonHasAttribute(JSONObject json, String attributeName){
+  public static boolean jsonHasAttribute(JSONObject json, String attributeName) {
 
-    try{
+    try {
       json.get(attributeName);
-    }
-    catch (JSONException e){
+    } catch (JSONException e) {
       return false;
     }
 

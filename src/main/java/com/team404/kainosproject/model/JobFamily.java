@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author team 404
  */
 @Entity
-@Table(name="job_family")
+@Table(name = "job_family")
 public class JobFamily {
 
   @Id
@@ -25,7 +25,7 @@ public class JobFamily {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @Column(name="name")
+  @Column(name = "name")
   private String name;
 
   // TODO relationships with capability and job role

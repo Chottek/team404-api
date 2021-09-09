@@ -119,7 +119,7 @@ public class JobRoleServiceTest {
   }
 
   @Before
-  public void setup(){
+  public void setup() {
     setupMocks();
 
     JobRoleService test = new JobRoleService(mockJobRoleRepository);
@@ -131,12 +131,12 @@ public class JobRoleServiceTest {
   }
 
   @Test
-  public void when_getJobBandFamilyMatrixByCapability_expect_twoTestResults(){
+  public void when_getJobBandFamilyMatrixByCapability_expect_twoTestResults() {
     assertEquals(2, bandedJobFamilies.size());
   }
 
   @Test
-  public void when_getJobBandFamilyMatrixByCapability_expect_groupedByBand(){
+  public void when_getJobBandFamilyMatrixByCapability_expect_groupedByBand() {
 
     assertAll(
         () -> assertEquals("First band had an unexpected name",
@@ -149,10 +149,11 @@ public class JobRoleServiceTest {
   }
 
   @Test
-  public void when_getJobBandFamilyMatrixByCapability_expect_BandsContainTestJobFamilies(){
+  public void when_getJobBandFamilyMatrixByCapability_expect_BandsContainTestJobFamilies() {
     assertAll(
         () -> assertEquals("First band had an unexpected job family",
-            mockJobFamilyDto1, bandedJobFamilies.get(0).getJobFamilies().get(0)    // fixme. This is failed, mocked object isnt the same?
+            mockJobFamilyDto1, bandedJobFamilies.get(0).getJobFamilies().get(0)
+            // fixme. This is failed, mocked object isnt the same?
         ),
         () -> assertEquals("Second band had an unexpected job family",
             mockJobFamilyDto2, bandedJobFamilies.get(1).getJobFamilies().get(0)
@@ -161,13 +162,13 @@ public class JobRoleServiceTest {
   }
 
   @Test
-  public void when_getJobBandFamilyMatrixByCapability_expect_TestJobFamiliesContainJobRoles(){
+  public void when_getJobBandFamilyMatrixByCapability_expect_TestJobFamiliesContainJobRoles() {
     assertAll(
         () -> assertEquals("First band had an unexpected job role",
-        "Test Job One", bandedJobFamilies.get(0).getJobFamilies().get(0).getJobTitles().get(0)
+            "Test Job One", bandedJobFamilies.get(0).getJobFamilies().get(0).getJobTitles().get(0)
         ),
         () -> assertEquals("Second band had an unexpected job role",
-        "Test Job Two", bandedJobFamilies.get(1).getJobFamilies().get(0).getJobTitles().get(0)
+            "Test Job Two", bandedJobFamilies.get(1).getJobFamilies().get(0).getJobTitles().get(0)
         )
     );
   }

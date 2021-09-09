@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class CapabilityDto {
 
-  private Integer id;
+  private final Integer id;
 
-  private String name;
+  private final String name;
 
   private List<JobRole> jobRoles;
 
