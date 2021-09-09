@@ -12,12 +12,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * Represents the job_family table
+ * Represents the job_family table.
  *
  * @author team 404
  */
 @Entity
-@Table(name="job_family")
+@Table(name = "job_family")
 public class JobFamily {
 
   @Id
@@ -25,10 +25,8 @@ public class JobFamily {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @Column(name="name")
+  @Column(name = "name")
   private String name;
-
-  // TODO relationships with capability and job role
 
   @OneToMany(mappedBy = "jobFamily")
   private List<JobRole> jobRoles;
@@ -36,9 +34,5 @@ public class JobFamily {
   @ManyToOne
   @JoinColumn(name = "capability_id")
   private Capability capability;
-
-  public String getName() {
-    return name;
-  }
 
 }

@@ -4,17 +4,51 @@ import com.team404.kainosproject.model.JobRole;
 import com.team404.kainosproject.model.Location;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Data transfer object abstrcting a {@link JobRole} model object.
+ *
+ * @author team404
+ */
 public class JobRoleDto {
 
   private Integer id;
   private String title;
   private String description;
-  private String contractType;
-  private List<Location> locations;
-  private String capability;
   private String band;
+  private String jobFamilyName;
+  private final String responsibilities;
+  private final String contractType;
+  private final List<LocationDto> locations;
+  private final String capability;
+  private final String sharePointLink;
 
+
+  /**
+   * Create a new data transfer object from a model object.
+   */
+  public JobRoleDto(JobRole jobRole) {
+    this.id = jobRole.getId();
+    this.title = jobRole.getTitle();
+    this.description = jobRole.getDescription();
+    this.contractType = jobRole.getContractType();
+    this.capability = jobRole.getCapability();
+    this.band = jobRole.getBandAsString();
+    this.sharePointLink = jobRole.getSharePointLink();
+    this.responsibilities = jobRole.getResponsibilities();
+
+    this.locations = jobRole.getLocations()
+        .stream()
+        .map(LocationDto::new)
+        .collect(Collectors.toList());
+
+    if (jobRole.getJobFamily() != null) {
+      this.jobFamilyName = jobRole.getJobFamily().getName();
+    }
+  }
+
+ 
   public JobRoleDto(Integer id, String title, String description, String contractType, List<Location> locations, String capability, String band) {
     this.id = id;
     this.title = title;
@@ -25,17 +59,9 @@ public class JobRoleDto {
     this.band = band;
   }
 
-  public JobRoleDto(JobRole jr) {
-    this.id = jr.getId();
-    this.title = jr.getTitle();
-    this.description = jr.getDescription();
-    this.contractType = jr.getContractType();
-    this.locations = jr.getLocations();
-    this.capability = jr.getCapability();
-    this.band = jr.getBandAsString();
-  }
 
   public JobRoleDto() {
+  
   }
 
   public Integer getId() {
@@ -44,10 +70,6 @@ public class JobRoleDto {
 
   public String getTitle() {
     return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
   }
 
   public String getDescription() {
@@ -62,24 +84,12 @@ public class JobRoleDto {
     return contractType;
   }
 
-  public void setContractType(String contractType) {
-    this.contractType = contractType;
-  }
-
-  public List<Location> getLocations() {
+  public List<LocationDto> getLocations() {
     return locations;
-  }
-
-  public void setLocations(List<Location> locations) {
-    this.locations = locations;
   }
 
   public String getCapability() {
     return capability;
-  }
-
-  public void setCapability(String capability) {
-    this.capability = capability;
   }
 
   public String getBand() {
@@ -89,4 +99,17 @@ public class JobRoleDto {
   public void setBand(String band) {
     this.band = band;
   }
+
+  public String getResponsibilities() {
+    return responsibilities;
+  }
+
+  public String getSharePointLink() {
+    return sharePointLink;
+  }
+
+  public String getJobFamilyName() {
+    return jobFamilyName;
+  }
 }
+

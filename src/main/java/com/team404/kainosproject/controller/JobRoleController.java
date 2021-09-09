@@ -1,6 +1,6 @@
 package com.team404.kainosproject.controller;
 
-import com.team404.kainosproject.model.JobRole;
+import com.team404.kainosproject.model.dto.BandJobFamiliesDto;
 import com.team404.kainosproject.model.dto.JobRoleDto;
 import com.team404.kainosproject.service.JobRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,21 +31,33 @@ public class JobRoleController {
    * @return List of JobRole objects
    */
   @GetMapping("/job-roles") //produces = "application/json"
-  public Iterable<JobRole> getAllJobRoles() {
-    return service.getAll();
+  public Iterable<JobRoleDto> getAllJobRoles() {
+    return service.getAllDto();  // fixme this needs to be a DTO
   }
 
   /**
    * Gets Job Role object based on ID.
    *
    * @param id Numeric id of Job Role in database
-   * @return ResponseEntity containing an object if it exists,
-   *         else ResponseEntity with 404 Not Found Status
+   * @return ResponseEntity containing an object if it exists, else ResponseEntity with 404 Not
+   *         Found Status
    */
   @GetMapping("/job-roles/{id}")
   public ResponseEntity<JobRoleDto> getById(@PathVariable("id") int id) {
     return service.getById(id).map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
+  /**
+   * Gets a list of all Job Families for a particular capability grouped by band.
+   *
+   * @return List of JobRole objects
+   */
+  @GetMapping("/job-matrix/{capability}")
+  public Iterable<BandJobFamiliesDto> getJobMatrixByCapability(
+      @PathVariable("capability") String capability) {
+
+    return service.getJobBandFamilyMatrixByCapability(capability);
   }
 
 

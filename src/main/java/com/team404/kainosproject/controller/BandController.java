@@ -1,7 +1,6 @@
 package com.team404.kainosproject.controller;
 
-import com.team404.kainosproject.model.Band;
-import com.team404.kainosproject.model.dto.BandDto;
+import com.team404.kainosproject.model.dto.BandCompetenciesDto;
 import com.team404.kainosproject.service.BandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +21,13 @@ public class BandController {
     this.service = service;
   }
 
-  @GetMapping("/bands")
-  public Iterable<Band> getAllBands() {
-    return service.getAllBands();
+  @GetMapping("/bandnames")
+  public Iterable<String> getBandNames() {
+    return service.getAllBandNames();
   }
 
   @GetMapping("/bands-competencies")
-  public Iterable<BandDto> getBandDtos() {
+  public Iterable<BandCompetenciesDto> getBandDtos() {
     return service.getAllBandsDtos();
   }
 

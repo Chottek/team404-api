@@ -1,5 +1,6 @@
 package com.team404.kainosproject.integrationtests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -111,6 +112,12 @@ public class BandControllerTest {
     }
   }
 
+  @Test
+  public void when_GetBandNames_ExpectList_ToBe_NotNullNotEmpty() {
+    String s = restTemplate.getForEntity(createURLWithPort("/bands"), String.class).getBody();
+    assertFalse("Result of Band Names query is empty!", s == null && s.isEmpty());
+  }
+
   private boolean isPresentInObject(JSONObject obj, String fieldName) {
     try {
       obj.get(fieldName);
@@ -127,5 +134,4 @@ public class BandControllerTest {
   private String createURLWithPort(String uri) {
     return "http://localhost:" + port + uri;
   }
-
 }

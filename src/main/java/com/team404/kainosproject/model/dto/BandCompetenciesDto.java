@@ -7,17 +7,17 @@ import java.util.List;
  *
  * @author team404
  */
-public class BandDto {
+public class BandCompetenciesDto {
 
   private String band;
   private List<CompetencyDto> competencies;
 
-  public BandDto(String band, List<CompetencyDto> competencies) {
+  public BandCompetenciesDto(String band, List<CompetencyDto> competencies) {
     this.band = band;
     this.competencies = competencies;
   }
 
-  public BandDto() {
+  public BandCompetenciesDto() {
   }
 
   public String getBand() {

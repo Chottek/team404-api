@@ -28,6 +28,8 @@ CREATE TABLE job_detail (
     description TEXT NOT NULL
 );
 
+ALTER TABLE job_role ADD responsibilities VARCHAR(400) NOT NULL;
+
 ALTER TABLE job_role ADD COLUMN capability ENUM (
     'Engineering',
     'Platforms',
@@ -71,7 +73,7 @@ CREATE TABLE competency_indicator (
     competency_indicator_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     sub_competency_id INT NOT NULL,
     band_id INT NOT NULL,
-    description VARCHAR(200) NOT NULL,
+    description VARCHAR(500) NOT NULL,
     FOREIGN KEY (band_id) REFERENCES band(band_id),
     FOREIGN KEY (sub_competency_id) REFERENCES sub_competency(sub_competency_id)
 );

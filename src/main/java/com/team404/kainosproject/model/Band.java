@@ -11,8 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * Model object representing the band table.
- * Bands represent Kainos management levels.
+ * Model object representing the band table. Bands represent Kainos management levels.
  *
  * @author team 404
  */
@@ -34,9 +33,8 @@ public class Band {
   @OneToMany(mappedBy = "band")
   private List<CompetencyIndicator> competencyIndicators;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+  @Column(name = "priority")
+  private int priority;
 
   public String getName() {
     return name;
@@ -46,10 +44,26 @@ public class Band {
     this.name = name;
   }
 
+  public List<JobRole> getJobs() {
+    return jobs;
+  }
+
+  public int getPriority() {
+    return priority;
+  }
+
   // Serialise this normally, but don't serialise any reference to this in competencyIndicators
   @JsonManagedReference
   public List<CompetencyIndicator> getCompetencyIndicators() {
     return competencyIndicators;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   @Override
