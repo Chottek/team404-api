@@ -41,11 +41,17 @@ VALUES
 
 INSERT INTO job_family (job_family_id, name, capability_id)
 VALUES
+-- Engineering
 (1,"Engineering Strategy and Planning",1),
 (2,"Engineering",1),
 (3,"Architecture",1),
 (4,"Testing and Quality Assurance",1),
-(5,"Product Specialist",1);
+(5,"Product Specialist",1),
+
+-- Security
+(6, "Security Strategy and Planning", 5),
+(7, "Security Engineering", 5),
+(8, "Corporate Security", 5);
 
 
 INSERT INTO job_role (job_id, title, contract_type, capability_id, band_id, sharepoint_link)
@@ -55,9 +61,6 @@ VALUES
 
 (2, "Head of People Operations", "full_time", 13, 1,
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EXYqFjDBzXZFiXMGdbXni2YBIM8ZztDBqB5naCdnXhbYew?e=DWvKrR"),
-
-(3, "Security Engineer", "full_time", 5, 5,
-"https://kainossoftwareltd.sharepoint.com/:b:/g/people/ERa52ZFdOhxJuKYbwl5w27YBUGgHxFh6qz9AtTflB2YPGA?e=mMeOWH"),
 
 (4, "Product Owner", "full_time", 11, 3,
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbWlHfJkEF1HhJ6_BC4aqLoBAGXd7z6SYRwcdEBcNgygCQ?e=nTVpB6");
@@ -72,8 +75,13 @@ VALUES
 "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EeS73plMEQ9Fjf-tovttXuYBEo-0tlfT-U3bFMcgryapVw?e=wJFypU"),
 
 (7, "Test Engineer", "full_time", 1, 6, 4,
-"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh");
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh"),
 
+(3, "Security Engineer", "full_time", 5, 6, 7,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/ERa52ZFdOhxJuKYbwl5w27YBUGgHxFh6qz9AtTflB2YPGA?e=mMeOWH"),
+
+(8, "Senior Security Analyst", "full_time", 5, 5, 8,
+"https://kainossoftwareltd.sharepoint.com/:b:/g/people/EcGbc8drFRlBoh2H2BZSeVwBV1tAiDCTwirdTmrz2EYYmQ?e=XMqXJh");
 
 -- Link inserted Jobs to their available locations
 INSERT INTO job_location (job_id, location_id)
