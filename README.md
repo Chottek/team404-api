@@ -17,6 +17,8 @@ Project is created with
 - Java 16.0.1
 - Maven 3.8.2
 - Spring Boot 2.5.4
+- JUnit 4.12
+- MySQL Connector 8.0.26
 
 ## Setup
 To run this project
@@ -31,7 +33,6 @@ spring.datasource.username=[databaseUsername]
 spring.datasource.password=[databasePassword]
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 spring.jpa.database-platform=org.hibernate.dialect.MySQL5Dialect
-spring.sql.init.continue-on-error=true
 ```
 * Logging Properties:
 ```
@@ -53,7 +54,7 @@ $ mvn spring-boot:run
 ## Testing
 To run the tests, execute
 ```
-$ mvn test -Dtest=con.team404.kainosproject.**.*
+$ mvn test
 ```
 
 ## Contributors
