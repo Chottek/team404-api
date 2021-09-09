@@ -120,16 +120,6 @@ public class BandControllerTest {
     assertFalse("Result of Band Names query is empty!", s == null && s.isEmpty());
   }
 
-  @Test
-  public void when_GetBandNames_ExpectFirst_ToBe_OfHighestPriority(){
-    final String BAND_OF_HIGHEST_PRIORITY = "Executive";
-    String[] s = restTemplate.getForEntity(createURLWithPort("/bands"), String.class).getBody()
-        .replace("[", "").replace("]", "").replaceAll("\"", "")
-        .split(",");
-
-    assertEquals("First entry of Band Names is not " + BAND_OF_HIGHEST_PRIORITY + "!", BAND_OF_HIGHEST_PRIORITY, s[0]);
-  }
-
   private boolean isPresentInObject(JSONObject obj, String fieldName) {
     try {
       obj.get(fieldName);
@@ -146,5 +136,4 @@ public class BandControllerTest {
   private String createURLWithPort(String uri) {
     return "http://localhost:" + port + uri;
   }
-
 }

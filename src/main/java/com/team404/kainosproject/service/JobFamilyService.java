@@ -83,7 +83,8 @@ public class JobFamilyService {
 
     return new JobFamilyDto(
         jobFamily.getName(),
-        jobRoleService.getByCapabilityAndBandAndFamily(jobFamily, band, capability)
+        jobRoleService.getByCapabilityAndBandAndFamily(jobFamily, band, capability),
+        capability
     );
   }
 
